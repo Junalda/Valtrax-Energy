@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { t, pathFor, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const p = dict.privacy;
+// Update when the notice text changes.
+const updated = '2026-10-21';
+const updatedLabel = new Intl.DateTimeFormat(lang === 'nl' ? 'nl-NL' : 'en-GB', { dateStyle: 'long' }).format(
+  new Date(`${updated}T12:00:00Z`),
+);
+---
+
+<Base lang={lang} page="privacy" title={p.metaTitle} description={p.metaDescription}>
+  <Header lang={lang} page="privacy" />
+  <main id="main" tabindex="-1" class="section">
+    <article class="container legal">
+      <p class="eyebrow">Valtrax Energy</p>
+      <h1>{p.title}</h1>
+      <p class="legal__updated">{p.updatedLabel}: <time datetime={updated}>{updatedLabel}</time></p>
+      {
+        p.sections.map((s) => (
+          <section>
+            <h2>{s.h}</h2>
+            {s.p.map((para) => (
+              <p>{para}</p>
+            ))}
+          </section>
+        ))
+      }
+      <p><a class="text-link" href={pathFor('home', lang)}>{p.back}</a></p>
+    </article>
+  </main>
+  <Footer lang={lang} page="privacy" />
+</Base>
+
+<script>
+  import '../scripts/site.ts';
+</script>
+
+<style>
+  .legal {
+    max-width: calc(46rem + 2 * var(--gutter));
+    display: grid;
+    gap: 1.25rem;
+  }
+  .legal h1 {
+    font-size: var(--step-4);
+  }
+  .legal__updated {
+    color: var(--grey-500);
+    font-size: 0.9rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .legal section {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+  .legal h2 {
+    font-size: var(--step-2);
+  }
+  .legal section p {
+    color: #2a3a52;
+  }
+</style>

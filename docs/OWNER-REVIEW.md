@@ -1,0 +1,110 @@
+# Owner review — open items before launch
+
+Internal working notes. This file is **not** part of the website build. It contains contact
+candidates from the confidential Client Information Sheet (CIS): keep this repository private,
+or remove those lines, until the details are approved for publication.
+
+## 1. Source materials were not available during the build
+
+The company profile, meeting notes, registration extract, CIS and logo files were **not**
+present in the repository or the build environment. All copy and facts come from the
+written brief, which summarised those documents. Before launch, please check against the
+originals:
+
+- [ ] Positioning, services and audiences match the **company profile**.
+- [ ] Scope and functional requirements match the **meeting notes**.
+- [ ] Legal name, KvK number and registered location match the **registration extract**:
+      Northbridge Trading B.V. · KvK 42053415 · Zwijndrecht, the Netherlands.
+- [ ] The hub list (Houston, Antwerp, Jurong, Fujairah) matches the company profile.
+
+## 2. Logo and brand colours
+
+No logo file was available, so the site uses a typographic wordmark (“VALTRAX | ENERGY”)
+and a simple “V” favicon. When the logo is supplied:
+
+- [ ] Check whether the SVG contains vector paths or only an embedded raster `<image>`.
+      Vector: use the SVG. Embedded raster: export an optimised PNG/WebP at 2× display size.
+- [ ] Add it to `public/brand/` and configure `site.logo` in `src/config/site.ts`
+      (keeping its intrinsic width/height, so proportions are preserved).
+- [ ] Sample the logo’s navy and gold and update the tokens at the top of
+      `src/styles/global.css` (`--navy-*`, `--gold-*`). Current values: navy `#0B1F3A`,
+      gold `#B8975A` (on navy), darker gold `#8A6A2F` (gold text on white, 5.0:1 contrast).
+- [ ] Replace `public/favicon.svg` and regenerate the icons and Open Graph images
+      (`node tools/generate-images.mjs`). Decide whether the world-map logo variant is used.
+
+## 3. Product list discrepancy
+
+The brief states that the **company profile** and the **CIS** list different products. As
+instructed, the website and the enquiry dropdown use only the company profile list:
+
+1. EN590 / ULSD
+2. Middle distillates
+3. Jet A-1
+4. LNG / natural gas
+5. Other refined petroleum products and energy commodities (subject to a qualified requirement)
+
+The CIS list was not available to compare, so the specific differences are **not recorded
+here**. Action:
+
+- [ ] Compare the two lists and decide whether any CIS product should be published.
+      If so, add it to `productKeys` (`src/config/site.ts`) and both dictionaries.
+
+## 4. Domain
+
+- [ ] Confirm `https://valtraxenergy.com` as the production domain. It is used for canonical
+      URLs, hreflang, the sitemap and Open Graph. Set `SITE_URL` if it changes.
+- [ ] Decide on the `www` / apex redirect in Vercel → Domains.
+
+## 5. Public contact details (not shown on the site yet)
+
+The CIS lists the following. They are **not** published. They will appear in the footer
+and structured data once added to `site.publicContact` in `src/config/site.ts`.
+
+| Item           | CIS candidate                         | Approved for publication? |
+| -------------- | ------------------------------------- | ------------------------- |
+| Email          | Thom@valtraxenergy.com                | [ ] yes / [ ] no          |
+| Street address | Stationsweg 41, 3331 LR Zwijndrecht   | [ ] yes / [ ] no          |
+
+No phone number or social media profiles were provided, so none are shown.
+
+## 6. Enquiry form recipient and delivery
+
+- [ ] Approve the recipient mailbox for enquiries (`CONTACT_TO_EMAIL`). The CIS email is
+      **not** assumed to be the recipient.
+- [ ] Create a Resend account, verify the sending domain (SPF/DKIM DNS records) and set
+      `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` in Vercel (Production, plus Preview if you
+      want to test there).
+- [ ] Send a test enquiry on the production deployment and confirm it arrives.
+      Until these are configured, the form honestly reports that it is unavailable.
+- [ ] Optional: add a Vercel Firewall rate-limit rule for `POST /api/enquiry`.
+
+If you prefer a different email provider, only `deliver()` in `src/pages/api/enquiry.ts`
+needs to change; update the privacy notice to name the new processor.
+
+## 7. Privacy notice (`/privacy/`, `/nl/privacy/`)
+
+The notice describes the processing as implemented. Please confirm or supply:
+
+- [ ] Northbridge Trading B.V. is the controller (stated).
+- [ ] A dedicated privacy contact. Currently, rights requests go “by replying to our
+      correspondence or through the enquiry form”; add an email once one is approved.
+- [ ] Specific retention periods. Currently: “only as long as necessary … unless a longer
+      period is required by law”.
+- [ ] Processors: Vercel (hosting) and Resend (email delivery), with possible transfers
+      outside the EEA under standard contractual clauses. Confirm the data processing
+      agreements are in place, and name any other processor (e.g. the mailbox provider).
+- [ ] Legal review of the legal bases (Art. 6(1)(f) and 6(1)(b) GDPR) and the wording.
+- [ ] Update the “Last updated” date in `src/components/PrivacyPage.astro` when the text changes.
+
+## 8. Content approvals
+
+- [ ] All English and Dutch copy (`src/i18n/en.ts`, `src/i18n/nl.ts`), especially the
+      expertise activities, the process stages and the FAQ answers.
+- [ ] Delivery-basis explanations (FOB, CIF, terminal-based) are general descriptions,
+      not legal Incoterms definitions.
+- [ ] Footer disclaimer: “Information on this website is general in nature and does not
+      constitute an offer, a commitment to supply or financial advice.”
+
+## 9. Launch switch
+
+- [ ] Set `SITE_INDEXING=true` for the **Production** environment and redeploy (see README).

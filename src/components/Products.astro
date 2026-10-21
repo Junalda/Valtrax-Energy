@@ -1,0 +1,116 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const dict = t(Astro.props.lang);
+---
+
+<section class="section" id="products" aria-labelledby="products-title">
+  <div class="container products__grid">
+    <div>
+      <header class="section-head">
+        <p class="eyebrow">{dict.products.eyebrow}</p>
+        <h2 id="products-title">{dict.products.title}</h2>
+        <p>{dict.products.intro}</p>
+      </header>
+      <ul class="product-list">
+        {
+          dict.products.items.map((p) => (
+            <li class="product">
+              <h3>{p.name}</h3>
+              <p>{p.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <aside class="products__aside" aria-labelledby="depends-title">
+      <h3 id="depends-title">{dict.products.dependsTitle}</h3>
+      <p class="muted">{dict.products.dependsIntro}</p>
+      <ol class="depends">
+        {dict.products.depends.map((d) => <li>{d}</li>)}
+      </ol>
+      <p class="products__note">{dict.products.note}</p>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .products__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+    align-items: start;
+  }
+  .product-list {
+    list-style: none;
+    border-top: 1px solid var(--navy-900);
+  }
+  .product {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1rem 2.5rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .product h3 {
+    font-size: var(--step-1);
+    font-weight: 600;
+  }
+  .product p {
+    color: var(--grey-500);
+  }
+  .products__aside {
+    display: grid;
+    gap: 1rem;
+    padding: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+    background: var(--navy-900);
+    color: var(--white);
+    --text-muted: var(--navy-300);
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+  }
+  .products__aside h3 {
+    font-size: var(--step-2);
+  }
+  .depends {
+    list-style: none;
+    counter-reset: dep;
+    display: grid;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .depends li {
+    counter-increment: dep;
+    display: flex;
+    gap: 1rem;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .depends li::before {
+    content: counter(dep, decimal-leading-zero);
+    color: var(--gold-500);
+    font-family: var(--font-serif);
+    min-width: 1.5rem;
+  }
+  .products__note {
+    margin-top: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--navy-300);
+  }
+  @media (max-width: 60rem) {
+    .products__grid {
+      grid-template-columns: 1fr;
+    }
+    .products__aside {
+      position: static;
+    }
+  }
+  @media (max-width: 40rem) {
+    .product {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+  }
+</style>

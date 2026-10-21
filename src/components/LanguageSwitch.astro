@@ -1,0 +1,94 @@
+---
+import { t, pathFor, otherLang, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  tone?: 'dark' | 'light';
+}
+const { lang, page, tone = 'dark' } = Astro.props;
+const dict = t(lang);
+const other = otherLang(lang);
+const order: Lang[] = ['en', 'nl'];
+---
+
+<div class:list={['lang-switch', `lang-switch--${tone}`]} role="group" aria-label={dict.langSwitch.label}>
+  {
+    order.map((l) =>
+      l === lang ? (
+        <span class="lang-switch__item is-current" aria-current="true">
+          <span aria-hidden="true">{l.toUpperCase()}</span>
+          <span class="visually-hidden">{dict.langSwitch.current}</span>
+        </span>
+      ) : (
+        <a
+          class="lang-switch__item"
+          href={pathFor(page, other)}
+          hreflang={other}
+          lang={other}
+          data-lang-switch
+        >
+          <span aria-hidden="true">{l.toUpperCase()}</span>
+          <span class="visually-hidden">{dict.langSwitch.other}</span>
+        </a>
+      ),
+    )
+  }
+</div>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    font: 600 0.8rem/1 var(--font-sans);
+    letter-spacing: 0.12em;
+  }
+  .lang-switch__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding-inline: 0.25rem;
+    text-decoration: none;
+  }
+  .lang-switch__item + .lang-switch__item {
+    border-left: 1px solid var(--grey-200);
+  }
+  .lang-switch--dark .lang-switch__item {
+    color: var(--grey-500);
+  }
+  .lang-switch--dark .is-current {
+    color: var(--navy-900);
+  }
+  .lang-switch--light .lang-switch__item {
+    color: var(--navy-300);
+  }
+  .lang-switch--light .is-current {
+    color: var(--white);
+  }
+  .lang-switch--light .lang-switch__item + .lang-switch__item {
+    border-left-color: rgba(255, 255, 255, 0.2);
+  }
+  .is-current {
+    position: relative;
+  }
+  .is-current::after {
+    content: '';
+    position: absolute;
+    bottom: 0.6rem;
+    left: 50%;
+    width: 1rem;
+    height: 1px;
+    margin-left: -0.5rem;
+    background: var(--gold-500);
+  }
+  a.lang-switch__item:hover {
+    color: var(--navy-900);
+    text-decoration: underline;
+    text-decoration-color: var(--gold-500);
+  }
+  .lang-switch--light a.lang-switch__item:hover {
+    color: var(--white);
+  }
+</style>

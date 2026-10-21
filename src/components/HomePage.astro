@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Expertise from './Expertise.astro';
+import Products from './Products.astro';
+import Markets from './Markets.astro';
+import Process from './Process.astro';
+import Audiences from './Audiences.astro';
+import Faq from './Faq.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+---
+
+<Base lang={lang} page="home" title={dict.meta.title} description={dict.meta.description}>
+  <Header lang={lang} page="home" />
+  <main id="main" tabindex="-1">
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Expertise lang={lang} />
+    <Products lang={lang} />
+    <Markets lang={lang} />
+    <Process lang={lang} />
+    <Audiences lang={lang} />
+    <Faq lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} page="home" />
+</Base>
+
+<script>
+  import '../scripts/site.ts';
+</script>

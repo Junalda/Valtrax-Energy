@@ -1,0 +1,98 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const dict = t(Astro.props.lang);
+---
+
+<section class="section section--grey" id="expertise" aria-labelledby="expertise-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">{dict.expertise.eyebrow}</p>
+      <h2 id="expertise-title">{dict.expertise.title}</h2>
+      <p>{dict.expertise.intro}</p>
+    </header>
+
+    <ol class="capabilities">
+      {
+        dict.expertise.items.map((item, i) => (
+          <li class="capability">
+            <span class="capability__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="capability__head">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+            <ul class="capability__points">
+              {item.points.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .capabilities {
+    list-style: none;
+    border-top: 1px solid var(--navy-900);
+  }
+  .capability {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(1rem, 0.5rem + 2vw, 3rem);
+    padding-block: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem);
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .capability__num {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--gold-600);
+    padding-top: 0.3rem;
+  }
+  .capability__head {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .capability__head h3 {
+    font-size: var(--step-2);
+  }
+  .capability__head p {
+    color: var(--grey-500);
+  }
+  .capability__points {
+    list-style: none;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    padding-top: 0.35rem;
+  }
+  .capability__points li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.97rem;
+  }
+  .capability__points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.55rem;
+    height: 1px;
+    background: var(--gold-500);
+  }
+  @media (max-width: 52rem) {
+    .capability {
+      grid-template-columns: 2.75rem minmax(0, 1fr);
+    }
+    .capability__points {
+      grid-column: 2;
+    }
+  }
+</style>
