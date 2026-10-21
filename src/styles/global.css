@@ -1,8 +1,8 @@
 /* ==========================================================================
    Valtrax Energy — design tokens and base styles
    Palette: deep navy + white, restrained gold accent, light-grey surfaces.
-   NOTE: gold/navy values are provisional until checked against the supplied logo
-   (see docs/OWNER-REVIEW.md). Change them here only.
+   Navy and gold are sampled from the supplied logo (navy ≈ #022449, gold ≈ #BE8A22);
+   darker/lighter steps are derived for contrast. Change them here only.
    ========================================================================== */
 
 @font-face {
@@ -26,14 +26,14 @@
 
 :root {
   /* Brand */
-  --navy-950: #06122a;
-  --navy-900: #0b1f3a;
-  --navy-800: #13294b;
-  --navy-700: #1f3a63;
+  --navy-950: #011630;
+  --navy-900: #022449;
+  --navy-800: #0a2f5c;
+  --navy-700: #154276;
   --navy-300: #9fb0c8;
-  --gold-500: #b8975a; /* accent on navy: 5.9:1 against --navy-900 */
-  --gold-600: #8a6a2f; /* gold text on white: 5.0:1 */
-  --gold-200: #e7d9bc;
+  --gold-500: #be8a22; /* logo gold; accent on navy: 5.1:1 against --navy-900 */
+  --gold-600: #8c6414; /* gold text on white: 5.3:1 */
+  --gold-200: #f1e1bd;
 
   /* Neutrals */
   --white: #ffffff;
@@ -41,14 +41,14 @@
   --grey-100: #eef0f3;
   --grey-200: #dde1e7;
   --grey-500: #5b6474; /* secondary text on white: 6.0:1 */
-  --ink: #0b1f3a;
+  --ink: #022449;
 
   /* Semantic */
   --bg: var(--white);
   --text: var(--ink);
   --text-muted: var(--grey-500);
   --rule: var(--grey-200);
-  --focus: #c9a45f;
+  --focus: #b8862a;
   --error: #a4262c;
   --success: #1f6b45;
 
@@ -278,7 +278,7 @@ a {
   color: var(--navy-950);
 }
 .btn--gold:hover {
-  background: #c9a96d;
+  background: #cf9b35;
 }
 .btn--ghost {
   border-color: currentColor;

@@ -2,89 +2,46 @@
 import { site } from '../config/site';
 
 interface Props {
+  /** `dark` = navy logo for light backgrounds, `light` = reversed logo for navy backgrounds. */
   tone?: 'dark' | 'light';
   size?: 'md' | 'lg';
+  /** Header logo loads eagerly; others may be lazy. */
+  eager?: boolean;
 }
-const { tone = 'dark', size = 'md' } = Astro.props;
+const { tone = 'dark', size = 'md', eager = false } = Astro.props;
+const asset = tone === 'light' ? site.logo.lockupLight : site.logo.lockup;
 ---
 
-{
-  site.logo ? (
-    <img
-      class:list={['logo-img', `logo-img--${size}`]}
-      src={site.logo.src}
-      width={site.logo.width}
-      height={site.logo.height}
-      alt={site.brand}
-      decoding="async"
-    />
-  ) : (
-    <span class:list={['wordmark', `wordmark--${tone}`, `wordmark--${size}`]} aria-label={site.brand} role="img">
-      <span class="wordmark__name" aria-hidden="true">Valtrax</span>
-      <span class="wordmark__rule" aria-hidden="true" />
-      <span class="wordmark__sub" aria-hidden="true">Energy</span>
-    </span>
-  )
-}
+<img
+  class:list={['logo', `logo--${size}`]}
+  src={asset.src}
+  width={asset.width}
+  height={asset.height}
+  alt={site.brand}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'}
+  decoding="async"
+/>
 
 <style>
-  /* Typographic wordmark used until the supplied logo file is approved and configured
-     in src/config/site.ts (site.logo). The image keeps its intrinsic aspect ratio. */
-  .logo-img {
+  /* Height-driven sizing keeps the logo's intrinsic aspect ratio (≈4.46:1). */
+  .logo {
+    display: block;
     width: auto;
-    height: 2.5rem;
-  }
-  .logo-img--lg {
     height: 3.25rem;
+    max-width: 100%;
   }
-  .wordmark {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    line-height: 1;
-    white-space: nowrap;
+  .logo--lg {
+    height: 3.75rem;
   }
-  .wordmark__name {
-    font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.375rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .wordmark__rule {
-    width: 1px;
-    height: 1.25rem;
-    background: var(--gold-500);
-  }
-  .wordmark__sub {
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-  }
-  .wordmark--dark .wordmark__name {
-    color: var(--navy-900);
-  }
-  .wordmark--dark .wordmark__sub {
-    color: var(--gold-600);
-  }
-  .wordmark--light .wordmark__name {
-    color: var(--white);
-  }
-  .wordmark--light .wordmark__sub {
-    color: var(--gold-500);
-  }
-  .wordmark--lg .wordmark__name {
-    font-size: 1.75rem;
+  @media (max-width: 30rem) {
+    .logo {
+      height: 2.75rem;
+    }
   }
   @media (max-width: 22rem) {
-    .wordmark__name {
-      font-size: 1.15rem;
-      letter-spacing: 0.12em;
-    }
-    .wordmark {
-      gap: 0.5rem;
+    .logo {
+      height: 2.4rem;
     }
   }
 </style>

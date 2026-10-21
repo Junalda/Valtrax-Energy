@@ -52,7 +52,12 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
     ],
   };
   if (site.publicContact.email) organization.email = site.publicContact.email;
-  if (site.logo) organization.logo = `${origin}${site.logo.src}`;
+  organization.logo = {
+    '@type': 'ImageObject',
+    url: `${origin}${site.logo.full.src}`,
+    width: site.logo.full.width,
+    height: site.logo.full.height,
+  };
 
   const webPage: Record<string, unknown> = {
     '@type': 'WebPage',

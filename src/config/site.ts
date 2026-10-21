@@ -23,8 +23,18 @@ export const site = {
     streetAddress: undefined as string | undefined,
     postalCode: undefined as string | undefined,
   },
-  /** Logo: set to a file under /public once the supplied logo is approved (see README). */
-  logo: undefined as { src: string; width: number; height: number } | undefined,
+  /**
+   * Logo assets generated from brand/valtrax-logo-original.png by tools/build_logo_assets.py.
+   * Dimensions are the intrinsic pixel sizes (used for width/height attributes).
+   */
+  logo: {
+    /** Horizontal lockup for light backgrounds (header). */
+    lockup: { src: '/brand/valtrax-lockup.webp', width: 750, height: 168 },
+    /** Same lockup with navy reversed to white, for navy backgrounds (footer). */
+    lockupLight: { src: '/brand/valtrax-lockup-light.webp', width: 750, height: 168 },
+    /** Full stacked logo as supplied (structured data). */
+    full: { src: '/brand/valtrax-logo.png', width: 960, height: 620 },
+  },
 } as const;
 
 /** Product options — must match the public product section (company profile list). */

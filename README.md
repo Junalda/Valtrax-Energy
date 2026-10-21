@@ -26,8 +26,9 @@ Owner decisions still open before launch: see **[docs/OWNER-REVIEW.md](docs/OWNE
 | `npm run build`     | Production build (`.vercel/output`)                      |
 | `npm run preview`   | Preview the build (static pages)                         |
 
-`node tools/generate-images.mjs` regenerates the Open Graph images and raster icons
-(needs a local Playwright install; see the header of that file).
+`python3 tools/build_logo_assets.py` regenerates logo variants and icons;
+`node tools/generate-images.mjs` regenerates the Open Graph images (needs a local
+Playwright install; see the header of that file).
 
 ## Environment variables
 
@@ -76,7 +77,8 @@ src/
   pages/api/enquiry.ts     Form endpoint (server-rendered)
   scripts/site.ts          Progressive enhancements
   styles/global.css        Design tokens and base styles
-public/                    Fonts, icons, Open Graph images — public assets only
+public/                    Fonts, logo variants, icons, Open Graph images — public assets only
+brand/                     Logo master file (not published)
 ```
 
 ### Editing content
@@ -86,13 +88,18 @@ The FAQ structured data is generated from the same entries, so it always matches
 Products are keyed in `src/config/site.ts` (`productKeys`); the product section and the
 form dropdown both come from that list.
 
-### Adding the logo
+### Logo
 
-The header and footer use a typographic wordmark until an approved logo is configured.
-Put the file in `public/brand/` (prefer an SVG with real vector paths; if the supplied SVG
-only wraps an embedded PNG/JPEG, use an optimised PNG/WebP instead) and set `site.logo` in
-`src/config/site.ts` with its intrinsic `width` and `height`. Re-check the colour tokens at
-the top of `src/styles/global.css` against the logo.
+The supplied master logo is `brand/valtrax-logo-original.png` (transparent PNG; no vector
+source was supplied). `python3 tools/build_logo_assets.py` (needs Pillow) generates:
+
+- `public/brand/valtrax-lockup.webp`: horizontal lockup for light backgrounds (header)
+- `public/brand/valtrax-lockup-light.webp`: navy reversed to white, for navy (footer)
+- `public/brand/valtrax-logo.png|webp`: full stacked logo (structured data)
+- `public/favicon.ico` and `public/apple-touch-icon.png`: from the symbol
+
+Paths and intrinsic sizes are set in `site.logo` (`src/config/site.ts`). After changing the
+logo, also run `node tools/generate-images.mjs` for the Open Graph images.
 
 ## Enquiry endpoint
 
