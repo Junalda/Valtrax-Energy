@@ -40,10 +40,13 @@ export const en = {
   hero: {
     eyebrow: 'Independent energy intermediary',
     title: 'Physical Energy Sourcing & Commercial Intermediation',
+    subtitle: 'Connecting Qualified Buyers with Relevant Physical Supply.',
     lead:
-      'Connecting qualified demand with relevant physical supply through disciplined sourcing, counterparty qualification and commercial coordination.',
+      'Valtrax Energy connects qualified buyers and suppliers across international energy markets through disciplined sourcing, counterparty qualification and professional commercial coordination.',
+    focus:
+      'We focus on refined petroleum products and gas, helping bring suitable counterparties together and facilitating structured commercial discussions.',
     role:
-      'We work between buyers and suppliers of refined products and gas. We do not produce, store or hold the product ourselves.',
+      'We operate as an independent intermediary. We do not produce, store or hold physical product ourselves.',
     primary: 'Discuss your requirements',
     secondary: 'Explore our expertise',
     strap: ['Netherlands-based', 'ARA market focus', 'International reach'],

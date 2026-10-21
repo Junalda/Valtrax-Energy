@@ -37,7 +37,9 @@ const arc = (deg: number, r: number) => {
     <div class="hero__copy">
       <p class="eyebrow">{dict.hero.eyebrow}</p>
       <h1 id="hero-title">{dict.hero.title}</h1>
+      <p class="hero__subtitle">{dict.hero.subtitle}</p>
       <p class="hero__lead">{dict.hero.lead}</p>
+      <p class="hero__focus">{dict.hero.focus}</p>
       <p class="hero__role">{dict.hero.role}</p>
       <div class="hero__actions">
         <a class="btn btn--gold" href="#contact">{dict.hero.primary}<Arrow /></a>
@@ -156,6 +158,18 @@ const arc = (deg: number, r: number) => {
     font-weight: 500;
     line-height: 1.06;
     letter-spacing: -0.02em;
+  }
+  .hero__subtitle {
+    margin-top: -0.25rem;
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    line-height: 1.3;
+    color: var(--gold-200);
+    max-width: 36rem;
+  }
+  .hero__focus {
+    color: #c9d3e1;
+    max-width: 36rem;
   }
   .hero__lead {
     font-size: var(--step-1);

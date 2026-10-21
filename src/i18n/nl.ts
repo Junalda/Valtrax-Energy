@@ -35,10 +35,13 @@ export const nl: Dictionary = {
   hero: {
     eyebrow: 'Onafhankelijke energiebemiddelaar',
     title: 'Fysieke energie-inkoop en commerciële bemiddeling',
+    subtitle: 'Wij verbinden gekwalificeerde kopers met relevant fysiek aanbod.',
     lead:
-      'Wij verbinden gekwalificeerde vraag met relevant fysiek aanbod, met een gedisciplineerde sourcing-aanpak, kwalificatie van tegenpartijen en commerciële coördinatie.',
+      'Valtrax Energy verbindt gekwalificeerde kopers en leveranciers op internationale energiemarkten, met een gedisciplineerde sourcing-aanpak, kwalificatie van tegenpartijen en professionele commerciële coördinatie.',
+    focus:
+      'Wij richten ons op geraffineerde aardolieproducten en gas, brengen passende tegenpartijen samen en faciliteren gestructureerde commerciële gesprekken.',
     role:
-      'Wij werken tussen kopers en leveranciers van geraffineerde producten en gas. Wij produceren, slaan op of houden zelf geen product aan.',
+      'Wij opereren als onafhankelijke bemiddelaar. Wij produceren, slaan op of houden zelf geen fysiek product aan.',
     primary: 'Bespreek uw behoefte',
     secondary: 'Bekijk onze expertise',
     strap: ['Gevestigd in Nederland', 'Focus op de ARA-markt', 'Internationaal bereik'],
