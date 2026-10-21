@@ -1,4 +1,4 @@
-# Owner review — open items before launch
+# Owner review: open items before launch
 
 Internal working notes. This file is **not** part of the website build. It contains contact
 candidates from the confidential Client Information Sheet (CIS): keep this repository private,

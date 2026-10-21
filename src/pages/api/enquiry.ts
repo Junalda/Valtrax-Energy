@@ -96,7 +96,7 @@ function composeEmail(e: Enquiry): { subject: string; text: string } {
     'Message / requirements:',
     e.message,
     '',
-    '— Reply directly to this email to respond to the sender.',
+    'Reply directly to this email to respond to the sender.',
   ].join('\n');
   return { subject, text };
 }

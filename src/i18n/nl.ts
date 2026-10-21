@@ -8,7 +8,7 @@ export const nl: Dictionary = {
     title: 'Valtrax Energy | Fysieke energie-inkoop en commerciële bemiddeling',
     description:
       'Onafhankelijke energiebemiddelaar uit Nederland die gekwalificeerde kopers verbindt met relevant fysiek aanbod van EN590, middeldestillaten, Jet A-1 en LNG, met de focus op de ARA-markt.',
-    ogAlt: 'Valtrax Energy — fysieke energie-inkoop en commerciële bemiddeling',
+    ogAlt: 'Valtrax Energy: fysieke energie-inkoop en commerciële bemiddeling',
   },
   skipLink: 'Direct naar de inhoud',
   nav: {
@@ -23,7 +23,7 @@ export const nl: Dictionary = {
     menuOpen: 'Menu',
     menuClose: 'Sluiten',
     menuLabel: 'Navigatiemenu openen',
-    home: 'Valtrax Energy — home',
+    home: 'Valtrax Energy, home',
   },
   langSwitch: {
     label: 'Taal',
@@ -61,7 +61,7 @@ export const nl: Dictionary = {
       { term: 'Rechtspersoon', value: 'Northbridge Trading B.V.' },
       { term: 'Statutair gevestigd', value: 'Zwijndrecht, Nederland' },
       { term: 'KvK-nummer', value: '42053415' },
-      { term: 'Rol', value: 'Onafhankelijke bemiddelaar — geen producent, raffinaderij of opslagbedrijf' },
+      { term: 'Rol', value: 'Onafhankelijke bemiddelaar, geen producent, raffinaderij of opslagbedrijf' },
     ],
     audienceTitle: 'Met wie wij werken',
     audiences: [
@@ -192,8 +192,8 @@ export const nl: Dictionary = {
     basisIntro:
       'De transactiestructuur hangt af van de grondstof, de procedure van de leverancier en de commerciële voorwaarden die partijen overeenkomen. Mogelijke structuren zijn:',
     basis: [
-      { term: 'FOB', text: 'Free on board — de koper regelt het transport vanaf de overeengekomen laadhaven.' },
-      { term: 'CIF', text: 'Cost, insurance and freight — de verkoper regelt transport en verzekering tot de loshaven.' },
+      { term: 'FOB', text: 'Free on board: de koper regelt het transport vanaf de overeengekomen laadhaven.' },
+      { term: 'CIF', text: 'Cost, insurance and freight: de verkoper regelt transport en verzekering tot de loshaven.' },
       { term: 'Terminalgebaseerd', text: 'Afspraken binnen een terminal van derden, zoals in-tank- of ex-tank-overdrachten.' },
     ],
   },

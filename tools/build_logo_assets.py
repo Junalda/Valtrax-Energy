@@ -1,6 +1,6 @@
 """
 Builds the web logo assets from the supplied transparent master logo
-(brand/valtrax-logo-original.png, 1536x1024 RGBA, raster only — no vector source exists).
+(brand/valtrax-logo-original.png, 1536x1024 RGBA, raster only, no vector source exists).
 
 Outputs (public/brand/):
   valtrax-logo.webp / .png      Full stacked logo, trimmed (structured data, large use)

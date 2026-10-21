@@ -3,7 +3,7 @@
  * structured data about the company's identity comes from here.
  *
  * Facts that are still pending owner approval (public e-mail, street address, final
- * domain) are deliberately NOT stored here — see docs/OWNER-REVIEW.md. Add them only
+ * domain) are deliberately NOT stored here; see docs/OWNER-REVIEW.md. Add them only
  * once approved; components render them automatically when present.
  */
 export const site = {
@@ -40,7 +40,7 @@ export const site = {
   },
 } as const;
 
-/** Product options — must match the public product section (company profile list). */
+/** Product options. Must match the public product section (company profile list). */
 export const productKeys = ['en590', 'middle-distillates', 'jet-a1', 'lng', 'other'] as const;
 export type ProductKey = (typeof productKeys)[number];
 

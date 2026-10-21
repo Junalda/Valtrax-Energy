@@ -1,4 +1,4 @@
-# Valtrax Energy — website
+# Valtrax Energy website
 
 One-page bilingual website (English primary, Dutch at `/nl/`) for Valtrax Energy, a trading
 name of Northbridge Trading B.V. Built with Astro 7 and TypeScript, deployed on Vercel.
@@ -77,7 +77,7 @@ src/
   pages/api/enquiry.ts     Form endpoint (server-rendered)
   scripts/site.ts          Progressive enhancements
   styles/global.css        Design tokens and base styles
-public/                    Fonts, logo variants, icons, Open Graph images — public assets only
+public/                    Fonts, logo variants, icons, Open Graph images (public assets only)
 brand/                     Logo master file (not published)
 ```
 

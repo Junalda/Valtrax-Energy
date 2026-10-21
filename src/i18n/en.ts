@@ -13,7 +13,7 @@ export const en = {
     title: 'Valtrax Energy | Physical Energy Sourcing & Commercial Intermediation',
     description:
       'Netherlands-based independent energy intermediary connecting qualified buyers with relevant physical supply of EN590, middle distillates, Jet A-1 and LNG, with a focus on the ARA market.',
-    ogAlt: 'Valtrax Energy — physical energy sourcing and commercial intermediation',
+    ogAlt: 'Valtrax Energy: physical energy sourcing and commercial intermediation',
   },
   skipLink: 'Skip to main content',
   nav: {
@@ -28,7 +28,7 @@ export const en = {
     menuOpen: 'Menu',
     menuClose: 'Close',
     menuLabel: 'Open navigation menu',
-    home: 'Valtrax Energy — home',
+    home: 'Valtrax Energy, home',
   },
   langSwitch: {
     label: 'Language',
@@ -43,7 +43,7 @@ export const en = {
     lead:
       'Connecting qualified demand with relevant physical supply through disciplined sourcing, counterparty qualification and commercial coordination.',
     role:
-      'We work between buyers and suppliers of refined products and gas — we do not produce, store or hold the product ourselves.',
+      'We work between buyers and suppliers of refined products and gas. We do not produce, store or hold the product ourselves.',
     primary: 'Discuss your requirements',
     secondary: 'Explore our expertise',
     strap: ['Netherlands-based', 'ARA market focus', 'International reach'],
@@ -66,7 +66,7 @@ export const en = {
       { term: 'Legal entity', value: 'Northbridge Trading B.V.' },
       { term: 'Registered in', value: 'Zwijndrecht, the Netherlands' },
       { term: 'Chamber of Commerce (KvK)', value: '42053415' },
-      { term: 'Role', value: 'Independent intermediary — not a producer, refiner or storage operator' },
+      { term: 'Role', value: 'Independent intermediary, not a producer, refiner or storage operator' },
     ],
     audienceTitle: 'Who we work with',
     audiences: [
@@ -197,8 +197,8 @@ export const en = {
     basisIntro:
       'Transaction structures depend on the commodity, the supplier’s procedure and the commercial terms agreed between the parties. They may include:',
     basis: [
-      { term: 'FOB', text: 'Free on board — the buyer arranges shipment from the agreed loading port.' },
-      { term: 'CIF', text: 'Cost, insurance and freight — the seller arranges shipment and insurance to the destination port.' },
+      { term: 'FOB', text: 'Free on board: the buyer arranges shipment from the agreed loading port.' },
+      { term: 'CIF', text: 'Cost, insurance and freight: the seller arranges shipment and insurance to the destination port.' },
       { term: 'Terminal-based', text: 'Arrangements within a third-party terminal, such as in-tank or ex-tank transfers.' },
     ],
   },

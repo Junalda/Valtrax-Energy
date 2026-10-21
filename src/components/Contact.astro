@@ -117,7 +117,7 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
             <div>
               <label for="f-unit">{f.fields.unit}</label>
               <select id="f-unit" name="unit">
-                <option value="">—</option>
+                <option value="">{f.choose}</option>
                 {volumeUnits.map((u) => <option value={u}>{f.units[u]}</option>)}
               </select>
             </div>
@@ -131,7 +131,7 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
           <div class="field">
             <label for="f-basis">{f.fields.basis}</label>
             <select id="f-basis" name="basis">
-              <option value="">—</option>
+              <option value="">{f.choose}</option>
               {deliveryBases.map((b) => <option value={b}>{f.deliveryBases[b]}</option>)}
             </select>
           </div>
