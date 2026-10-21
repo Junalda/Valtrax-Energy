@@ -12,7 +12,7 @@ const header = document.querySelector<HTMLElement>('[data-header]');
 const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
 const menu = document.querySelector<HTMLElement>('[data-menu]');
 const toggleLabel = toggle?.querySelector<HTMLElement>('.menu-toggle__label');
-const desktop = window.matchMedia('(min-width: 68.0625rem)');
+const desktop = window.matchMedia('(min-width: 80rem)');
 
 function setMenu(open: boolean, returnFocus = false) {
   if (!header || !toggle) return;

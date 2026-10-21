@@ -93,8 +93,10 @@ form dropdown both come from that list.
 The supplied master logo is `brand/valtrax-logo-original.png` (transparent PNG; no vector
 source was supplied). `python3 tools/build_logo_assets.py` (needs Pillow) generates:
 
-- `public/brand/valtrax-lockup.webp`: horizontal lockup for light backgrounds (header)
-- `public/brand/valtrax-lockup-light.webp`: navy reversed to white, for navy (footer)
+- `public/brand/valtrax-lockup-tagline.webp` / `-tagline-light.webp`: horizontal lockup
+  with OIL TRADING, used from 48rem (header / footer)
+- `public/brand/valtrax-lockup.webp` / `-light.webp`: compact lockup without the
+  tagline, used on phones
 - `public/brand/valtrax-logo.png|webp`: full stacked logo (structured data)
 - `public/favicon.ico` and `public/apple-touch-icon.png`: from the symbol
 

@@ -6,11 +6,13 @@ Outputs (public/brand/):
   valtrax-logo.webp / .png      Full stacked logo, trimmed (structured data, large use)
   valtrax-lockup.webp           Horizontal lockup for the header (on white)
   valtrax-lockup-light.webp     Same lockup with navy reversed to white (on navy)
+  valtrax-lockup-tagline*.webp  Lockups including the OIL TRADING line (wider screens)
 And icons in public/: favicon.ico, apple-touch-icon.png
 
 The horizontal lockup re-arranges the original artwork (symbol left, VALTRAX and the
 ENERGY line right) without redrawing or recolouring it, so the logo stays legible at
-header height. The "OIL TRADING" line is omitted there because it would render at ~5px.
+header height. The compact lockup omits "OIL TRADING" (used on phones, where it would
+render at ~4px); the tagline lockup keeps the original text block intact.
 
 Run: python3 tools/build_logo_assets.py
 """
@@ -87,6 +89,20 @@ lockup = trim(lockup)
 LOCKUP_H = 168
 save_webp(lockup, "valtrax-lockup.webp", LOCKUP_H)
 save_webp(reverse(lockup), "valtrax-lockup-light.webp", LOCKUP_H)
+
+# --- Horizontal lockup with tagline ------------------------------------------------
+# The complete text block (VALTRAX, ENERGY line, OIL TRADING) keeps its original layout
+# and is scaled to the symbol's height so the tagline stays as large as possible.
+text_block = band(550, 915)
+scale = mark.height / text_block.height
+text_block = text_block.resize((round(text_block.width * scale), mark.height), Image.LANCZOS)
+tagline = Image.new("RGBA", (mark.width + gap_mark + text_block.width, mark.height), (0, 0, 0, 0))
+tagline.alpha_composite(mark, (0, 0))
+tagline.alpha_composite(text_block, (mark.width + gap_mark, 0))
+tagline = trim(tagline)
+TAGLINE_H = 192
+save_webp(tagline, "valtrax-lockup-tagline.webp", TAGLINE_H)
+save_webp(reverse(tagline), "valtrax-lockup-tagline-light.webp", TAGLINE_H)
 
 # --- Symbol and icons ----------------------------------------------------------------
 # (The symbol is only used for the icons below; no separate public file is needed.)

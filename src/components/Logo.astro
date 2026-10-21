@@ -9,39 +9,48 @@ interface Props {
   eager?: boolean;
 }
 const { tone = 'dark', size = 'md', eager = false } = Astro.props;
-const asset = tone === 'light' ? site.logo.lockupLight : site.logo.lockup;
+// Phones get the compact lockup; from 48rem the lockup with the OIL TRADING tagline.
+const compact = tone === 'light' ? site.logo.lockupLight : site.logo.lockup;
+const tagline = tone === 'light' ? site.logo.lockupTaglineLight : site.logo.lockupTagline;
 ---
 
-<img
-  class:list={['logo', `logo--${size}`]}
-  src={asset.src}
-  width={asset.width}
-  height={asset.height}
-  alt={site.brand}
-  loading={eager ? 'eager' : 'lazy'}
-  fetchpriority={eager ? 'high' : 'auto'}
-  decoding="async"
-/>
+<picture>
+  <source media="(min-width: 48rem)" srcset={tagline.src} width={tagline.width} height={tagline.height} />
+  <img
+    class:list={['logo', `logo--${size}`]}
+    src={compact.src}
+    width={compact.width}
+    height={compact.height}
+    alt={site.brand}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+  />
+</picture>
 
 <style>
-  /* Height-driven sizing keeps the logo's intrinsic aspect ratio (≈4.46:1). */
+  /* Height-driven sizing keeps each lockup's intrinsic aspect ratio. */
+  picture {
+    display: block;
+  }
   .logo {
     display: block;
     width: auto;
-    height: 3.25rem;
+    height: 2.75rem;
     max-width: 100%;
-  }
-  .logo--lg {
-    height: 3.75rem;
-  }
-  @media (max-width: 30rem) {
-    .logo {
-      height: 2.75rem;
-    }
   }
   @media (max-width: 22rem) {
     .logo {
       height: 2.4rem;
+    }
+  }
+  /* Tagline lockup: taller so OIL TRADING stays readable. */
+  @media (min-width: 48rem) {
+    .logo {
+      height: 3.75rem;
+    }
+    .logo--lg {
+      height: 4.25rem;
     }
   }
 </style>

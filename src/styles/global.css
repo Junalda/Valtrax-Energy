@@ -71,6 +71,11 @@
   --header-h: 4.5rem;
   --radius: 2px;
 }
+@media (min-width: 48rem) {
+  :root {
+    --header-h: 5.5rem; /* room for the logo with the OIL TRADING tagline */
+  }
+}
 
 *,
 *::before,

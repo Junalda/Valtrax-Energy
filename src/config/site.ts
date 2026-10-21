@@ -32,6 +32,9 @@ export const site = {
     lockup: { src: '/brand/valtrax-lockup.webp', width: 750, height: 168 },
     /** Same lockup with navy reversed to white, for navy backgrounds (footer). */
     lockupLight: { src: '/brand/valtrax-lockup-light.webp', width: 750, height: 168 },
+    /** Lockups including the OIL TRADING tagline, used from tablet width upwards. */
+    lockupTagline: { src: '/brand/valtrax-lockup-tagline.webp', width: 994, height: 192 },
+    lockupTaglineLight: { src: '/brand/valtrax-lockup-tagline-light.webp', width: 994, height: 192 },
     /** Full stacked logo as supplied (structured data). */
     full: { src: '/brand/valtrax-logo.png', width: 960, height: 620 },
   },
