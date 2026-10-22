@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } from 'astro:env/server';
+import { RESEND_API_KEY, CONTACT_FROM_EMAIL } from 'astro:env/server';
+import { site } from '../../config/site';
 import { MAX_BODY_BYTES, MIN_FILL_MS, validateEnquiry, type Enquiry } from '../../lib/enquiry';
 import { t, pathFor, type Lang } from '../../i18n';
 
@@ -70,6 +71,14 @@ function respond(request: Request, lang: Lang, status: Status, extra?: Record<st
 
 // --- Delivery ----------------------------------------------------------------------
 const labels = t('en');
+const OWN_DOMAIN = new URL(site.website).hostname;
+
+/** True when the From address (plain or "Name <addr>") is on the own domain or a subdomain of it. */
+function isOwnDomainSender(from: string): boolean {
+  const address = (from.match(/<([^>]+)>/)?.[1] ?? from).trim().toLowerCase();
+  const domain = address.split('@')[1] ?? '';
+  return domain === OWN_DOMAIN || domain.endsWith(`.${OWN_DOMAIN}`);
+}
 
 function composeEmail(e: Enquiry): { subject: string; text: string } {
   const type = labels.form.enquiryTypes[e.enquiryType];
@@ -181,15 +190,24 @@ export const POST: APIRoute = async ({ request, clientAddress, url }) => {
     return respond(request, lang, 'invalid', { errors: result.errors });
   }
 
-  const to = (CONTACT_TO_EMAIL ?? '').split(',').map((s) => s.trim()).filter(Boolean);
-  if (!RESEND_API_KEY || !CONTACT_FROM_EMAIL || to.length === 0) {
+  if (!RESEND_API_KEY || !CONTACT_FROM_EMAIL) {
     // Honest failure: nothing is sent and the visitor is told so.
     log('unavailable', { reason: 'not-configured' });
     return respond(request, lang, 'unavailable');
   }
+  if (!isOwnDomainSender(CONTACT_FROM_EMAIL)) {
+    // The sender must be an address on the company's own (Resend-verified) domain.
+    log('unavailable', { reason: 'sender-not-own-domain' });
+    return respond(request, lang, 'unavailable');
+  }
 
   try {
-    const delivery = await deliver(result.data, { apiKey: RESEND_API_KEY, to, from: CONTACT_FROM_EMAIL });
+    // Single fixed recipient (site.formRecipient); the visitor's address is only used as Reply-To.
+    const delivery = await deliver(result.data, {
+      apiKey: RESEND_API_KEY,
+      to: [site.formRecipient],
+      from: CONTACT_FROM_EMAIL,
+    });
     if (!delivery.ok) {
       log('error', { provider: delivery.httpStatus });
       return respond(request, lang, 'error');

@@ -1,7 +1,7 @@
 ---
 import Arrow from './Arrow.astro';
 import { t, pathFor, type Lang } from '../i18n';
-import { productKeys, enquiryTypes, deliveryBases, volumeUnits } from '../config/site';
+import { site, productKeys, enquiryTypes, deliveryBases, volumeUnits } from '../config/site';
 import { limits } from '../lib/enquiry';
 
 interface Props {
@@ -29,6 +29,19 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
         {dict.contact.checklist.map((c) => <li>{c}</li>)}
       </ul>
       <p class="contact__notice">{dict.contact.notRequested}</p>
+      <h3 class="contact__subhead">{dict.contact.directTitle}</h3>
+      <dl class="contact__emails">
+        {
+          (['general', 'trading', 'finance'] as const).map((role) => (
+            <div>
+              <dt>{dict.contact.direct[role]}</dt>
+              <dd>
+                <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
 
     <form
@@ -198,6 +211,30 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
     width: 0.55rem;
     height: 1px;
     background: var(--gold-500);
+  }
+  .contact__emails {
+    margin: 0;
+    display: grid;
+    border-top: 1px solid var(--grey-200);
+  }
+  .contact__emails div {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1rem;
+    padding-block: 0.6rem;
+    border-bottom: 1px solid var(--grey-200);
+    font-size: 0.95rem;
+  }
+  .contact__emails dt {
+    color: var(--grey-500);
+  }
+  .contact__emails dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .contact__emails a {
+    color: var(--navy-900);
+    text-decoration-color: var(--gold-500);
   }
   .contact__notice {
     margin-top: 0.5rem;

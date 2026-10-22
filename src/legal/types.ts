@@ -9,8 +9,9 @@
  *   [[...]]                                             DRAFT placeholder: information or a decision
  *                                                       still needed before publication
  *
- * A page containing any [[...]] placeholder is a draft: it shows a draft banner and the
- * production (indexable) build refuses to publish it. See README "Legal pages".
+ * Unresolved items are NOT written into public text. They go into `review` (internal, never
+ * rendered). A document with review items or [[...]] markers blocks the production
+ * (indexable) build. See README "Legal pages".
  */
 export type Block =
   | { type: 'p'; text: string }
@@ -32,9 +33,21 @@ export interface LegalDoc {
   /** Actual revision date of the text (ISO yyyy-mm-dd). */
   updated: string;
   sections: Section[];
+  /** Internal publication blockers (legal review, provider checks). Never rendered. */
+  review: string[];
 }
 
-/** Number of unresolved [[...]] placeholders in a document. */
+/** Number of visible [[...]] placeholders in a document's public text. */
 export function countDrafts(doc: LegalDoc): number {
-  return (JSON.stringify(doc).match(/\[\[/g) ?? []).length;
+  const texts = doc.sections.flatMap((section) =>
+    section.blocks.flatMap((block) =>
+      block.type === 'p' ? [block.text] : block.type === 'list' ? block.items : block.type === 'table' ? block.rows.flat() : [],
+    ),
+  );
+  return texts.reduce((n, text) => n + (text.match(/\[\[/g) ?? []).length, 0);
+}
+
+/** Everything that must be resolved before the document may be published. */
+export function publicationBlockers(doc: LegalDoc): number {
+  return countDrafts(doc) + doc.review.length;
 }

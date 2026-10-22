@@ -5,7 +5,7 @@ import Footer from './Footer.astro';
 import LegalText from './LegalText.astro';
 import { site } from '../config/site';
 import { t, pathFor, legalPages, type Lang, type LegalPageKey } from '../i18n';
-import { legalDoc, countDrafts } from '../legal';
+import { legalDoc, countDrafts, publicationBlockers } from '../legal';
 
 interface Props {
   lang: Lang;
@@ -15,12 +15,14 @@ const { lang, page } = Astro.props;
 const dict = t(lang);
 const doc = legalDoc(page, lang);
 const drafts = countDrafts(doc);
+const blockers = publicationBlockers(doc);
 
-// Unresolved drafts must never reach the production (indexable) site.
-if (site.indexable && drafts > 0) {
+// Unresolved items (internal review list or [[...]] markers) must never reach the
+// production (indexable) site.
+if (site.indexable && blockers > 0) {
   throw new Error(
-    `Legal page "${page}" (${lang}) still contains ${drafts} unresolved [[...]] placeholder(s). ` +
-      'Resolve them in src/legal/*.ts before building with SITE_INDEXING=true.',
+    `Legal page "${page}" (${lang}) has ${blockers} unresolved publication blocker(s) ` +
+      '(see `review` and [[...]] in src/legal/*.ts). Resolve them before building with SITE_INDEXING=true.',
   );
 }
 
