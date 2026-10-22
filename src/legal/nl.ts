@@ -1,7 +1,11 @@
 import type { LegalDoc } from './types';
 import type { LegalPageKey } from '../i18n';
+import { legalEn } from './en';
 
-/** Dutch legal texts. Same structure and facts as en.ts; keep both in step. */
+/**
+ * Dutch legal texts. Same structure and meaning as en.ts; formal address (u/uw).
+ * The internal review lists are shared with the English version.
+ */
 const UPDATED = '2026-10-22';
 
 export const legalNl: Record<LegalPageKey, LegalDoc> = {
@@ -11,7 +15,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
       'Voorwaarden voor het gebruik van de website van Valtrax Energy en voor aanvragen via de website, van Northbridge Trading B.V.',
     title: 'Algemene voorwaarden',
     intro:
-      'Deze voorwaarden leggen uit hoe u deze website mag gebruiken en wat het indienen van een aanvraag wel en niet betekent. Ze bevatten niet de voorwaarden van een energie- of grondstoffentransactie.',
+      'Deze voorwaarden gelden voor het gebruik van deze website en het indienen van aanvragen. Commerciële transacties worden geregeld in afzonderlijke schriftelijke overeenkomsten.',
     updated: UPDATED,
     sections: [
       {
@@ -31,11 +35,11 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Deze website bevat algemene zakelijke informatie over Valtrax Energy en biedt professionele partijen de mogelijkheid een aanvraag in te dienen. Deze voorwaarden gelden voor het gebruik van de website en voor aanvragen die via de website worden ingediend.',
+            text: 'Deze voorwaarden gelden voor het gebruik van deze website en voor aanvragen die via de website worden ingediend. Zij vormen geen handels-, bemiddelings- of leveringsovereenkomst.',
           },
           {
             type: 'p',
-            text: 'Deze voorwaarden zijn geen commerciële voorwaarden voor een transactie. Commerciële voorwaarden gelden voor een transactie alleen als ze uitdrukkelijk zijn opgenomen in, of door verwijzing van toepassing zijn verklaard in, een afzonderlijke schriftelijke overeenkomst voor die transactie. Het bezoeken van deze website betekent niet dat u commerciële voorwaarden aanvaardt.',
+            text: 'Voor commerciële transacties is een afzonderlijke schriftelijke overeenkomst nodig. Commerciële voorwaarden gelden voor een transactie alleen als zij in die overeenkomst zijn opgenomen of daarin uitdrukkelijk van toepassing zijn verklaard. Het bezoeken van deze website betekent niet dat u commerciële voorwaarden aanvaardt.',
           },
         ],
       },
@@ -45,25 +49,25 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Valtrax Energy faciliteert en coördineert internationale transacties in fysieke energie en grondstoffen tussen professionele marktpartijen.',
+            text: 'Valtrax Energy brengt professionele kopers en verkopers van fysieke energieproducten bij elkaar. Onze primaire focus ligt op commerciële bemiddeling. Afhankelijk van de transactie en de overeengekomen contractuele afspraken kunnen wij ook rechtstreeks deelnemen aan de aan- en verkoop van producten, waaronder back-to-backtransacties.',
           },
           {
             type: 'p',
-            text: 'Afhankelijk van de overeenkomst voor een specifieke transactie kan Valtrax Energy optreden als bemiddelaar, op basis van agentuur of commissie, of op back-to-backbasis. Onze rol, bevoegdheid, dienstverlening en verantwoordelijkheden worden per opdracht vastgelegd. Valtrax Energy treedt alleen op als verkoper, leverancier, eigenaar van de goederen of gemachtigd mandaathouder als een schriftelijke overeenkomst voor die transactie dat uitdrukkelijk bepaalt.',
+            text: 'Onze rol, bevoegdheid, verantwoordelijkheden en dienstverlening worden per transactie schriftelijk overeengekomen. Valtrax Energy treedt alleen op als verkoper, leverancier, eigenaar van de goederen of gemachtigd mandaathouder als de schriftelijke overeenkomst voor die transactie dat uitdrukkelijk bepaalt.',
           },
         ],
       },
       {
-        id: 'enquiries',
+        id: 'website-information',
         title: '4. Informatie op de website en aanvragen',
         blocks: [
           {
             type: 'p',
-            text: 'Beschrijvingen van producten, markten en diensten op deze website zijn algemene informatie. Tenzij uitdrukkelijk vermeld in een bevoegd uitgebracht schriftelijk aanbod, zijn ze geen bindend aanbod en bevestigen ze niet dat een product beschikbaar is.',
+            text: 'Deze website is informatief. De inhoud ervan vormt op zichzelf geen bindend aanbod, geen garantie van beschikbaarheid en geen leveringsverplichting. Vermelde producten zijn algemene informatie en betekenen niet dat een product op voorraad of beschikbaar is.',
           },
           {
             type: 'p',
-            text: 'Het indienen van een aanvraag via het contactformulier leidt niet tot een koop-, leverings-, agentuur-, bemiddelings- of andere overeenkomst en verplicht geen van beide partijen om een transactie aan te gaan.',
+            text: 'Het indienen van een aanvraag via het contactformulier leidt niet tot een koop-, leverings-, bemiddelings-, agentuur- of andere overeenkomst en verplicht geen van beide partijen om een transactie aan te gaan.',
           },
         ],
       },
@@ -73,17 +77,54 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Productspecificaties, hoeveelheden, prijzen, levering, betaling, eigendomsoverdracht, commissies en alle andere transactievoorwaarden worden per transactie afzonderlijk overeengekomen en schriftelijk vastgelegd.',
+            text: 'Productspecificaties, hoeveelheden, prijzen, levering, betaling, eigendomsoverdracht, commissies en alle andere transactievoorwaarden worden per transactie afzonderlijk overeengekomen en schriftelijk vastgelegd. Deze websitevoorwaarden vervangen geen transactiedocumenten.',
+          },
+        ],
+      },
+      {
+        id: 'payment',
+        title: '6. Betaling en commissie',
+        blocks: [
+          {
+            type: 'list',
+            items: [
+              'Bemiddeling: een eventuele commissie, de eventuele verdeling daarvan tussen partijen, de betalingstermijn en de valuta worden per opdracht schriftelijk overeengekomen.',
+              'Rechtstreekse aan- en verkoop: de prijs en de betalingsvoorwaarden worden vastgelegd in de betreffende koop- of verkoopovereenkomst.',
+            ],
           },
           {
             type: 'p',
-            text: 'Deze websitevoorwaarden vervangen geen transactiedocumenten en zijn niet van toepassing op een transactie, tenzij de overeenkomst voor die transactie dat uitdrukkelijk bepaalt.',
+            text: 'Uit deze websitevoorwaarden volgen geen betalings- of commissieverplichtingen.',
+          },
+        ],
+      },
+      {
+        id: 'termination',
+        title: '7. Beëindiging en annulering',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Beëindiging, annulering en een eventueel recht op commissie worden geregeld in de betreffende schriftelijke overeenkomst. Deze websitevoorwaarden leggen geen annuleringskosten op.',
+          },
+        ],
+      },
+      {
+        id: 'commercial-information',
+        title: '8. Commerciële informatie',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Wij gaan zorgvuldig om met commerciële informatie die met ons wordt gedeeld. Wij delen die informatie alleen met anderen als dat voor de betreffende zaak noodzakelijk en passend is, met inachtneming van de toepasselijke wetgeving en een eventuele geheimhoudings- of non-circumventionovereenkomst (NDA of NCNDA) met de betrokken partijen.',
+          },
+          {
+            type: 'p',
+            text: 'Het gebruik van deze website of het indienen van een aanvraag leidt op zichzelf niet tot een NDA of NCNDA. Waar geheimhoudingsverplichtingen nodig zijn, worden die afzonderlijk schriftelijk overeengekomen.',
           },
         ],
       },
       {
         id: 'counterparties',
-        title: '6. Gegevens van tegenpartijen en verificatie',
+        title: '9. Gegevens van tegenpartijen en verificatie',
         blocks: [
           {
             type: 'p',
@@ -100,36 +141,32 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         ],
       },
       {
-        id: 'website-information',
-        title: '7. Juistheid en beschikbaarheid van de website',
+        id: 'accuracy',
+        title: '10. Juistheid, beschikbaarheid en aansprakelijkheid',
         blocks: [
           {
             type: 'p',
-            text: 'Wij besteden redelijke zorg aan de juistheid en actualiteit van de informatie op deze website. Toch kan de informatie fouten bevatten of verouderd raken, en wij kunnen haar op elk moment wijzigen. Informatie over beschikbaarheid, specificaties of andere transactiespecifieke zaken vereist altijd een afzonderlijke schriftelijke bevestiging.',
+            text: 'Wij besteden redelijke zorg aan de juistheid en actualiteit van de informatie op deze website. Toch kan de informatie fouten bevatten of verouderd raken, en wij kunnen haar op elk moment wijzigen. Wij streven ernaar de website beschikbaar te houden, maar kunnen geen ononderbroken of foutloze toegang garanderen.',
           },
           {
             type: 'p',
-            text: 'Wij streven ernaar de website beschikbaar te houden, maar kunnen geen ononderbroken of foutloze toegang garanderen.',
-          },
-          {
-            type: 'p',
-            text: '[[Aansprakelijkheid voor het gebruik van deze website: beslissen of een aansprakelijkheidsbepaling voor websitegebruik gewenst is en zo ja, met welke tekst.]]',
+            text: 'Beslissingen over een transactie horen te berusten op de schriftelijke overeenkomst en bevestigingen voor die transactie, niet alleen op algemene informatie op de website. Niets in deze voorwaarden beperkt of sluit aansprakelijkheid uit waar dat op grond van dwingend recht niet is toegestaan.',
           },
         ],
       },
       {
         id: 'third-party-links',
-        title: '8. Links naar andere websites',
+        title: '11. Links naar andere websites',
         blocks: [
           {
             type: 'p',
-            text: 'Deze website kan links bevatten naar websites van derden. Die websites worden beheerd door hun eigen aanbieders, en hun eigen voorwaarden en privacyverklaringen zijn van toepassing. Wij hebben geen invloed op de inhoud ervan en zijn daar niet verantwoordelijk voor, maar als u een onjuiste of ongepaste link ziet, horen wij dat graag.',
+            text: 'Deze website kan links bevatten naar websites van derden. Die websites worden beheerd door hun eigen aanbieders, en hun eigen voorwaarden en privacyverklaringen zijn van toepassing. Wij hebben geen invloed op de inhoud ervan, maar als u een onjuiste of ongepaste link ziet, horen wij dat graag.',
           },
         ],
       },
       {
         id: 'intellectual-property',
-        title: '9. Intellectueel eigendom',
+        title: '12. Intellectueel eigendom',
         blocks: [
           {
             type: 'p',
@@ -143,7 +180,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
       },
       {
         id: 'privacy',
-        title: '10. Privacy en cookies',
+        title: '13. Privacy en cookies',
         blocks: [
           {
             type: 'p',
@@ -152,39 +189,28 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         ],
       },
       {
-        id: 'commercial-provisions',
-        title: '11. Commerciële bepalingen',
+        id: 'law',
+        title: '14. Toepasselijk recht en bevoegde rechter',
         blocks: [
           {
             type: 'p',
-            text: 'De volgende onderwerpen worden vastgelegd in de schriftelijke overeenkomst voor elke transactie:',
-          },
-          {
-            type: 'list',
-            items: [
-              '[[Betalings- en commissieafspraken: bevestigen of standaardvoorwaarden gelden of dat dit altijd per transactie wordt overeengekomen.]]',
-              '[[Aansprakelijkheid en een eventuele financiële beperking daarvan.]]',
-              '[[Beëindiging en annulering.]]',
-              '[[Geheimhoudingsverplichtingen.]]',
-            ],
+            text: 'Op deze voorwaarden en het gebruik van deze website is Nederlands recht van toepassing. Geschillen worden voorgelegd aan de bevoegde rechter in Rotterdam, tenzij dwingend recht anders bepaalt. Overeenkomsten voor afzonderlijke transacties kunnen andere bepalingen over toepasselijk recht en geschillenbeslechting bevatten.',
           },
         ],
       },
       {
-        id: 'law-language',
-        title: '12. Toepasselijk recht, geschillen en taal',
+        id: 'language',
+        title: '15. Taal',
         blocks: [
-          { type: 'p', text: '[[Toepasselijk recht op deze websitevoorwaarden en op aanvragen.]]' },
-          { type: 'p', text: '[[Bevoegde rechter bij geschillen.]]' },
           {
             type: 'p',
-            text: 'Deze voorwaarden zijn beschikbaar in het Engels en het Nederlands. [[Beslissen welke taalversie voorgaat als de versies van elkaar afwijken.]]',
+            text: 'Deze voorwaarden zijn beschikbaar in het Engels en het Nederlands. Engels is onze voorkeurstaal voor internationale communicatie. Beide versies hebben dezelfde inhoud.',
           },
         ],
       },
       {
         id: 'contact',
-        title: '13. Vragen, klachten en wijzigingen',
+        title: '16. Vragen, klachten en wijzigingen',
         blocks: [
           {
             type: 'p',
@@ -192,11 +218,12 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
-            text: 'Wij kunnen deze voorwaarden wijzigen. De datum bovenaan deze pagina geeft aan wanneer ze voor het laatst zijn gewijzigd.',
+            text: 'Wij kunnen deze voorwaarden wijzigen. De datum bovenaan deze pagina geeft aan wanneer zij voor het laatst zijn gewijzigd.',
           },
         ],
       },
     ],
+    review: legalEn.terms.review,
   },
 
   privacy: {
@@ -248,7 +275,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
-            text: 'Technische gegevens. Wanneer u de website bezoekt, stuurt uw browser automatisch technische informatie naar onze hostingprovider, zoals uw IP-adres, de opgevraagde pagina, het tijdstip en browsergegevens. Dit is nodig om de website aan u te tonen. [[Bevestigen welke verzoekgegevens de hostingprovider (Vercel) voor deze website in haar logbestanden vastlegt en hoe lang.]]',
+            text: 'Technische gegevens. Wanneer u de website bezoekt, stuurt uw browser automatisch technische informatie naar onze hostingprovider, zoals uw IP-adres, de opgevraagde pagina, het tijdstip en browsergegevens. Dit is nodig om de website aan u te tonen. Onze hostingprovider legt zulke verzoekgegevens vast in haar logbestanden en bewaart ze gedurende een beperkte periode.',
           },
           {
             type: 'p',
@@ -277,13 +304,13 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
                 'Uw aanvraag beoordelen en beantwoorden',
                 'Gegevens uit het aanvraagformulier en correspondentie',
                 'Ons gerechtvaardigd belang bij het beantwoorden en opvolgen van zakelijke aanvragen van professionele partijen (art. 6 lid 1 sub f AVG). Neemt u namens uzelf contact op om stappen te zetten naar een overeenkomst met ons, dan is de grondslag het nemen van die stappen op uw verzoek (art. 6 lid 1 sub b AVG).',
-                'Zolang nodig is om de aanvraag af te handelen. [[Bewaartermijn als er geen zakelijke relatie volgt.]]',
+                'Als er geen zakelijke relatie volgt: verwijderd zes maanden na het laatste inhoudelijke contact, tenzij een langere termijn gerechtvaardigd is, bijvoorbeeld vanwege een geschil, of wettelijk verplicht is.',
               ],
               [
                 'Onderhouden van een zakelijke relatie met de organisatie die u vertegenwoordigt',
                 'Contactgegevens van contactpersonen en correspondentie',
                 'Ons gerechtvaardigd belang bij het onderhouden van zakelijke contacten en het coördineren van gesprekken met professionele partijen (art. 6 lid 1 sub f AVG), of de uitvoering van een overeenkomst met u (art. 6 lid 1 sub b AVG) als u zelf de contractpartij bent.',
-                'Zolang de zakelijke relatie duurt. [[Bewaartermijn na afloop van de relatie.]]',
+                'Zolang dat voor het doel van de zakelijke relatie nodig is.',
               ],
               [
                 'Beschermen van het aanvraagformulier tegen spam en misbruik',
@@ -295,13 +322,13 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
                 'Tonen en beveiligen van de website',
                 'Technische verzoekgegevens, zoals IP-adres en browsergegevens',
                 'Ons gerechtvaardigd belang bij een betrouwbare en veilige website (art. 6 lid 1 sub f AVG).',
-                '[[Bewaartermijn van de hostinglogs (zie paragraaf 2).]]',
+                'Gedurende een beperkte periode in de logbestanden van onze hostingprovider.',
               ],
               [
-                'Voldoen aan wettelijke verplichtingen',
+                'Voldoen aan wettelijke verplichtingen, zoals het bewaren van de fiscale administratie',
                 'Gegevens die wij wettelijk moeten bewaren, bijvoorbeeld als een aanvraag tot een transactie leidt',
                 'Wettelijke verplichting (art. 6 lid 1 sub c AVG).',
-                'Zolang de betreffende wettelijke verplichting dat vereist.',
+                'Gedurende de toepasselijke wettelijke bewaartermijn.',
               ],
             ],
           },
@@ -317,23 +344,23 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Wij maken gebruik van dienstverleners die namens ons gegevens verwerken:',
+            text: 'Wij maken gebruik van de volgende dienstverleners, die namens ons gegevens verwerken:',
           },
           {
             type: 'list',
             items: [
               'Vercel Inc.: hosting van de website en van de serverfunctie die het aanvraagformulier verwerkt.',
-              'Resend: bezorging van formulierinzendingen per e-mail in onze mailbox. [[Bevestigen dat Resend wordt gebruikt zodra het formulier is ingesteld.]]',
-              '[[De e-mailprovider noemen bij wie de mailbox staat die de aanvragen ontvangt.]]',
+              'Resend: verzending van formulierinzendingen per e-mail naar onze mailbox.',
+              'Microsoft (Microsoft 365): onze e-mail- en mailboxdienst, waar aanvragen en correspondentie binnenkomen en worden bewaard.',
             ],
           },
           {
             type: 'p',
-            text: '[[Bevestigen dat er verwerkersovereenkomsten met deze dienstverleners zijn en dat hier vermelden.]]',
+            text: 'Aanvragen via het contactformulier worden niet automatisch gedeeld met mogelijke kopers of leveranciers. Wij delen herleidbare persoonsgegevens niet met tegenpartijen zonder uw voorafgaande toestemming, tenzij een andere duidelijke wettelijke grondslag dat toestaat.',
           },
           {
             type: 'p',
-            text: '[[Bevestigen of en onder welke voorwaarden gegevens uit aanvragen worden gedeeld met mogelijke tegenpartijen in een transactie, en met welk doel.]]',
+            text: 'Binnen onze organisatie worden aanvragen behandeld door de personen die daarvoor verantwoordelijk zijn. Andere personen en dienstverleners hebben alleen toegang als dat voor hun werkzaamheden noodzakelijk is, met passende toegangsbeperkingen.',
           },
           {
             type: 'p',
@@ -347,11 +374,11 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Onze hostingprovider Vercel Inc. is gevestigd in de Verenigde Staten, en de serverfunctie die inzendingen van het aanvraagformulier op dit moment verwerkt, draait in een datacenter in de Verenigde Staten. Pagina’s van de website worden via een wereldwijd netwerk geleverd. Uw persoonsgegevens kunnen daardoor buiten de Europese Economische Ruimte worden verwerkt.',
+            text: 'Onze hostingprovider Vercel Inc. en onze dienst voor e-mailverzending Resend zijn gevestigd in de Verenigde Staten. De serverfunctie die inzendingen van het aanvraagformulier verwerkt, draait in een datacenter in de Verenigde Staten, en pagina’s van de website worden via het wereldwijde netwerk van Vercel geleverd. Ook Microsoft kan, afhankelijk van haar diensten, gegevens buiten de Europese Economische Ruimte verwerken. Uw persoonsgegevens kunnen daardoor buiten de Europese Economische Ruimte worden verwerkt.',
           },
           {
             type: 'p',
-            text: '[[De geverifieerde waarborg voor doorgifte per dienstverlener beschrijven (bijvoorbeeld certificering onder het EU-VS-gegevensprivacykader of standaardcontractbepalingen), ook voor Resend en de e-mailprovider.]]',
+            text: 'Waar persoonsgegevens worden doorgegeven naar een land buiten de Europese Economische Ruimte, baseren wij ons op de doorgiftemechanismen die de betreffende dienstverlener biedt, zoals certificering onder het EU-VS-gegevensprivacykader (Data Privacy Framework) of de standaardcontractbepalingen van de Europese Commissie.',
           },
         ],
       },
@@ -361,7 +388,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Wij bewaren persoonsgegevens niet langer dan nodig is voor de doelen in paragraaf 3. De bewaartermijn per activiteit staat in de tabel hierboven. Gegevens die wij wettelijk moeten bewaren, bewaren wij zolang de wet dat voorschrijft.',
+            text: 'Wij bewaren persoonsgegevens niet langer dan nodig is voor de doelen in paragraaf 3. De bewaartermijn per activiteit staat in de tabel hierboven. Gegevens die wij wettelijk moeten bewaren, zoals de fiscale administratie, bewaren wij gedurende de wettelijke termijn.',
           },
         ],
       },
@@ -371,7 +398,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Wij nemen passende technische en organisatorische maatregelen om persoonsgegevens te beschermen. Zo is de website alleen bereikbaar via een versleutelde verbinding (HTTPS), worden inzendingen op de server gecontroleerd, is het formulier beschermd tegen geautomatiseerd misbruik, bevatten onze logbestanden geen inhoud van aanvragen en worden toegangsgegevens voor de e-maildienst alleen op de server bewaard. [[De organisatorische maatregelen beschrijven, bijvoorbeeld wie toegang heeft tot de mailbox met aanvragen.]]',
+            text: 'Wij nemen passende technische en organisatorische maatregelen om persoonsgegevens te beschermen. Zo is de website alleen bereikbaar via een versleutelde verbinding (HTTPS), worden inzendingen op de server gecontroleerd, is het formulier beschermd tegen geautomatiseerd misbruik, bevatten onze logbestanden geen inhoud van aanvragen, worden toegangsgegevens voor de e-maildienst alleen op de server bewaard en is de toegang tot de mailboxen met aanvragen beperkt tot de personen die die toegang nodig hebben.',
           },
           {
             type: 'p',
@@ -422,7 +449,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
-            text: 'Wij gebruiken de gegevens die via deze website worden verzameld niet voor profilering. [[Als bij controles van tegenpartijen geautomatiseerde screeningtools worden gebruikt, bijvoorbeeld controle op sanctielijsten, die hier beschrijven.]]',
+            text: 'Controles van tegenpartijen worden op dit moment handmatig uitgevoerd. Wij gebruiken geen geautomatiseerde besluitvorming of profilering op basis van de gegevens die via deze website worden verzameld.',
           },
         ],
       },
@@ -447,6 +474,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
+    review: legalEn.privacy.review,
   },
 
   cookies: {
@@ -483,10 +511,6 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
             type: 'p',
             text: 'Wanneer u een pagina laadt, stuurt uw browser wel standaard technische informatie, zoals uw IP-adres, naar onze hostingprovider. Dat is geen cookie; hoe wij daarmee omgaan, leest u in onze {link:privacy}.',
           },
-          {
-            type: 'p',
-            text: '[[Vóór publicatie op het live domein valtraxenergy.com controleren dat er geen cookies of browseropslag worden geplaatst, ook niet door de hostingprovider.]]',
-          },
         ],
       },
       {
@@ -520,5 +544,6 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
+    review: legalEn.cookies.review,
   },
 };

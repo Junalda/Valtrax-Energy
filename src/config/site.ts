@@ -14,9 +14,22 @@ export const site = {
   website: 'https://valtraxenergy.com',
   /** Origin is set via SITE_URL in astro.config.mjs; this is read from Astro.site at render time. */
   indexable: __SITE_INDEXABLE__,
+  /**
+   * Confirmed e-mail roles (client answers, 2026-10). `general` is the public contact
+   * address and the only recipient of the website enquiry form. `direct` is Thom's address
+   * for existing business correspondence and is intentionally not shown on the site.
+   */
+  emails: {
+    general: 'info@valtraxenergy.com',
+    trading: 'trading@valtraxenergy.com',
+    finance: 'finance@valtraxenergy.com',
+    direct: 'Thom@valtraxenergy.com',
+  },
+  /** The enquiry form always delivers to this single address (no copies, no routing). */
+  formRecipient: 'info@valtraxenergy.com',
   /** Public contact details (footer, legal pages, structured data). */
   publicContact: {
-    email: 'Thom@valtraxenergy.com' as string | undefined,
+    email: 'info@valtraxenergy.com' as string | undefined,
     streetAddress: 'Stationsweg 41' as string | undefined,
     postalCode: '3331 LR' as string | undefined,
   },
@@ -37,8 +50,11 @@ export const site = {
   },
 } as const;
 
-/** Product options. Must match the public product section (company profile list). */
-export const productKeys = ['en590', 'middle-distillates', 'jet-a1', 'lng', 'other'] as const;
+/**
+ * Confirmed product list (client answers, 2026-10). Single source for the product section,
+ * the enquiry form, the FAQ and structured data; names and descriptions live in i18n.
+ */
+export const productKeys = ['en590', 'jet-a1', 'lpfo', 'd6', 'lpg', 'lng', 'other'] as const;
 export type ProductKey = (typeof productKeys)[number];
 
 export const enquiryTypes = ['buyer', 'supplier', 'other'] as const;

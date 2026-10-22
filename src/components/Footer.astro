@@ -16,7 +16,7 @@ const sections = (['about', 'expertise', 'products', 'markets', 'process', 'cont
   label: dict.nav[id],
 }));
 const year = new Date().getFullYear();
-const { email, streetAddress, postalCode } = site.publicContact;
+const { streetAddress, postalCode } = site.publicContact;
 ---
 
 <footer class="site-footer on-navy">
@@ -42,7 +42,13 @@ const { email, streetAddress, postalCode } = site.publicContact;
         {streetAddress && <p>{streetAddress}{postalCode ? `, ${postalCode}` : ''} {site.registeredLocality}</p>}
         <p>{dict.footer.registration}</p>
         <p>{dict.footer.vat} {site.vat}</p>
-        {email && <p><a href={`mailto:${email}`}>{email}</a></p>}
+        {
+          (['general', 'trading', 'finance'] as const).map((role) => (
+            <p>
+              {dict.contact.direct[role]}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+            </p>
+          ))
+        }
       </address>
     </div>
     <div class="site-footer__bottom">

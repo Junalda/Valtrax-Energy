@@ -40,12 +40,14 @@ Copy `.env.example` to `.env` for local work. On Vercel, set them under
 | `SITE_URL`           | build            | Public origin for canonical URLs, hreflang, sitemap, Open Graph. Defaults to `https://valtraxenergy.com`. |
 | `SITE_INDEXING`      | build            | `true` makes pages indexable. **Only takes effect when `VERCEL_ENV` is `production`** (or outside Vercel). |
 | `RESEND_API_KEY`     | runtime (secret) | API key for [Resend](https://resend.com), used to deliver enquiries.                                      |
-| `CONTACT_TO_EMAIL`   | runtime (secret) | Approved recipient mailbox(es), comma-separated.                                                          |
-| `CONTACT_FROM_EMAIL` | runtime (secret) | Sender on a domain verified in Resend, e.g. `Valtrax Energy website <website@valtraxenergy.com>`.       |
+| `CONTACT_FROM_EMAIL` | runtime (secret) | Sender on the Resend-verified domain; must be on valtraxenergy.com or a subdomain, e.g. `Valtrax Energy website <website@notify.valtraxenergy.com>`. |
 
-If any of the three form variables is missing, the endpoint returns **503** and the page
+If either form variable is missing (or the sender is not on the own domain), the endpoint returns **503** and the page
 tells the visitor the form is unavailable and that their message was **not** sent.
 A success message is shown only after Resend accepts the message and returns a message id.
+
+The recipient is fixed in `src/config/site.ts` (`formRecipient`: info@valtraxenergy.com); the
+visitor's address is only used as Reply-To. DNS and mail setup: **[docs/DNS-AND-EMAIL.md](docs/DNS-AND-EMAIL.md)**.
 
 ## Indexing: previews vs. launch
 
@@ -110,9 +112,10 @@ logo, also run `node tools/generate-images.mjs` for the Open Graph images.
 `src/legal/nl.ts`. Company details come from `src/config/site.ts` through tokens such as
 `{company}` and `{email}` (see `src/legal/types.ts`).
 
-Unresolved items are written as `[[...]]`. Such a page shows a draft banner, and a build with
-`SITE_INDEXING=true` **fails** until all markers are resolved, so drafts cannot reach the
-production site. Update the `UPDATED` date in both files whenever the text changes, and keep
+Open legal-review and provider checks are listed in each document's internal `review` array
+(never rendered). A build with `SITE_INDEXING=true` **fails** while any `review` item or `[[...]]`
+marker remains, so unreviewed texts cannot reach the indexed production site. Empty a `review`
+array only after the item is resolved (and the text updated if needed). Update the `UPDATED` date in both files whenever the text changes, and keep
 the texts in line with the actual implementation (form fields, providers, logging, storage).
 
 ## Enquiry endpoint

@@ -1,13 +1,55 @@
 import type { Dictionary } from './en';
 
-/** Dutch copy. Same structure as en.ts; keep both files in step. */
+/** Dutch copy. Same structure as en.ts; keep both files in step. Formal address (u/uw) throughout. */
+
+/** Confirmed product list; order and keys follow productKeys in src/config/site.ts. */
+const products = [
+  {
+    key: 'en590',
+    name: 'EN590 10 PPM / ULSD',
+    text: 'Diesel volgens de Europese norm EN 590 met een zwavelgehalte van maximaal 10 ppm (ultra-zwavelarme diesel), voor wegtransport, industrie en distributie.',
+  },
+  {
+    key: 'jet-a1',
+    name: 'Jet A-1',
+    text: 'Vliegtuigbrandstof op kerosinebasis voor afnemers en distributeurs van luchtvaartbrandstof.',
+  },
+  {
+    key: 'lpfo',
+    name: 'LPFO (Low Pour Fuel Oil)',
+    text: 'Residuale stookolie met een laag vloeipunt, voor afnemers in de industrie en de energiesector.',
+  },
+  {
+    key: 'd6',
+    name: 'D6 Fuel Oil',
+    text: 'Zware residuale stookolie, geleverd volgens de specificatie die per transactie wordt overeengekomen.',
+  },
+  {
+    key: 'lpg',
+    name: 'LPG',
+    text: 'Vloeibaar gemaakt petroleumgas, zoals propaan, butaan en mengsels, afhankelijk van specificatie, volume en leveringspunt.',
+  },
+  {
+    key: 'lng',
+    name: 'LNG / aardgas',
+    text: 'Vloeibaar aardgas en aardgas, afhankelijk van leveringspunt, volumeprofiel en contractstructuur.',
+  },
+  {
+    key: 'other',
+    name: 'Overige geraffineerde aardolieproducten en middeldestillaten',
+    text: 'Andere geraffineerde aardolieproducten en middeldestillaten, zoals gasoliekwaliteiten, per geval beoordeeld bij een concrete behoefte.',
+  },
+];
+const productNames = products.map((p) => p.name);
+const listProducts = `${productNames.slice(0, -1).join(', ')} en ${productNames.at(-1)!.toLowerCase()}`;
+
 export const nl: Dictionary = {
   lang: 'nl',
   locale: 'nl_NL',
   meta: {
     title: 'Valtrax Energy | Fysieke energie-inkoop en commerciële bemiddeling',
     description:
-      'Onafhankelijke energiebemiddelaar uit Nederland die gekwalificeerde kopers verbindt met relevant fysiek aanbod van EN590, middeldestillaten, Jet A-1 en LNG, met de focus op de ARA-markt.',
+      'Valtrax Energy brengt professionele kopers en verkopers van fysieke energieproducten samen, zoals EN590 10 PPM, Jet A-1, stookolie, LPG en LNG. Gevestigd in Nederland, met de focus op de ARA-markt.',
     ogAlt: 'Valtrax Energy: fysieke energie-inkoop en commerciële bemiddeling',
   },
   skipLink: 'Direct naar de inhoud',
@@ -33,7 +75,7 @@ export const nl: Dictionary = {
     currentShort: 'NL',
   },
   hero: {
-    eyebrow: 'Onafhankelijke energiebemiddelaar',
+    eyebrow: 'Commerciële bemiddeling in fysieke energie',
     title: 'Fysieke energie-inkoop en commerciële bemiddeling',
     subtitle: 'Wij verbinden gekwalificeerde kopers met relevant fysiek aanbod.',
     lead:
@@ -41,7 +83,7 @@ export const nl: Dictionary = {
     focus:
       'Wij richten ons op geraffineerde aardolieproducten en gas, brengen passende tegenpartijen samen en faciliteren gestructureerde commerciële gesprekken.',
     role:
-      'Wij opereren als onafhankelijke bemiddelaar. Wij produceren, slaan op of houden zelf geen fysiek product aan.',
+      'Onze primaire focus ligt op commerciële bemiddeling. Als dat voor een specifieke transactie is overeengekomen, kunnen wij producten ook zelf inkopen en doorverkopen, ook op back-to-backbasis.',
     primary: 'Bespreek uw behoefte',
     secondary: 'Bekijk onze expertise',
     strap: ['Gevestigd in Nederland', 'Focus op de ARA-markt', 'Internationaal bereik'],
@@ -50,21 +92,21 @@ export const nl: Dictionary = {
   },
   about: {
     eyebrow: 'Over ons',
-    title: 'Bemiddelaar tussen gekwalificeerde vraag en fysiek aanbod',
+    title: 'Wij brengen professionele kopers en verkopers van fysieke energie samen',
     body: [
-      'Valtrax Energy is actief aan de commerciële kant van de fysieke energiehandel. Wij nemen een concrete behoefte van een koper of inkoopafdeling als uitgangspunt, zoeken aanbod dat daarbij past en helpen beide partijen tot een werkbare commerciële basis te komen.',
+      'Valtrax Energy brengt professionele kopers en verkopers van fysieke energieproducten bij elkaar. Onze primaire focus ligt op commerciële bemiddeling: wij nemen een concrete behoefte van een koper of inkoopafdeling als uitgangspunt, zoeken aanbod dat daarbij past en helpen beide partijen tot een werkbare commerciële basis te komen. Afhankelijk van de transactie en de overeengekomen contractuele afspraken kunnen wij ook rechtstreeks deelnemen aan de aan- en verkoop van producten, waaronder back-to-backtransacties.',
       'Onze tegenpartijen zijn onder meer inkoopafdelingen, fysieke grondstoffenhandelaren, brandstofdistributeurs en importeurs, industriële en maritieme brandstofgebruikers, en leveranciers, allocatiehouders en partijen aan de raffinaderijzijde.',
       'Onze toegevoegde waarde zit in voorbereiding en discipline: specificaties en voorwaarden vroeg helder krijgen, tegenpartijen kwalificeren voordat zij worden voorgesteld en het proces gecoördineerd houden, zodat de aandacht uitgaat naar kansen die realistisch doorgang kunnen vinden.',
     ],
     factTitle: 'In het kort',
     fact:
-      'Valtrax Energy is een onafhankelijke energiebemiddelaar uit Nederland die gekwalificeerde kopers en inkooporganisaties verbindt met relevant fysiek aanbod. Het bedrijf opereert onder Northbridge Trading B.V. en richt zich op fysieke energie-inkoop, commerciële afstemming en transactiecoördinatie, met bijzondere aandacht voor de ARA-markt en internationale handelsknooppunten.',
+      'Valtrax Energy is een Nederlands bedrijf dat professionele kopers en verkopers van fysieke energieproducten bij elkaar brengt. Het bedrijf opereert onder Northbridge Trading B.V. en richt zich primair op commerciële bemiddeling. Afhankelijk van de transactie en de overeengekomen contractuele afspraken kan het ook rechtstreeks deelnemen aan de aan- en verkoop van producten, waaronder back-to-backtransacties. De marktfocus ligt op de ARA-regio en internationale handelsknooppunten.',
     facts: [
       { term: 'Handelsnaam', value: 'Valtrax Energy' },
       { term: 'Rechtspersoon', value: 'Northbridge Trading B.V.' },
       { term: 'Statutair gevestigd', value: 'Zwijndrecht, Nederland' },
       { term: 'KvK-nummer', value: '42053415' },
-      { term: 'Rol', value: 'Onafhankelijke bemiddelaar, geen producent, raffinaderij of opslagbedrijf' },
+      { term: 'Rol', value: 'Primair commerciële bemiddeling; rechtstreekse aan- en verkoop, ook back-to-back, als dat per transactie is overeengekomen' },
     ],
     audienceTitle: 'Met wie wij werken',
     audiences: [
@@ -132,34 +174,8 @@ export const nl: Dictionary = {
     eyebrow: 'Producten',
     title: 'Productfocus',
     intro:
-      'Wij werken aan geraffineerde aardolieproducten en gas waarvoor een gekwalificeerde koper of leverancier een concrete behoefte heeft.',
-    items: [
-      {
-        key: 'en590',
-        name: 'EN590 / ULSD',
-        text: 'Diesel volgens de Europese norm EN 590 en ultra-zwavelarme diesel voor wegtransport, industrie en distributie.',
-      },
-      {
-        key: 'middle-distillates',
-        name: 'Middeldestillaten',
-        text: 'Gasolie en verwante destillaatkwaliteiten, ingekocht op basis van de specificatie die de koper vraagt.',
-      },
-      {
-        key: 'jet-a1',
-        name: 'Jet A-1',
-        text: 'Vliegtuigbrandstof voor gekwalificeerde afnemers en distributeurs van luchtvaartbrandstof.',
-      },
-      {
-        key: 'lng',
-        name: 'LNG / aardgas',
-        text: 'Vloeibaar aardgas en aardgas, afhankelijk van leveringspunt, volumeprofiel en contractstructuur.',
-      },
-      {
-        key: 'other',
-        name: 'Overige geraffineerde producten en energiegrondstoffen',
-        text: 'Andere geraffineerde aardolieproducten en energiegrondstoffen, per geval beoordeeld bij een gekwalificeerde behoefte.',
-      },
-    ],
+      'Wij werken aan fysieke energieproducten waarvoor een professionele koper of verkoper een concrete behoefte heeft.',
+    items: products,
     dependsTitle: 'Waar inkoop van afhangt',
     dependsIntro: 'Of en hoe een product kan worden ingekocht, beoordelen wij per behoefte, op basis van:',
     depends: [
@@ -171,7 +187,7 @@ export const nl: Dictionary = {
       'Kwalificatie van de tegenpartij',
     ],
     note:
-      'Wij publiceren geen voorraden, prijzen of beschikbaarheid. Indicatieve voorwaarden worden pas besproken wanneer een behoefte en de betrokken tegenpartijen zijn gekwalificeerd.',
+      'Dat een product hier wordt genoemd, betekent niet dat het op voorraad of beschikbaar is. Wij publiceren geen prijzen of beschikbaarheid: specificaties, hoeveelheden, beschikbaarheid, levering en commerciële voorwaarden worden per transactie afzonderlijk bevestigd.',
   },
   markets: {
     eyebrow: 'Markten en logistiek',
@@ -260,19 +276,19 @@ export const nl: Dictionary = {
     items: [
       {
         q: 'Wat doet Valtrax Energy?',
-        a: 'Valtrax Energy is een onafhankelijke energiebemiddelaar uit Nederland. Het bedrijf verbindt gekwalificeerde kopers en inkooporganisaties met relevant fysiek aanbod en ondersteunt bij de kwalificatie van tegenpartijen, commerciële afstemming en transactiecoördinatie.',
+        a: 'Valtrax Energy is een Nederlands bedrijf dat professionele kopers en verkopers van fysieke energieproducten bij elkaar brengt. De primaire focus ligt op commerciële bemiddeling, waaronder de kwalificatie van tegenpartijen, commerciële afstemming en transactiecoördinatie. Afhankelijk van de transactie en de overeengekomen contractuele afspraken kan het bedrijf ook rechtstreeks deelnemen aan de aan- en verkoop van producten, waaronder back-to-backtransacties.',
       },
       {
         q: 'Op welke producten richt Valtrax Energy zich?',
-        a: 'De focus ligt op EN590 / ULSD, middeldestillaten, Jet A-1 en LNG / aardgas. Andere geraffineerde aardolieproducten en energiegrondstoffen worden overwogen wanneer er een gekwalificeerde behoefte is.',
+        a: `De focus ligt op ${listProducts}. Dat een product wordt genoemd, betekent niet dat het beschikbaar is; specificaties, hoeveelheden en beschikbaarheid worden per transactie bevestigd.`,
       },
       {
         q: 'Op welke markten is Valtrax Energy actief?',
         a: 'De belangrijkste focus ligt op de ARA-regio (Amsterdam–Rotterdam–Antwerpen) en Noordwest-Europa. Daarnaast volgt Valtrax Energy internationale knooppunten zoals Houston, Antwerpen, Jurong en Fujairah en overweegt het internationale kansen.',
       },
       {
-        q: 'Bezit Valtrax Energy raffinaderijen of opslagfaciliteiten?',
-        a: 'Nee. Valtrax Energy is een bemiddelaar. Het bedrijf bezit geen raffinaderijen, terminals, opslagfaciliteiten, schepen of productvoorraad en treedt niet op als producent.',
+        q: 'Bezit Valtrax Energy raffinaderijen, terminals of opslagfaciliteiten?',
+        a: 'Nee. Valtrax Energy bezit geen raffinaderijen, terminals of opslagfaciliteiten en is geen producent. Als het bedrijf rechtstreeks deelneemt aan een aan- en verkoop, worden het product, de levering en de eigendomsoverdracht geregeld in de contracten voor die transactie.',
       },
       {
         q: 'Welke informatie is nodig voor een aanvraag?',
@@ -280,7 +296,7 @@ export const nl: Dictionary = {
       },
       {
         q: 'Hoe worden mogelijke tegenpartijen beoordeeld?',
-        a: 'Elke kans wordt afzonderlijk beoordeeld. Valtrax Energy beoordeelt de identiteit en registratie van het bedrijf, zijn rol in de transactie en de consistentie van de voorgestelde procedure voordat partijen aan elkaar worden voorgesteld.',
+        a: 'Elke kans wordt afzonderlijk beoordeeld. Valtrax Energy beoordeelt de identiteit en registratie van het bedrijf, zijn rol in de transactie en de consistentie van de voorgestelde procedure voordat partijen aan elkaar worden voorgesteld. Deze controles worden handmatig uitgevoerd.',
       },
     ],
   },
@@ -299,6 +315,8 @@ export const nl: Dictionary = {
     ],
     notRequested:
       'Stuur via dit formulier geen bankgegevens, paspoorten, bewijs van financiële middelen of andere KYC-documenten. Als documentatie later nodig is, spreken wij met u een geschikt kanaal af.',
+    directTitle: 'Contact per e-mail',
+    direct: { general: 'Algemene vragen', trading: 'Handel', finance: 'Financiën' },
   },
   form: {
     legend: 'Aanvraagformulier',
@@ -326,9 +344,9 @@ export const nl: Dictionary = {
     deliveryBases: { fob: 'FOB', cif: 'CIF', terminal: 'Terminalgebaseerd', open: 'Open / nader te bespreken' },
     units: { mt: 'Metrische ton (MT)', m3: 'Kubieke meter (m³)', bbl: 'Vaten (bbl)', mmbtu: 'MMBtu', other: 'Anders' },
     notice: {
-      before: 'Wij gebruiken de gegevens die je verstrekt om je aanvraag te beantwoorden. Lees onze',
+      before: 'Wij gebruiken de gegevens die u verstrekt om uw aanvraag te beantwoorden. Lees onze',
       link: 'privacyverklaring',
-      after: 'voor meer informatie over hoe wij met je persoonsgegevens omgaan.',
+      after: 'voor meer informatie over hoe wij met uw persoonsgegevens omgaan.',
     },
     submit: 'Aanvraag verzenden',
     sending: 'Bezig met verzenden…',
@@ -341,7 +359,7 @@ export const nl: Dictionary = {
       invalid: 'Controleer deze invoer.',
     },
     status: {
-      success: 'Dank u. Uw aanvraag is ontvangen en wordt beoordeeld. Wij reageren per e-mail op gekwalificeerde aanvragen.',
+      success: 'Dank u. Uw aanvraag is verzonden. Wij reageren per e-mail op gekwalificeerde aanvragen.',
       unavailable:
         'Het aanvraagformulier is tijdelijk niet beschikbaar en uw bericht is niet verzonden. Probeer het later opnieuw.',
       error: 'Uw aanvraag kon door een technisch probleem niet worden verzonden. Probeer het over enkele minuten opnieuw.',
@@ -364,7 +382,7 @@ export const nl: Dictionary = {
     navTitle: 'Onderdelen',
     rights: 'Alle rechten voorbehouden.',
     disclaimer:
-      'De informatie op deze website is algemeen van aard en vormt geen aanbod, leveringstoezegging of financieel advies.',
+      'De informatie op deze website is algemeen van aard. Zij vormt geen bindend aanbod, geen garantie van beschikbaarheid en geen leveringsverplichting, en is geen financieel advies.',
   },
   legal: {
     lastUpdated: 'Laatst bijgewerkt',

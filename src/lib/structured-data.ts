@@ -42,18 +42,20 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
       { '@type': 'Place', name: 'Northwest Europe' },
     ],
     knowsAbout: [
-      'Physical energy sourcing',
-      'Energy intermediation',
+      'Commercial intermediation in physical energy',
+      'Physical energy trading',
       'Petroleum procurement',
       'Counterparty qualification',
-      'EN590 diesel',
-      'Middle distillates',
-      'Jet A-1',
-      'Liquefied natural gas',
+      ...t('en').products.items.filter((p) => p.key !== 'other').map((p) => p.name),
       'ARA market',
     ],
+    email: site.emails.general,
+    contactPoint: (['general', 'trading', 'finance'] as const).map((role) => ({
+      '@type': 'ContactPoint',
+      contactType: t('en').contact.direct[role],
+      email: site.emails[role],
+    })),
   };
-  if (site.publicContact.email) organization.email = site.publicContact.email;
   organization.logo = {
     '@type': 'ImageObject',
     url: `${origin}${site.logo.full.src}`,
