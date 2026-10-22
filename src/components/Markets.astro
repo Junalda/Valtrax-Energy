@@ -1,0 +1,193 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const dict = t(Astro.props.lang);
+---
+
+<section class="section section--navy" id="markets" aria-labelledby="markets-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">{dict.markets.eyebrow}</p>
+      <h2 id="markets-title">{dict.markets.title}</h2>
+      <p>{dict.markets.intro}</p>
+    </header>
+
+    <div class="markets__grid">
+      <article class="markets__primary">
+        <span class="markets__coord" aria-hidden="true">51.9° N · 4.1° E</span>
+        <h3>{dict.markets.primaryTitle}</h3>
+        <p>{dict.markets.primaryText}</p>
+      </article>
+
+      <div class="markets__hubs">
+        <h3>{dict.markets.hubsTitle}</h3>
+        <p class="muted">{dict.markets.hubsIntro}</p>
+        <ul class="hubs">
+          {
+            dict.markets.hubs.map((h) => (
+              <li>
+                <span class="hub__name">{h.name}</span>
+                <span class="hub__region">{h.region}</span>
+                <span class="hub__coords">{h.coords}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="markets__note">{dict.markets.hubsNote}</p>
+      </div>
+    </div>
+
+    <div class="basis">
+      <div class="basis__intro">
+        <h3>{dict.markets.basisTitle}</h3>
+        <p class="muted">{dict.markets.basisIntro}</p>
+      </div>
+      <dl class="basis__list">
+        {
+          dict.markets.basis.map((b) => (
+            <div>
+              <dt>{b.term}</dt>
+              <dd>{b.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .markets__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+  }
+  .markets__primary {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    align-content: end;
+    min-height: 20rem;
+    padding: clamp(1.75rem, 1rem + 2vw, 2.75rem);
+    border: 1px solid rgba(190, 138, 34, 0.5);
+    background:
+      repeating-radial-gradient(circle at 85% 18%, transparent 0 38px, rgba(255, 255, 255, 0.06) 38px 39px),
+      var(--navy-800);
+  }
+  .markets__coord {
+    position: absolute;
+    top: 1.5rem;
+    left: clamp(1.75rem, 1rem + 2vw, 2.75rem);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--gold-500);
+  }
+  .markets__primary h3 {
+    font-size: var(--step-2);
+  }
+  .markets__primary p {
+    color: #d5dce7;
+  }
+  .markets__hubs {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+  .markets__hubs h3,
+  .basis h3 {
+    font-size: var(--step-2);
+  }
+  .hubs {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .hubs li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) 10.5rem;
+    gap: 1rem;
+    align-items: baseline;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hub__name {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+  }
+  .hub__region {
+    color: var(--navy-300);
+    font-size: 0.93rem;
+  }
+  .hub__coords {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--gold-500);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .markets__note {
+    font-size: 0.88rem;
+    color: var(--navy-300);
+  }
+  .basis {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    margin-top: clamp(3rem, 2rem + 3vw, 5rem);
+    padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    border-top: 1px solid var(--rule);
+  }
+  .basis__intro {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+  .basis__list {
+    margin: 0;
+    display: grid;
+    gap: 0;
+  }
+  .basis__list div {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .basis__list div:first-child {
+    border-top: 1px solid var(--rule);
+  }
+  .basis__list dt {
+    font-weight: 600;
+    color: var(--gold-500);
+    letter-spacing: 0.04em;
+  }
+  .basis__list dd {
+    margin: 0;
+    color: #d5dce7;
+  }
+  @media (max-width: 60rem) {
+    .markets__grid,
+    .basis {
+      grid-template-columns: 1fr;
+    }
+    .markets__primary {
+      min-height: 16rem;
+    }
+  }
+  @media (max-width: 36rem) {
+    .hubs li {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.25rem 1rem;
+    }
+    .hub__region {
+      grid-row: 2;
+    }
+    .basis__list div {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

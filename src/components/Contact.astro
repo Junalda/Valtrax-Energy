@@ -1,0 +1,416 @@
+---
+import Arrow from './Arrow.astro';
+import { t, pathFor, type Lang } from '../i18n';
+import { productKeys, enquiryTypes, deliveryBases, volumeUnits } from '../config/site';
+import { limits } from '../lib/enquiry';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(Astro.props.lang);
+const f = dict.form;
+const products = productKeys.map((key) => ({
+  key,
+  name: dict.products.items.find((p) => p.key === key)?.name ?? key,
+}));
+// Messages for client-side validation and status, localised per page.
+const messages = { validation: f.validation, status: f.status, sending: f.sending, submit: f.submit, summary: f.errorsSummary };
+---
+
+<section class="section section--grey contact" id="contact" aria-labelledby="contact-title">
+  <div class="container contact__grid">
+    <div class="contact__intro">
+      <p class="eyebrow">{dict.contact.eyebrow}</p>
+      <h2 id="contact-title">{dict.contact.title}</h2>
+      <p class="lead muted">{dict.contact.intro}</p>
+      <h3 class="contact__subhead">{dict.contact.checklistTitle}</h3>
+      <ul class="contact__checklist">
+        {dict.contact.checklist.map((c) => <li>{c}</li>)}
+      </ul>
+      <p class="contact__notice">{dict.contact.notRequested}</p>
+    </div>
+
+    <form
+      class="enquiry-form"
+      action="/api/enquiry"
+      method="post"
+      data-enquiry-form
+      data-messages={JSON.stringify(messages)}
+      aria-labelledby="form-legend"
+    >
+      <h3 id="form-legend" class="visually-hidden">{f.legend}</h3>
+      <p class="form-note">{f.requiredNote}</p>
+
+      <div class="form-summary" role="alert" tabindex="-1" data-form-summary hidden></div>
+
+      <input type="hidden" name="lang" value={lang} />
+      <input type="hidden" name="startedAt" value="" data-started-at />
+      <div class="hp" aria-hidden="true">
+        <label for="website">{f.fields.honeypot}</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="f-name">{f.fields.name} <span aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required maxlength={limits.name} aria-describedby="f-name-error" />
+          <p class="field__error" id="f-name-error" data-error-for="name"></p>
+        </div>
+        <div class="field">
+          <label for="f-company">{f.fields.company} <span aria-hidden="true">*</span></label>
+          <input id="f-company" name="company" type="text" autocomplete="organization" required maxlength={limits.company} aria-describedby="f-company-error" />
+          <p class="field__error" id="f-company-error" data-error-for="company"></p>
+        </div>
+        <div class="field">
+          <label for="f-email">{f.fields.email} <span aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required maxlength={limits.email} aria-describedby="f-email-error" />
+          <p class="field__error" id="f-email-error" data-error-for="email"></p>
+        </div>
+        <div class="field">
+          <label for="f-country">{f.fields.country} <span aria-hidden="true">*</span></label>
+          <input id="f-country" name="country" type="text" autocomplete="country-name" required maxlength={limits.country} aria-describedby="f-country-error" />
+          <p class="field__error" id="f-country-error" data-error-for="country"></p>
+        </div>
+        <div class="field">
+          <label for="f-type">{f.fields.enquiryType} <span aria-hidden="true">*</span></label>
+          <select id="f-type" name="enquiryType" required aria-describedby="f-type-error" data-enquiry-select>
+            <option value="">{f.choose}</option>
+            {enquiryTypes.map((k) => <option value={k}>{f.enquiryTypes[k]}</option>)}
+          </select>
+          <p class="field__error" id="f-type-error" data-error-for="enquiryType"></p>
+        </div>
+        <div class="field">
+          <label for="f-product">{f.fields.product} <span aria-hidden="true">*</span></label>
+          <select id="f-product" name="product" required aria-describedby="f-product-error">
+            <option value="">{f.choose}</option>
+            {products.map((p) => <option value={p.key}>{p.name}</option>)}
+          </select>
+          <p class="field__error" id="f-product-error" data-error-for="product"></p>
+        </div>
+        <div class="field field--full">
+          <label for="f-message">{f.fields.message} <span aria-hidden="true">*</span></label>
+          <p class="field__hint" id="f-message-hint">{f.fields.messageHint}</p>
+          <textarea
+            id="f-message"
+            name="message"
+            rows="6"
+            required
+            minlength={limits.messageMin}
+            maxlength={limits.message}
+            aria-describedby="f-message-hint f-message-error"></textarea>
+          <p class="field__error" id="f-message-error" data-error-for="message"></p>
+        </div>
+      </div>
+
+      <details class="trade-details">
+        <summary>
+          <span>{f.fields.tradeDetails}</span>
+          <span class="trade-details__hint">{f.fields.tradeDetailsHint}</span>
+        </summary>
+        <div class="form-grid">
+          <div class="field field--volume">
+            <div>
+              <label for="f-volume">{f.fields.volume}</label>
+              <input id="f-volume" name="volume" type="text" inputmode="decimal" maxlength={limits.volume} aria-describedby="f-volume-error" />
+            </div>
+            <div>
+              <label for="f-unit">{f.fields.unit}</label>
+              <select id="f-unit" name="unit">
+                <option value="">{f.choose}</option>
+                {volumeUnits.map((u) => <option value={u}>{f.units[u]}</option>)}
+              </select>
+            </div>
+            <p class="field__error" id="f-volume-error" data-error-for="volume"></p>
+          </div>
+          <div class="field">
+            <label for="f-destination">{f.fields.destination}</label>
+            <input id="f-destination" name="destination" type="text" maxlength={limits.destination} aria-describedby="f-destination-error" />
+            <p class="field__error" id="f-destination-error" data-error-for="destination"></p>
+          </div>
+          <div class="field">
+            <label for="f-basis">{f.fields.basis}</label>
+            <select id="f-basis" name="basis">
+              <option value="">{f.choose}</option>
+              {deliveryBases.map((b) => <option value={b}>{f.deliveryBases[b]}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-phone">{f.fields.phone}</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" pattern="[+\(\)0-9 .\/\-]{5,}" maxlength={limits.phone} aria-describedby="f-phone-error" />
+            <p class="field__error" id="f-phone-error" data-error-for="phone"></p>
+          </div>
+        </div>
+      </details>
+
+      <p class="form-consent">
+        {f.notice.before} <a href={pathFor('privacy', lang)}>{f.notice.link}</a> {f.notice.after}
+      </p>
+
+      <div class="form-actions">
+        <button class="btn btn--primary" type="submit" data-submit>
+          <span data-submit-label>{f.submit}</span>
+          <Arrow />
+        </button>
+        <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+    align-items: start;
+  }
+  .contact__intro {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .contact__intro h2 {
+    font-size: var(--step-3);
+  }
+  .contact__subhead {
+    margin-top: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+  }
+  .contact__checklist {
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+  }
+  .contact__checklist li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+  .contact__checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.55rem;
+    height: 1px;
+    background: var(--gold-500);
+  }
+  .contact__notice {
+    margin-top: 0.5rem;
+    padding: 1rem 1.15rem;
+    border-left: 2px solid var(--gold-500);
+    background: var(--white);
+    font-size: 0.9rem;
+    color: var(--grey-500);
+  }
+
+  .enquiry-form {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 0.75rem + 3vw, 3rem);
+    background: var(--white);
+    border-top: 3px solid var(--navy-900);
+    box-shadow: 0 1px 2px rgba(2, 36, 73, 0.06);
+  }
+  .form-note {
+    font-size: 0.85rem;
+    color: var(--grey-500);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .field--full {
+    grid-column: 1 / -1;
+  }
+  .field--volume {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.4rem 0.75rem;
+  }
+  .field--volume > div {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field--volume .field__error {
+    grid-column: 1 / -1;
+  }
+  label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+  .field__hint {
+    font-size: 0.82rem;
+    color: var(--grey-500);
+    margin-top: -0.15rem;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid #7d8796;
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--navy-900);
+    font: inherit;
+    font-size: 1rem;
+  }
+  select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23022449' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 0.75rem;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 9rem;
+    line-height: 1.5;
+  }
+  input:hover,
+  select:hover,
+  textarea:hover {
+    border-color: var(--navy-700);
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-color: var(--navy-900);
+  }
+  [aria-invalid='true'] {
+    border-color: var(--error);
+    box-shadow: inset 3px 0 0 var(--error);
+  }
+  .field__error {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--error);
+  }
+  .field__error:empty {
+    display: none;
+  }
+  .form-summary {
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--error);
+    background: #fbefef;
+    color: var(--error);
+    font-weight: 500;
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .trade-details {
+    border-top: 1px solid var(--grey-200);
+    border-bottom: 1px solid var(--grey-200);
+  }
+  .trade-details summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 0.75rem;
+    padding: 1rem 0 1rem 1.75rem;
+    position: relative;
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+  }
+  .trade-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .trade-details summary::before {
+    content: '';
+    position: absolute;
+    left: 0.2rem;
+    top: 1.45rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 1.5px solid var(--gold-600);
+    border-bottom: 1.5px solid var(--gold-600);
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease;
+  }
+  .trade-details[open] summary::before {
+    transform: rotate(45deg);
+    top: 1.3rem;
+  }
+  .trade-details__hint {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--grey-500);
+  }
+  .trade-details .form-grid {
+    padding-bottom: 1.5rem;
+  }
+
+  .form-consent {
+    font-size: 0.85rem;
+    color: var(--grey-500);
+  }
+  .form-consent a {
+    color: var(--navy-900);
+  }
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  .form-actions .btn[aria-disabled='true'] {
+    opacity: 0.7;
+    cursor: progress;
+  }
+  .form-status {
+    flex: 1 1 16rem;
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+  .form-status:empty {
+    display: none;
+  }
+  .form-status[data-state='success'] {
+    color: var(--success);
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--success);
+    background: #edf6f1;
+  }
+  .form-status[data-state='error'] {
+    color: var(--error);
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--error);
+    background: #fbefef;
+  }
+
+  @media (max-width: 60rem) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 36rem) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

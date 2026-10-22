@@ -1,0 +1,101 @@
+---
+import Arrow from './Arrow.astro';
+import { t, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const dict = t(Astro.props.lang);
+const blocks = [
+  { key: 'buyer', id: 'buyers', ...dict.audiences.buyers },
+  { key: 'supplier', id: 'suppliers', ...dict.audiences.suppliers },
+] as const;
+---
+
+<section class="section section--grey" aria-labelledby="audiences-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">{dict.audiences.eyebrow}</p>
+      <h2 id="audiences-title">{dict.audiences.title}</h2>
+    </header>
+    <div class="audiences">
+      {
+        blocks.map((b) => (
+          <article class="audience" id={b.id} aria-labelledby={`${b.id}-title`}>
+            <h3 id={`${b.id}-title`}>{b.title}</h3>
+            <p class="audience__text">{b.text}</p>
+            <ul>
+              {b.points.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+            <a class="btn btn--outline" href={`?type=${b.key}#contact`} data-enquiry-type={b.key}>
+              {b.cta}
+              <Arrow />
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .audiences {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--navy-900);
+  }
+  .audience {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 1.25rem;
+    padding: clamp(2rem, 1.5rem + 2vw, 3rem) clamp(0rem, -1rem + 4vw, 3.5rem) 0 0;
+  }
+  .audience + .audience {
+    padding-left: clamp(1.5rem, 0.5rem + 4vw, 3.5rem);
+    padding-right: 0;
+    border-left: 1px solid var(--grey-200);
+  }
+  .audience h3 {
+    font-size: var(--step-2);
+  }
+  .audience__text {
+    color: var(--grey-500);
+  }
+  .audience ul {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .audience li {
+    position: relative;
+    padding-left: 1.4rem;
+  }
+  .audience li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.55rem;
+    height: 1px;
+    background: var(--gold-500);
+  }
+  .audience .btn {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 52rem) {
+    .audiences {
+      grid-template-columns: 1fr;
+    }
+    .audience,
+    .audience + .audience {
+      padding: 2rem 0 2.5rem;
+      border-left: 0;
+    }
+    .audience + .audience {
+      border-top: 1px solid var(--grey-200);
+    }
+  }
+</style>
