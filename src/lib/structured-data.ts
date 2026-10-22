@@ -1,5 +1,6 @@
 import { site } from '../config/site';
 import { t, pathFor, type Lang, type PageKey } from '../i18n';
+import { legalDoc } from '../legal';
 
 /**
  * Schema.org graph. Only verified, approved facts are included. Stable @id values let
@@ -30,6 +31,7 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
     url: `${origin}/`,
     description: t('en').about.fact,
     address,
+    vatID: site.vat,
     identifier: {
       '@type': 'PropertyValue',
       propertyID: 'KvK (Netherlands Chamber of Commerce)',
@@ -63,8 +65,8 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
     '@type': 'WebPage',
     '@id': pageId,
     url: pageUrl,
-    name: page === 'home' ? dict.meta.title : dict.privacy.metaTitle,
-    description: page === 'home' ? dict.meta.description : dict.privacy.metaDescription,
+    name: page === 'home' ? dict.meta.title : legalDoc(page, lang).metaTitle,
+    description: page === 'home' ? dict.meta.description : legalDoc(page, lang).metaDescription,
     inLanguage: lang,
     isPartOf: { '@id': siteId },
     about: { '@id': orgId },

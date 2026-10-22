@@ -1,10 +1,7 @@
 /**
- * Verified, publicly approved company facts. Everything rendered on the site and in
- * structured data about the company's identity comes from here.
- *
- * Facts that are still pending owner approval (public e-mail, street address, final
- * domain) are deliberately NOT stored here; see docs/OWNER-REVIEW.md. Add them only
- * once approved; components render them automatically when present.
+ * Company facts used on the site, in the legal pages and in structured data.
+ * Single source of truth: change company details here only.
+ * Address, e-mail and VAT number were supplied for publication with the legal pages.
  */
 export const site = {
   brand: 'Valtrax Energy',
@@ -12,16 +9,16 @@ export const site = {
   country: { code: 'NL', en: 'The Netherlands', nl: 'Nederland' },
   registeredLocality: 'Zwijndrecht',
   kvk: '42053415',
+  vat: 'NL869493334B01',
+  /** Public website address as stated in the legal pages (deployment origin comes from SITE_URL). */
+  website: 'https://valtraxenergy.com',
   /** Origin is set via SITE_URL in astro.config.mjs; this is read from Astro.site at render time. */
   indexable: __SITE_INDEXABLE__,
-  /**
-   * Public contact details. Leave `undefined` until approved for publication.
-   * Candidates from the Client Information Sheet are listed in docs/OWNER-REVIEW.md.
-   */
+  /** Public contact details (footer, legal pages, structured data). */
   publicContact: {
-    email: undefined as string | undefined,
-    streetAddress: undefined as string | undefined,
-    postalCode: undefined as string | undefined,
+    email: 'Thom@valtraxenergy.com' as string | undefined,
+    streetAddress: 'Stationsweg 41' as string | undefined,
+    postalCode: '3331 LR' as string | undefined,
   },
   /**
    * Logo assets generated from brand/valtrax-logo-original.png by tools/build_logo_assets.py.

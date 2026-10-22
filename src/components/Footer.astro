@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import { site } from '../config/site';
-import { t, pathFor, type Lang, type PageKey } from '../i18n';
+import { t, pathFor, legalPages, type Lang, type PageKey } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -29,13 +29,19 @@ const { email, streetAddress, postalCode } = site.publicContact;
       <nav class="site-footer__nav" aria-label={dict.footer.navTitle}>
         <ul>
           {sections.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
-          <li><a href={pathFor('privacy', lang)}>{dict.footer.privacy}</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__nav" aria-label={dict.footer.legalTitle}>
+        <p class="site-footer__heading">{dict.footer.legalTitle}</p>
+        <ul>
+          {legalPages.map((p) => <li><a href={pathFor(p, lang)} aria-current={p === page ? 'page' : undefined}>{dict.footer[p]}</a></li>)}
         </ul>
       </nav>
       <address class="site-footer__legal">
         <p>{dict.footer.tradingName}</p>
         {streetAddress && <p>{streetAddress}{postalCode ? `, ${postalCode}` : ''} {site.registeredLocality}</p>}
         <p>{dict.footer.registration}</p>
+        <p>{dict.footer.vat} {site.vat}</p>
         {email && <p><a href={`mailto:${email}`}>{email}</a></p>}
       </address>
     </div>
@@ -58,7 +64,7 @@ const { email, streetAddress, postalCode } = site.publicContact;
   }
   .site-footer__top {
     display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 3fr) minmax(0, 4fr);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 2fr) minmax(0, 3fr) minmax(0, 4fr);
     gap: 2.5rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -82,6 +88,19 @@ const { email, streetAddress, postalCode } = site.publicContact;
     padding-block: 0.3rem;
     color: #dfe5ee;
     text-decoration: none;
+  }
+  .site-footer__heading {
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+  }
+  .site-footer__nav a[aria-current='page'] {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--gold-500);
   }
   .site-footer__nav a:hover {
     color: var(--white);
@@ -118,6 +137,9 @@ const { email, streetAddress, postalCode } = site.publicContact;
   @media (max-width: 52rem) {
     .site-footer__top {
       grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__legal {
+      grid-column: 1 / -1;
     }
     .site-footer__brand {
       grid-column: 1 / -1;

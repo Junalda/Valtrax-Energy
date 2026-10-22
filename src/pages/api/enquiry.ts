@@ -15,13 +15,13 @@ const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 8;
 const hits = new Map<string, number[]>();
 
+// IP addresses are held in memory only, never logged or stored, and are dropped once the
+// window has passed (the privacy policy states this, so keep the behaviour in sync).
 function rateLimited(key: string, now: number): boolean {
+  for (const [k, v] of hits) if (v.every((ts) => now - ts >= WINDOW_MS)) hits.delete(k);
   const recent = (hits.get(key) ?? []).filter((ts) => now - ts < WINDOW_MS);
   recent.push(now);
   hits.set(key, recent);
-  if (hits.size > 5000) {
-    for (const [k, v] of hits) if (v.every((ts) => now - ts >= WINDOW_MS)) hits.delete(k);
-  }
   return recent.length > MAX_PER_WINDOW;
 }
 

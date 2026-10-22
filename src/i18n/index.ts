@@ -12,11 +12,15 @@ export function t(lang: Lang): Dictionary {
 }
 
 /** Logical pages that exist in every language. */
-export type PageKey = 'home' | 'privacy';
+export type PageKey = 'home' | LegalPageKey;
+export type LegalPageKey = 'terms' | 'privacy' | 'cookies';
+export const legalPages: LegalPageKey[] = ['terms', 'privacy', 'cookies'];
 
 const paths: Record<PageKey, Record<Lang, string>> = {
   home: { en: '/', nl: '/nl/' },
+  terms: { en: '/terms/', nl: '/nl/terms/' },
   privacy: { en: '/privacy/', nl: '/nl/privacy/' },
+  cookies: { en: '/cookies/', nl: '/nl/cookies/' },
 };
 
 export function pathFor(page: PageKey, lang: Lang): string {

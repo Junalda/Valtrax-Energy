@@ -103,6 +103,18 @@ source was supplied). `python3 tools/build_logo_assets.py` (needs Pillow) genera
 Paths and intrinsic sizes are set in `site.logo` (`src/config/site.ts`). After changing the
 logo, also run `node tools/generate-images.mjs` for the Open Graph images.
 
+## Legal pages
+
+`/terms/`, `/privacy/`, `/cookies/` (English) and `/nl/terms/`, `/nl/privacy/`, `/nl/cookies/`
+(Dutch) are rendered by `src/components/LegalPage.astro` from `src/legal/en.ts` and
+`src/legal/nl.ts`. Company details come from `src/config/site.ts` through tokens such as
+`{company}` and `{email}` (see `src/legal/types.ts`).
+
+Unresolved items are written as `[[...]]`. Such a page shows a draft banner, and a build with
+`SITE_INDEXING=true` **fails** until all markers are resolved, so drafts cannot reach the
+production site. Update the `UPDATED` date in both files whenever the text changes, and keep
+the texts in line with the actual implementation (form fields, providers, logging, storage).
+
 ## Enquiry endpoint
 
 `POST /api/enquiry` accepts JSON (from the page script) or a regular form post (no-JS

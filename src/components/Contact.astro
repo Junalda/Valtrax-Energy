@@ -144,7 +144,7 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
       </details>
 
       <p class="form-consent">
-        {f.consent} <a href={pathFor('privacy', lang)}>{f.privacyLink}</a>.
+        {f.notice.before} <a href={pathFor('privacy', lang)}>{f.notice.link}</a> {f.notice.after}
       </p>
 
       <div class="form-actions">

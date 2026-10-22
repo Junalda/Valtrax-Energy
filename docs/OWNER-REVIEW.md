@@ -61,17 +61,11 @@ here**. Action:
       URLs, hreflang, the sitemap and Open Graph. Set `SITE_URL` if it changes.
 - [ ] Decide on the `www` / apex redirect in Vercel → Domains.
 
-## 5. Public contact details (not shown on the site yet)
+## 5. Public contact details
 
-The CIS lists the following. They are **not** published. They will appear in the footer
-and structured data once added to `site.publicContact` in `src/config/site.ts`.
-
-| Item           | CIS candidate                         | Approved for publication? |
-| -------------- | ------------------------------------- | ------------------------- |
-| Email          | Thom@valtraxenergy.com                | [ ] yes / [ ] no          |
-| Street address | Stationsweg 41, 3331 LR Zwijndrecht   | [ ] yes / [ ] no          |
-
-No phone number or social media profiles were provided, so none are shown.
+Published since 2026-10-22 (supplied for the legal pages): Stationsweg 41, 3331 LR Zwijndrecht ·
+Thom@valtraxenergy.com · VAT NL869493334B01. They appear in the footer, the legal pages and
+the structured data, all from `src/config/site.ts`. No phone number or social profiles are shown.
 
 ## 6. Enquiry form recipient and delivery
 
@@ -87,20 +81,64 @@ No phone number or social media profiles were provided, so none are shown.
 If you prefer a different email provider, only `deliver()` in `src/pages/api/enquiry.ts`
 needs to change; update the privacy notice to name the new processor.
 
-## 7. Privacy notice (`/privacy/`, `/nl/privacy/`)
+## 7. Legal pages: before publication
 
-The notice describes the processing as implemented. Please confirm or supply:
+Terms (`/terms/`), Privacy Policy (`/privacy/`) and Cookie Policy (`/cookies/`), with Dutch
+versions under `/nl/`, are **drafts**. Every open item is marked `[[...]]` in
+`src/legal/en.ts` and `src/legal/nl.ts`, shows on the page as "To be confirmed / Nog te
+bevestigen", and blocks the production build (`SITE_INDEXING=true`) until resolved.
+Replace each marker with the confirmed text (EN and NL), or remove the sentence.
 
-- [ ] Northbridge Trading B.V. is the controller (stated).
-- [ ] A dedicated privacy contact. Currently, rights requests go “by replying to our
-      correspondence or through the enquiry form”; add an email once one is approved.
-- [ ] Specific retention periods. Currently: “only as long as necessary … unless a longer
-      period is required by law”.
-- [ ] Processors: Vercel (hosting) and Resend (email delivery), with possible transfers
-      outside the EEA under standard contractual clauses. Confirm the data processing
-      agreements are in place, and name any other processor (e.g. the mailbox provider).
-- [ ] Legal review of the legal bases (Art. 6(1)(f) and 6(1)(b) GDPR) and the wording.
-- [ ] Update the “Last updated” date in `src/components/PrivacyPage.astro` when the text changes.
+Facts confirmed during the review on 2026-10-22:
+- Hosting: Vercel. The enquiry function runs in region `iad1` (Washington, D.C., USA).
+- No cookies, no local/session storage, no analytics, pixels, tag managers, embeds, maps,
+  captcha or third-party fonts. Checked in the code and at runtime on the built site and the
+  live vercel.app deployment (no `Set-Cookie`, no third-party requests).
+- No environment variables are set in Vercel: the form currently does not send anything and
+  tells visitors it is unavailable. Resend is the provider implemented in code, not yet active.
+- Own logs: outcome, enquiry type, product and language only. IP addresses are held in
+  memory for rate limiting and dropped after 10 minutes.
+
+Information and decisions still needed from Thom:
+
+Terms and Conditions
+- [ ] Liability clause for website use (wanted? wording?).
+- [ ] Payment and commission arrangements: standard terms, or always per transaction?
+- [ ] Liability and any financial cap; termination and cancellation; confidentiality.
+- [ ] Governing law and competent court.
+- [ ] Which language version prevails.
+- [ ] Are approved commercial terms available? If so, they replace these draft items.
+
+Privacy Policy
+- [ ] Hosting logs: what Vercel records for this project and for how long (Vercel dashboard / plan).
+- [ ] Email delivery: confirm Resend (or another provider) and set it up; name the mailbox
+      provider for valtraxenergy.com (for example Microsoft 365 or Google Workspace).
+- [ ] Data processing agreements with Vercel, Resend and the mailbox provider.
+- [ ] Transfer safeguards per provider (Data Privacy Framework certification or SCCs).
+- [ ] Consider switching the Vercel function region to the EU (for example `fra1`) to reduce
+      transfers; the policy text must then be updated.
+- [ ] Whether and under which conditions enquiry details are shared with prospective
+      counterparties.
+- [ ] Retention periods: enquiries without follow-up, and business contacts after the
+      relationship ends.
+- [ ] Organisational measures (who has access to the enquiry mailbox).
+- [ ] Automated screening tools used in counterparty checks, if any.
+
+Cookie Policy
+- [ ] After connecting valtraxenergy.com, check in a private browser window that no cookies
+      or storage are set (Vercel deployment protection only applies to logged-in team
+      members on protected vercel.app URLs, not to visitors of the custom domain).
+
+Content consistency
+- [ ] Products: the brief for the legal pages lists EN590 diesel, Jet A-1, D6 and LPG; the
+      homepage (company profile) lists EN590/ULSD, middle distillates, Jet A-1, LNG/natural gas
+      and other products. The legal pages avoid a product list until this is decided.
+- [ ] Role: the terms describe possible roles as intermediary, agency/commission or
+      back-to-back. The homepage says "We operate as an independent intermediary. We do not
+      produce, store or hold physical product ourselves." Check that this still fits
+      back-to-back transactions (where title may pass through Valtrax).
+- [ ] The form notice uses the informal "je" in Dutch (text as supplied); the rest of the
+      site uses "u".
 
 ## 8. Content approvals
 

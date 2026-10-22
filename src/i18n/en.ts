@@ -330,8 +330,12 @@ export const en = {
     enquiryTypes: { buyer: 'Buyer / procurement', supplier: 'Supplier / seller', other: 'Other' },
     deliveryBases: { fob: 'FOB', cif: 'CIF', terminal: 'Terminal-based', open: 'Open / to be discussed' },
     units: { mt: 'Metric tonnes (MT)', m3: 'Cubic metres (m³)', bbl: 'Barrels (bbl)', mmbtu: 'MMBtu', other: 'Other' },
-    consent: 'By submitting this form you acknowledge that your details are processed to handle your enquiry, as described in our',
-    privacyLink: 'privacy notice',
+    // Notice under the form (text supplied by the owner; no consent checkbox).
+    notice: {
+      before: 'We use the information you submit to respond to your enquiry. Read our',
+      link: 'Privacy Policy',
+      after: 'for details about how we handle your personal data.',
+    },
     submit: 'Send enquiry',
     sending: 'Sending…',
     errorsSummary: 'Please correct the highlighted fields.',
@@ -358,66 +362,37 @@ export const en = {
     tagline: 'Physical energy sourcing and commercial intermediation.',
     tradingName: 'Valtrax Energy is a trading name of Northbridge Trading B.V.',
     registration: 'The Netherlands · KvK 42053415',
-    privacy: 'Privacy notice',
+    legalTitle: 'Legal',
+    terms: 'Terms and Conditions',
+    privacy: 'Privacy Policy',
+    cookies: 'Cookie Policy',
+    vat: 'VAT',
     navTitle: 'Sections',
     rights: 'All rights reserved.',
     disclaimer:
       'Information on this website is general in nature and does not constitute an offer, a commitment to supply or financial advice.',
   },
-  privacy: {
-    metaTitle: 'Privacy notice | Valtrax Energy',
-    metaDescription:
-      'How Valtrax Energy (Northbridge Trading B.V.) processes personal data submitted through the website enquiry form.',
-    title: 'Privacy notice',
-    updatedLabel: 'Last updated',
+  legal: {
+    lastUpdated: 'Last updated',
+    toc: 'On this page',
+    print: 'Print this page',
     back: 'Back to the homepage',
-    sections: [
-      {
-        h: 'Who is responsible',
-        p: [
-          'This website is operated by Northbridge Trading B.V., trading as Valtrax Energy, registered with the Netherlands Chamber of Commerce (KvK) under number 42053415 in Zwijndrecht, the Netherlands. Northbridge Trading B.V. is the controller for the personal data described in this notice.',
-        ],
-      },
-      {
-        h: 'What we collect',
-        p: [
-          'We only process personal data that you provide through the enquiry form: your name, company, business email address, country, enquiry type, product, your message and, if you choose to provide them, volume, delivery destination, preferred delivery basis and telephone number.',
-          'The website does not use analytics, advertising or tracking cookies, and does not load third-party tracking scripts.',
-        ],
-      },
-      {
-        h: 'Why we use it',
-        p: [
-          'We use your details to assess and respond to your enquiry and, where relevant, to take steps towards a possible business relationship at your request. The legal basis is our legitimate interest in responding to business enquiries and, where applicable, steps taken at your request prior to entering into a contract (Article 6(1)(f) and 6(1)(b) GDPR).',
-        ],
-      },
-      {
-        h: 'Who receives it',
-        p: [
-          'Your enquiry is delivered by email to Valtrax Energy. To do this we use service providers acting on our behalf: our website hosting provider (Vercel Inc.) and a transactional email delivery service (Resend). These providers may process data outside the European Economic Area; where that happens, transfers are subject to appropriate safeguards such as the European Commission’s standard contractual clauses.',
-          'We do not sell your data and do not share it with potential counterparties without your agreement.',
-        ],
-      },
-      {
-        h: 'How long we keep it',
-        p: [
-          'We keep enquiry data only for as long as necessary to handle your enquiry and any resulting business contact, unless a longer period is required by law.',
-        ],
-      },
-      {
-        h: 'Security and abuse prevention',
-        p: [
-          'Form submissions are sent over an encrypted connection. To protect the form against abuse, your IP address is used briefly to limit repeated submissions; it is not stored with your enquiry. Technical logs do not contain the content of your message.',
-        ],
-      },
-      {
-        h: 'Your rights',
-        p: [
-          'You have the right to request access to, correction or deletion of your personal data, to object to its processing and to request restriction or data portability. You can make such a request by replying to our correspondence or by submitting it through the enquiry form.',
-          'You also have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).',
-        ],
-      },
-    ],
+    related: 'Related documents',
+    draftBanner:
+      'Draft. Items marked on this page still have to be confirmed by Valtrax Energy. This page is not yet ready for publication.',
+    draftLabel: 'To be confirmed',
+    /** Link labels used inside running legal text. */
+    inline: { terms: 'Terms and Conditions', privacy: 'Privacy Policy', cookies: 'Cookie Policy', ap: 'Autoriteit Persoonsgegevens' },
+    companyDetails: 'Company details',
+    company: {
+      legalName: 'Legal entity',
+      tradingName: 'Trading name',
+      address: 'Address',
+      kvk: 'Chamber of Commerce (KvK)',
+      vat: 'VAT identification number',
+      email: 'Email',
+      website: 'Website',
+    },
   },
   notFound: {
     title: 'Page not found',
