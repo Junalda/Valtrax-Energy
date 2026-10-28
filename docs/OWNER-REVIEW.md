@@ -102,9 +102,9 @@ Privacy Policy
       profile → Data location), DPA and transfer mechanism.
 
 Cookie Policy
-- [ ] Verify on the live custom domain that no cookies or storage are set. Verified so far: the
-      local build and the vercel.app deployment send no Set-Cookie headers, use no storage and make
-      no third-party requests.
+- [x] Verified on the live domain valtraxenergy.com (2026-10-28): no Set-Cookie header, only
+      same-origin resources, and no cookie or browser-storage code in `src/`. Recheck whenever a
+      script, embed or provider is added.
 
 ## 7. Facts verified in this review (2026-10-22)
 

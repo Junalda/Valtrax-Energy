@@ -550,8 +550,6 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
-    review: [
-      'After connecting valtraxenergy.com, verify in a private browser window that no cookies or browser storage are set, including by the hosting provider.',
-    ],
+    review: [],
   },
 };
