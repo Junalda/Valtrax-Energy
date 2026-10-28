@@ -72,5 +72,9 @@ const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page
   <body>
     <a class="skip-link" href="#main">{dict.skipLink}</a>
     <slot />
+    <script>
+      import { injectSpeedInsights } from '@vercel/speed-insights';
+      injectSpeedInsights();
+    </script>
   </body>
 </html>
