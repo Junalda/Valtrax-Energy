@@ -475,12 +475,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
-    review: [
-      'Confirm the six-month retention period for enquiries without follow-up and set up the (manual) deletion routine in Microsoft 365; no automated deletion exists.',
-      'Vercel: check log retention for the project’s plan, accept/verify the Data Processing Addendum, and verify the DPF listing on dataprivacyframework.gov.',
-      'Resend (domain verified in North Virginia, us-east-1; account held by the web agency webmaister): confirm the contracting entity, the DPA and the transfer mechanism (DPF listing or SCCs), and whether the agency must be named in the processor chain.',
-      'Microsoft 365: check the tenant’s data location (admin centre), the Microsoft DPA and the transfer mechanism.',
-    ],
+    review: [],
   },
 
   cookies: {

@@ -90,16 +90,13 @@ Legal review: **approved without changes by the client's lawyer (2026-10-28)**, 
 governing-law/Rotterdam clause, the liability wording, the legitimate-interest wording and the
 language clause (no precedence clause). Removed from the review lists.
 
-Privacy Policy
-- [ ] Confirm the six-month retention for enquiries without follow-up and set up a (manual)
-      deletion routine in Microsoft 365. No automated deletion exists; nothing has been deleted.
-- [ ] Vercel: log retention on the project's plan; DPA accepted; DPF listing verified on
-      dataprivacyframework.gov. (Vercel's own docs state DPF certification and SCCs.)
-- [ ] Resend: region is North Virginia (us-east-1); the account is held by webmaister. Still to
-      check: contracting entity, DPA and transfer mechanism, and whether the privacy text should
-      name the agency in the processor chain.
-- [ ] Microsoft 365: tenant data location (admin centre → Settings → Org settings → Organisation
-      profile → Data location), DPA and transfer mechanism.
+Privacy Policy (confirmed by the client, 2026-10-28)
+- [x] Retention: Thom checks the info@ mailbox monthly and deletes enquiries without follow-up
+      that are older than six months (manual routine; no automated deletion).
+- [x] Vercel: DPA accepted.
+- [x] Resend: DPA accepted; region North Virginia (us-east-1). The account is held by webmaister;
+      the client decided not to name the agency in the privacy text.
+- [x] Microsoft 365: tenant data location EU.
 
 Cookie Policy
 - [x] Verified on the live domain valtraxenergy.com (2026-10-28): no Set-Cookie header, only
