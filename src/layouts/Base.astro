@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { site } from '../config/site';
 import { t, pathFor, languages, defaultLang, type Lang, type PageKey } from '../i18n';
 import { buildJsonLd, serializeJsonLd } from '../lib/structured-data';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   lang: Lang;
@@ -68,6 +69,7 @@ const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page
     <meta name="twitter:image:alt" content={dict.meta.ogAlt} />
 
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+    <Analytics />
   </head>
   <body>
     <a class="skip-link" href="#main">{dict.skipLink}</a>

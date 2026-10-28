@@ -16,7 +16,9 @@ export default defineConfig({
   trailingSlash: 'ignore',
   // Pages are prerendered; only /api/enquiry opts out and runs as a Vercel function.
   output: 'static',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   build: { format: 'directory', inlineStylesheets: 'auto' },
   compressHTML: true,
   vite: {
