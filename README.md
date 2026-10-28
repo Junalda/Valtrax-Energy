@@ -40,7 +40,7 @@ Copy `.env.example` to `.env` for local work. On Vercel, set them under
 | `SITE_URL`           | build            | Public origin for canonical URLs, hreflang, sitemap, Open Graph. Defaults to `https://valtraxenergy.com`. |
 | `SITE_INDEXING`      | build            | `true` makes pages indexable. **Only takes effect when `VERCEL_ENV` is `production`** (or outside Vercel). |
 | `RESEND_API_KEY`     | runtime (secret) | API key for [Resend](https://resend.com), used to deliver enquiries.                                      |
-| `CONTACT_FROM_EMAIL` | runtime (secret) | Sender on the Resend-verified domain; must be on valtraxenergy.com or a subdomain, e.g. `Valtrax Energy website <website@notify.valtraxenergy.com>`. |
+| `CONTACT_FROM_EMAIL` | runtime (secret) | Sender on the Resend-verified domain; must be on valtraxenergy.com or a subdomain, e.g. `Valtrax Energy website <website@valtraxenergy.com>`. |
 
 If either form variable is missing (or the sender is not on the own domain), the endpoint returns **503** and the page
 tells the visitor the form is unavailable and that their message was **not** sent.

@@ -66,10 +66,11 @@ See **docs/DNS-AND-EMAIL.md** for the exact plan. Summary:
       read from the build environment).
 - [ ] Vercel: add valtraxenergy.com (primary), and set www.valtraxenergy.com, valtraxenergy.nl and
       www.valtraxenergy.nl to redirect (308) to it; add the A/CNAME values Vercel shows.
-- [ ] Resend: verify `notify.valtraxenergy.com` (records on subdomains only; Microsoft 365 SPF,
-      DKIM, DMARC and MX untouched); choose a region (eu-west-1 suggested).
-- [ ] Vercel env: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`; redeploy; send one labelled test
-      enquiry and confirm arrival in the info@ mailbox.
+- [x] Resend: `valtraxenergy.com` verified (region North Virginia, us-east-1); records on
+      `resend._domainkey`, `send` and `rsend` only; Microsoft 365 records untouched.
+- [x] Vercel env: `RESEND_API_KEY` (Production), `CONTACT_FROM_EMAIL`
+      (`website@valtraxenergy.com`); production redeployed.
+- [ ] Send one labelled test enquiry and confirm arrival in the info@ mailbox (incl. Junk).
 - [ ] Vercel production branch → `main` after merging the pull request.
 
 ## 5. Company details
@@ -97,8 +98,9 @@ Privacy Policy
       deletion routine in Microsoft 365. No automated deletion exists; nothing has been deleted.
 - [ ] Vercel: log retention on the project's plan; DPA accepted; DPF listing verified on
       dataprivacyframework.gov. (Vercel's own docs state DPF certification and SCCs.)
-- [ ] Resend: account, contracting entity and location, region, DPA, transfer mechanism.
-      These could not be verified from the build environment.
+- [ ] Resend: region is North Virginia (us-east-1); the account is held by webmaister. Still to
+      check: contracting entity, DPA and transfer mechanism, and whether the privacy text should
+      name the agency in the processor chain.
 - [ ] Microsoft 365: tenant data location (admin centre → Settings → Org settings → Organisation
       profile → Data location), DPA and transfer mechanism.
 - [ ] Legal review, including legitimate-interest wording (no documented balancing test).
@@ -113,8 +115,7 @@ Cookie Policy
 - **Hosting:** Vercel. The form function runs in `iad1` (Washington, D.C., USA). Pages are
   delivered via Vercel's global network. The client accepts the US server; no migration.
 - **Integrations:** no analytics, pixels, tag managers, embeds, maps, captcha or third-party fonts.
-- **Form delivery:** Resend integration in code (`src/pages/api/enquiry.ts`), not yet active
-  (no environment variables set in Vercel).
+- **Form delivery:** Resend, active in production since 2026-10-28 (`src/pages/api/enquiry.ts`).
 - **Own logs:** outcome, enquiry type, product and language only. IP addresses are held in
   memory for 10 minutes for rate limiting.
 

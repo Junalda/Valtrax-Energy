@@ -1,6 +1,6 @@
 # Domains, DNS and form e-mail: setup plan
 
-Status 2026-10-22. Nothing below has been changed in DNS, Vercel or Resend yet. DNS is managed
+Status 2026-10-28. The website domain and the Resend records are live (sections 1 and 2). DNS is managed
 at **TransIP**; mail runs on **Microsoft 365** and must keep working throughout.
 
 Verification values are generated per account/project. **Never type them from memory or from
@@ -56,49 +56,37 @@ After adding each domain, Vercel shows the exact DNS records it needs (also via
 The site URL is already `https://valtraxenergy.com` (`SITE_URL` default in `astro.config.mjs`),
 so canonical URLs, hreflang and the sitemap already use the preferred domain.
 
-## 2. Form e-mail: Resend on a sending subdomain
+## 2. Form e-mail: Resend on the root domain (done)
 
 The form sends one e-mail per enquiry **to info@valtraxenergy.com** (fixed in
-`src/config/site.ts`), **from** an address on a Resend-verified domain, with the visitor's
-validated address as **Reply-To**. Microsoft 365 remains the mailbox.
+`src/config/site.ts`), **from** `Valtrax Energy website <website@valtraxenergy.com>`, with the
+visitor's validated address as **Reply-To**. Microsoft 365 remains the mailbox.
 
-Recommended: verify a **subdomain** in Resend, for example `notify.valtraxenergy.com`. Then:
+Set up on 2026-10-28:
 
-- the root domain's SPF record (Microsoft 365) is not touched;
-- there is never a second SPF record on the same host name;
-- sending reputation is separated from normal office e-mail.
+- Resend domain: `valtraxenergy.com` (root domain), region **North Virginia (us-east-1)**.
+  Status: Verified. The Resend account is held by webmaister (the web agency), which matters
+  for the processor chain in the privacy review.
+- Records added at TransIP (zone valtraxenergy.com), copied from Resend:
 
-Steps:
+  | Name                 | Type  | Value                        |
+  | -------------------- | ----- | ---------------------------- |
+  | `resend._domainkey`  | TXT   | DKIM public key from Resend  |
+  | `send`               | CNAME | `send.forge.rmta.net.`       |
+  | `rsend`              | CNAME | `rsend.forge.rmta.net.`      |
 
-1. Resend → Domains → Add domain `notify.valtraxenergy.com`. Choose region **eu-west-1
-   (Ireland)** unless there is a reason not to. The region is part of the generated MX value.
-2. Resend shows the records. With a subdomain they are typically:
+  None of these are on `@`, so the Microsoft 365 MX, SPF, DKIM and DMARC records are untouched.
+- Vercel environment variables: `RESEND_API_KEY` (Production only, sensitive) and
+  `CONTACT_FROM_EMAIL` (Production and Preview). Preview deployments have no key, so the form
+  there shows "temporarily unavailable" and sends nothing.
 
-   | Name (at TransIP, zone valtraxenergy.com) | Type | Value                                           |
-   | ----------------------------------------- | ---- | ----------------------------------------------- |
-   | `resend._domainkey.notify`                | TXT  | DKIM public key shown by Resend                 |
-   | `send.notify`                             | MX   | `feedback-smtp.<region>.amazonses.com` (priority as shown) |
-   | `send.notify`                             | TXT  | SPF value shown by Resend (copy exactly) |
+Test after each change: send **one** clearly labelled enquiry with synthetic data, for example
+name "TEST Valtrax website" and message "Test enquiry, please ignore".
 
-   Copy names and values exactly from Resend. Some DNS panels need a trailing dot on the MX
-   target. None of these records are on `@`, so they cannot conflict with Microsoft 365.
-3. Wait for "Verified" in Resend.
-4. DMARC: the existing `_dmarc.valtraxenergy.com` policy also applies to the subdomain. Resend
-   signs with DKIM `d=notify.valtraxenergy.com`, which aligns with the organisational domain under
-   relaxed alignment. Do not create a separate `_dmarc.notify` record unless intended.
-5. Vercel → Settings → Environment Variables (Production, and Preview if testing there):
-   - `RESEND_API_KEY`: a Resend API key with "Sending access" only.
-   - `CONTACT_FROM_EMAIL`: for example `Valtrax Energy website <website@notify.valtraxenergy.com>`.
-     The code refuses a sender that is not on valtraxenergy.com or a subdomain.
-6. Redeploy, then send **one** clearly labelled test enquiry with synthetic data, for example
-   name "TEST Valtrax website" and message "Test enquiry, please ignore".
-   - "Thank you, sent" only means Resend accepted the message.
-   - Confirm actual delivery in the info@ mailbox in Microsoft 365, including the Junk folder,
-     and check that Reply-To shows the test sender.
-   - Check Resend → Emails for the delivery status.
-
-If Resend is not used after all, the form keeps showing "temporarily unavailable" and sends
-nothing.
+- "Thank you, sent" only means Resend accepted the message.
+- Confirm actual delivery in the info@ mailbox in Microsoft 365, including the Junk folder,
+  and check that Reply-To shows the test sender.
+- Check Resend → Emails for the delivery status.
 
 ## 3. After DNS is live
 
