@@ -86,12 +86,9 @@ The texts no longer contain visible placeholders. Open items are kept in the `re
 in `src/legal/en.ts` (shared by nl.ts). While any remain, a production build with
 `SITE_INDEXING=true` fails. Current items:
 
-Terms and Conditions
-- [ ] Legal review of the whole text (no lawyer has reviewed it).
-- [ ] Governing law Dutch / court Rotterdam "insofar as legally valid": check wording and effect.
-- [ ] Liability wording (proportionate, subject to mandatory law; no cap invented).
-- [ ] Language: English is the preferred communication language; no precedence clause yet.
-      Decide after legal review.
+Legal review: **approved without changes by the client's lawyer (2026-10-28)**, including the
+governing-law/Rotterdam clause, the liability wording, the legitimate-interest wording and the
+language clause (no precedence clause). Removed from the review lists.
 
 Privacy Policy
 - [ ] Confirm the six-month retention for enquiries without follow-up and set up a (manual)
@@ -103,7 +100,6 @@ Privacy Policy
       name the agency in the processor chain.
 - [ ] Microsoft 365: tenant data location (admin centre → Settings → Org settings → Organisation
       profile → Data location), DPA and transfer mechanism.
-- [ ] Legal review, including legitimate-interest wording (no documented balancing test).
 
 Cookie Policy
 - [ ] Verify on the live custom domain that no cookies or storage are set. Verified so far: the

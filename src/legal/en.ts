@@ -224,12 +224,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
-    review: [
-      'Legal review of the whole text (no lawyer has reviewed it yet).',
-      'Legal review of the governing-law and Rotterdam jurisdiction clause (section 14), including its effect on consumers and non-Dutch parties.',
-      'Legal review of the liability wording (section 10).',
-      'Decide, after legal review, whether a language-precedence clause is needed (section 15 currently states no precedence).',
-    ],
+    review: [],
   },
 
   privacy: {
@@ -483,9 +478,8 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
     review: [
       'Confirm the six-month retention period for enquiries without follow-up and set up the (manual) deletion routine in Microsoft 365; no automated deletion exists.',
       'Vercel: check log retention for the project’s plan, accept/verify the Data Processing Addendum, and verify the DPF listing on dataprivacyframework.gov.',
-      'Resend: confirm the account, the contracting entity and its location, the sending region chosen for the domain, the DPA and the transfer mechanism (DPF listing or SCCs).',
+      'Resend (domain verified in North Virginia, us-east-1; account held by the web agency webmaister): confirm the contracting entity, the DPA and the transfer mechanism (DPF listing or SCCs), and whether the agency must be named in the processor chain.',
       'Microsoft 365: check the tenant’s data location (admin centre), the Microsoft DPA and the transfer mechanism.',
-      'Legal review of the whole policy, including the legal bases and the legitimate-interest wording (no interest assessment has been documented yet).',
     ],
   },
 
