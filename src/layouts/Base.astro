@@ -3,6 +3,8 @@ import '../styles/global.css';
 import { site } from '../config/site';
 import { t, pathFor, languages, defaultLang, type Lang, type PageKey } from '../i18n';
 import { buildJsonLd, serializeJsonLd } from '../lib/structured-data';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   lang: Lang;
@@ -72,5 +74,7 @@ const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page
   <body>
     <a class="skip-link" href="#main">{dict.skipLink}</a>
     <slot />
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>

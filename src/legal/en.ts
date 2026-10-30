@@ -7,7 +7,7 @@ import type { LegalPageKey } from '../i18n';
  * Public text contains only confirmed facts; open checks live in `review` (internal).
  * Keep these texts in sync when the implementation or providers change.
  */
-const UPDATED = '2026-10-22';
+const UPDATED = '2026-10-30';
 
 export const legalEn: Record<LegalPageKey, LegalDoc> = {
   terms: {
@@ -280,6 +280,10 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
+            text: 'Visitor statistics. We use Vercel Web Analytics and Vercel Speed Insights to see how the website is used and how quickly pages load. When a page loads, a script served from our own domain sends our hosting provider Vercel the page visited, the referring website, the type of browser, operating system and device, and measurements of loading speed. Vercel derives the country from your IP address. These services do not place cookies or store information in your browser. In our dashboard we see only totals and averages, not individual visitors.',
+          },
+          {
+            type: 'p',
             text: 'When you submit the form, your IP address is used to limit repeated submissions. It is kept only in the working memory of the server, is not stored with your enquiry or in our logs, and is discarded within 10 minutes. Our own server logs record only the outcome of a submission (for example sent or rejected), the enquiry type, the product category and the page language, not your name, email address or message.',
           },
           {
@@ -320,6 +324,12 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
                 'The IP address is held in working memory only and discarded within 10 minutes; the other data is not stored separately.',
               ],
               [
+                'Measuring visits and loading speed (Vercel Web Analytics and Speed Insights)',
+                'Page visited, referring website, browser, operating system, device type, country (derived from the IP address) and loading-time measurements',
+                'Our legitimate interest in understanding how the website is used and keeping it fast (Art. 6(1)(f) GDPR).',
+                'At Vercel, for the retention period of the analytics services on our plan; we only view aggregated figures.',
+              ],
+              [
                 'Delivering and securing the website',
                 'Technical request data, such as IP address and browser information',
                 'Our legitimate interest in delivering the website reliably and securely (Art. 6(1)(f) GDPR).',
@@ -350,7 +360,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
           {
             type: 'list',
             items: [
-              'Vercel Inc.: hosting of the website and of the server function that processes the enquiry form.',
+              'Vercel Inc.: hosting of the website and of the server function that processes the enquiry form, and the visitor statistics (Web Analytics and Speed Insights).',
               'Resend: sending form submissions by email to our mailbox.',
               'Microsoft (Microsoft 365): our email and mailbox service, where enquiries and correspondence are received and stored.',
             ],
@@ -502,7 +512,11 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'This website does not place cookies and does not store information in your browser’s local storage or session storage. It does not use analytics, advertising or social-media tracking, and it does not embed content from third parties such as videos or maps. The fonts are served from our own website.',
+            text: 'This website does not place cookies and does not store information in your browser’s local storage or session storage. It does not use advertising or social-media tracking, and it does not embed content from third parties such as videos or maps. The fonts are served from our own website.',
+          },
+          {
+            type: 'p',
+            text: 'To measure visits and loading speed, we use Vercel Web Analytics and Vercel Speed Insights. Their scripts are served from our own domain and send page and device information and loading times to our hosting provider Vercel. They do not place cookies or use browser storage. More information is in our {link:privacy}.',
           },
           {
             type: 'p',
@@ -520,7 +534,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Because this website does not use cookies or similar technologies that require consent, we do not show a cookie banner. If we introduce such technologies in the future, we will ask for your consent before using them and update this policy.',
+            text: 'This website does not use cookies. The visitor statistics described above work without cookies or browser storage and are used only for aggregated statistics, so we do not show a cookie banner. If we introduce technologies that require consent in the future, we will ask for your consent before using them and update this policy.',
           },
         ],
       },

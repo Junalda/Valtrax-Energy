@@ -6,7 +6,7 @@ import { legalEn } from './en';
  * Dutch legal texts. Same structure and meaning as en.ts; formal address (u/uw).
  * The internal review lists are shared with the English version.
  */
-const UPDATED = '2026-10-22';
+const UPDATED = '2026-10-30';
 
 export const legalNl: Record<LegalPageKey, LegalDoc> = {
   terms: {
@@ -279,6 +279,10 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
+            text: 'Bezoekersstatistieken. Wij gebruiken Vercel Web Analytics en Vercel Speed Insights om te zien hoe de website wordt gebruikt en hoe snel pagina’s laden. Wanneer een pagina laadt, stuurt een script dat vanaf ons eigen domein wordt geladen onze hostingprovider Vercel de bezochte pagina, de verwijzende website, het type browser, besturingssysteem en apparaat, en metingen van de laadsnelheid. Vercel leidt het land af uit uw IP-adres. Deze diensten plaatsen geen cookies en slaan geen informatie op in uw browser. In ons dashboard zien wij alleen totalen en gemiddelden, geen individuele bezoekers.',
+          },
+          {
+            type: 'p',
             text: 'Wanneer u het formulier verstuurt, wordt uw IP-adres gebruikt om herhaalde inzendingen te beperken. Het wordt alleen in het werkgeheugen van de server bewaard, niet bij uw aanvraag of in onze logbestanden opgeslagen, en binnen 10 minuten verwijderd. Onze eigen serverlogs bevatten alleen de uitkomst van een inzending (bijvoorbeeld verzonden of geweigerd), het type aanvraag, de productcategorie en de taal van de pagina, niet uw naam, e-mailadres of bericht.',
           },
           {
@@ -319,6 +323,12 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
                 'Het IP-adres staat alleen in het werkgeheugen en wordt binnen 10 minuten verwijderd; de overige gegevens worden niet afzonderlijk bewaard.',
               ],
               [
+                'Meten van bezoek en laadsnelheid (Vercel Web Analytics en Speed Insights)',
+                'Bezochte pagina, verwijzende website, browser, besturingssysteem, type apparaat, land (afgeleid uit het IP-adres) en metingen van de laadtijd',
+                'Ons gerechtvaardigd belang bij inzicht in het gebruik van de website en een snelle website (art. 6 lid 1 sub f AVG).',
+                'Bij Vercel, gedurende de bewaartermijn van de statistiekdiensten in ons abonnement; wij bekijken alleen geaggregeerde cijfers.',
+              ],
+              [
                 'Tonen en beveiligen van de website',
                 'Technische verzoekgegevens, zoals IP-adres en browsergegevens',
                 'Ons gerechtvaardigd belang bij een betrouwbare en veilige website (art. 6 lid 1 sub f AVG).',
@@ -349,7 +359,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
           {
             type: 'list',
             items: [
-              'Vercel Inc.: hosting van de website en van de serverfunctie die het aanvraagformulier verwerkt.',
+              'Vercel Inc.: hosting van de website en van de serverfunctie die het aanvraagformulier verwerkt, en de bezoekersstatistieken (Web Analytics en Speed Insights).',
               'Resend: verzending van formulierinzendingen per e-mail naar onze mailbox.',
               'Microsoft (Microsoft 365): onze e-mail- en mailboxdienst, waar aanvragen en correspondentie binnenkomen en worden bewaard.',
             ],
@@ -501,7 +511,11 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Deze website plaatst geen cookies en slaat geen informatie op in de local storage of session storage van uw browser. Zij gebruikt geen analytics, advertenties of tracking van sociale media, en bevat geen ingesloten inhoud van derden, zoals video’s of kaarten. De lettertypen worden vanaf onze eigen website geladen.',
+            text: 'Deze website plaatst geen cookies en slaat geen informatie op in de local storage of session storage van uw browser. Zij gebruikt geen advertenties of tracking van sociale media, en bevat geen ingesloten inhoud van derden, zoals video’s of kaarten. De lettertypen worden vanaf onze eigen website geladen.',
+          },
+          {
+            type: 'p',
+            text: 'Om bezoek en laadsnelheid te meten, gebruiken wij Vercel Web Analytics en Vercel Speed Insights. De scripts daarvan worden vanaf ons eigen domein geladen en sturen pagina- en apparaatgegevens en laadtijden naar onze hostingprovider Vercel. Zij plaatsen geen cookies en gebruiken geen browseropslag. Meer informatie vindt u in onze {link:privacy}.',
           },
           {
             type: 'p',
@@ -519,7 +533,7 @@ export const legalNl: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Omdat deze website geen cookies of vergelijkbare technieken gebruikt waarvoor toestemming nodig is, tonen wij geen cookiebanner. Als wij zulke technieken in de toekomst gaan gebruiken, vragen wij vooraf uw toestemming en passen wij dit beleid aan.',
+            text: 'Deze website gebruikt geen cookies. De bezoekersstatistieken die hierboven zijn beschreven werken zonder cookies of browseropslag en worden alleen gebruikt voor geaggregeerde statistieken. Daarom tonen wij geen cookiebanner. Als wij in de toekomst technieken gaan gebruiken waarvoor toestemming nodig is, vragen wij vooraf uw toestemming en passen wij dit beleid aan.',
           },
         ],
       },
