@@ -5,7 +5,9 @@ name of Northbridge Trading B.V. Built with Astro 7 and TypeScript, deployed on 
 
 - All pages are prerendered static HTML. The only server code is the enquiry endpoint
   (`POST /api/enquiry`), which runs as a Vercel function.
-- No UI framework, analytics, cookies or third-party scripts. Fonts are self-hosted (OFL).
+- No UI framework, cookies or third-party scripts. Fonts are self-hosted (OFL).
+- Vercel Web Analytics and Speed Insights (cookieless, scripts served from the own domain under
+  `/_vercel/`) are described in the privacy and cookie policies; keep those texts in line.
 - Client JavaScript is a single small module (mobile menu, section-aware language switch,
   enquiry-type preselection, form submission). All content works without it.
 
