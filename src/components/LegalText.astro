@@ -1,0 +1,76 @@
+---
+/**
+ * Renders one legal text string, resolving the inline syntax documented in
+ * src/legal/types.ts (company tokens, links and [[draft]] placeholders).
+ */
+import { site } from '../config/site';
+import { t, pathFor, type Lang } from '../i18n';
+
+interface Props {
+  text: string;
+  lang: Lang;
+}
+const { text, lang } = Astro.props;
+const dict = t(lang);
+const AP_URL = 'https://www.autoriteitpersoonsgegevens.nl/';
+const address = [
+  site.publicContact.streetAddress,
+  [site.publicContact.postalCode, site.registeredLocality].filter(Boolean).join(' '),
+  site.country[lang],
+]
+  .filter(Boolean)
+  .join(', ');
+
+const plain: Record<string, string> = {
+  company: site.legalName,
+  brand: site.brand,
+  address,
+  kvk: site.kvk,
+  vat: site.vat,
+  website: site.website,
+};
+
+type Part =
+  | { kind: 'text'; value: string }
+  | { kind: 'link'; href: string; label: string; external?: boolean }
+  | { kind: 'draft'; value: string };
+
+const parts: Part[] = [];
+for (const piece of text.split(/(\[\[.*?\]\]|\{[a-z:]+\})/g)) {
+  if (!piece) continue;
+  if (piece.startsWith('[[')) {
+    parts.push({ kind: 'draft', value: piece.slice(2, -2) });
+  } else if (piece === '{email}' && site.publicContact.email) {
+    parts.push({ kind: 'link', href: `mailto:${site.publicContact.email}`, label: site.publicContact.email });
+  } else if (piece === '{ap}') {
+    parts.push({ kind: 'link', href: AP_URL, label: dict.legal.inline.ap, external: true });
+  } else if (piece.startsWith('{link:')) {
+    const page = piece.slice(6, -1) as 'terms' | 'privacy' | 'cookies';
+    parts.push({ kind: 'link', href: pathFor(page, lang), label: dict.legal.inline[page] });
+  } else if (/^\{[a-z]+\}$/.test(piece) && piece.slice(1, -1) in plain) {
+    parts.push({ kind: 'text', value: plain[piece.slice(1, -1)] });
+  } else {
+    parts.push({ kind: 'text', value: piece });
+  }
+}
+---
+
+{
+  parts.map((p) =>
+    p.kind === 'text' ? (
+      p.value
+    ) : p.kind === 'link' ? (
+      p.external ? (
+        <a href={p.href} rel="noopener">
+          {p.label}
+        </a>
+      ) : (
+        <a href={p.href}>{p.label}</a>
+      )
+    ) : (
+      <mark class="legal-draft">
+        <span class="legal-draft__label">{dict.legal.draftLabel}:</span> {p.value}
+      </mark>
+    ),
+  )
+}

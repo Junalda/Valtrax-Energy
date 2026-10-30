@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+import { site } from '../config/site';
+import { t, pathFor, languages, defaultLang, type Lang, type PageKey } from '../i18n';
+import { buildJsonLd, serializeJsonLd } from '../lib/structured-data';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  title: string;
+  description: string;
+  /** Pages such as 404 are never indexed, regardless of environment. */
+  noindex?: boolean;
+  structuredData?: boolean;
+}
+
+const { lang, page, title, description, noindex = false, structuredData = true } = Astro.props;
+const dict = t(lang);
+const origin = (Astro.site?.origin ?? Astro.url.origin).replace(/\/$/, '');
+const canonical = `${origin}${pathFor(page, lang)}`;
+const ogImage = `${origin}/og/og-${lang}.png`;
+const indexable = site.indexable && !noindex;
+const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page })) : null;
+---
+
+<!doctype html>
+<html lang={lang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable ? 'index, follow, max-image-preview:large' : 'noindex, nofollow'} />
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          {languages.map((l) => <link rel="alternate" hreflang={l} href={`${origin}${pathFor(page, l)}`} />)}
+          <link rel="alternate" hreflang="x-default" href={`${origin}${pathFor(page, defaultLang)}`} />
+        </>
+      )
+    }
+
+    <meta name="theme-color" content="#022449" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preload" href="/fonts/source-serif-4-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={dict.locale} />
+    <meta property="og:locale:alternate" content={t(lang === 'en' ? 'nl' : 'en').locale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={dict.meta.ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={dict.meta.ogAlt} />
+
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{dict.skipLink}</a>
+    <slot />
+  </body>
+</html>

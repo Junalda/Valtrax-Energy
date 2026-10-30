@@ -1,0 +1,349 @@
+/* ==========================================================================
+   Valtrax Energy: design tokens and base styles
+   Palette: deep navy + white, restrained gold accent, light-grey surfaces.
+   Navy and gold are sampled from the supplied logo (navy ≈ #022449, gold ≈ #BE8A22);
+   darker/lighter steps are derived for contrast. Change them here only.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Inter Variable';
+  src: url('/fonts/inter-latin-var.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Source Serif 4 Variable';
+  src: url('/fonts/source-serif-4-latin-var.woff2') format('woff2');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* Brand */
+  --navy-950: #011630;
+  --navy-900: #022449;
+  --navy-800: #0a2f5c;
+  --navy-700: #154276;
+  --navy-300: #9fb0c8;
+  --gold-500: #be8a22; /* logo gold; accent on navy: 5.1:1 against --navy-900 */
+  --gold-600: #8c6414; /* gold text on white: 5.3:1 */
+  --gold-200: #f1e1bd;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --grey-50: #f6f7f9;
+  --grey-100: #eef0f3;
+  --grey-200: #dde1e7;
+  --grey-500: #5b6474; /* secondary text on white: 6.0:1 */
+  --ink: #022449;
+
+  /* Semantic */
+  --bg: var(--white);
+  --text: var(--ink);
+  --text-muted: var(--grey-500);
+  --rule: var(--grey-200);
+  --focus: #b8862a;
+  --error: #a4262c;
+  --success: #1f6b45;
+
+  /* Type */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-serif: 'Source Serif 4 Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, 'Times New Roman', serif;
+  --step--1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.3vw, 1.3rem);
+  --step-2: clamp(1.4rem, 1.25rem + 0.7vw, 1.8rem);
+  --step-3: clamp(1.8rem, 1.5rem + 1.4vw, 2.6rem);
+  --step-4: clamp(2.3rem, 1.75rem + 2.6vw, 3.9rem);
+
+  /* Space & layout */
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  --section-y: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --max: 76rem;
+  --measure: 40rem;
+  --header-h: 4.5rem;
+  --radius: 2px;
+}
+@media (min-width: 48rem) {
+  :root {
+    --header-h: 5.5rem; /* room for the logo with the OIL TRADING tagline */
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+::selection {
+  background: var(--gold-200);
+  color: var(--navy-900);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100%;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--navy-900);
+  color: var(--white);
+  font-weight: 600;
+}
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+/* --- Layout primitives --------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+.section--grey {
+  background: var(--grey-50);
+}
+.section--navy {
+  background: var(--navy-900);
+  color: var(--white);
+  --text-muted: var(--navy-300);
+  --rule: rgba(255, 255, 255, 0.16);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+}
+.eyebrow::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+.section--navy .eyebrow,
+.on-navy .eyebrow {
+  color: var(--gold-500);
+}
+
+.section-head {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+}
+.section-head h2 {
+  font-size: var(--step-3);
+}
+.section-head p:not(.eyebrow) {
+  font-size: var(--step-1);
+  color: var(--text-muted);
+  max-width: var(--measure);
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.6;
+}
+.muted {
+  color: var(--text-muted);
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font: 600 0.95rem/1.2 var(--font-sans);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  transition: transform 0.2s ease;
+}
+.btn:hover svg {
+  transform: translateX(3px);
+}
+.btn--primary {
+  background: var(--navy-900);
+  color: var(--white);
+}
+.btn--primary:hover {
+  background: var(--navy-700);
+}
+.btn--gold {
+  background: var(--gold-500);
+  color: var(--navy-950);
+}
+.btn--gold:hover {
+  background: #cf9b35;
+}
+.btn--ghost {
+  border-color: currentColor;
+  color: inherit;
+  background: transparent;
+}
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.btn--outline {
+  border-color: var(--navy-900);
+  color: var(--navy-900);
+  background: transparent;
+}
+.btn--outline:hover {
+  background: var(--navy-900);
+  color: var(--white);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-500);
+  padding-bottom: 0.15rem;
+}
+
+/* --- Motion -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Forced colours: keep focus and borders visible. */
+@media (forced-colors: active) {
+  .btn {
+    border-color: ButtonText;
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .enquiry-form,
+  .skip-link {
+    display: none !important;
+  }
+  .section--navy {
+    background: none;
+    color: #000;
+  }
+}

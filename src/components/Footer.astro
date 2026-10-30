@@ -1,0 +1,159 @@
+---
+import Logo from './Logo.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
+import { site } from '../config/site';
+import { t, pathFor, legalPages, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+const { lang, page } = Astro.props;
+const dict = t(lang);
+const base = page === 'home' ? '' : pathFor('home', lang);
+const sections = (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
+  href: `${base}#${id}`,
+  label: dict.nav[id],
+}));
+const year = new Date().getFullYear();
+const { streetAddress, postalCode } = site.publicContact;
+---
+
+<footer class="site-footer on-navy">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <Logo tone="light" size="lg" />
+        <p>{dict.footer.tagline}</p>
+      </div>
+      <nav class="site-footer__nav" aria-label={dict.footer.navTitle}>
+        <ul>
+          {sections.map((s) => <li><a href={s.href}>{s.label}</a></li>)}
+        </ul>
+      </nav>
+      <nav class="site-footer__nav" aria-label={dict.footer.legalTitle}>
+        <p class="site-footer__heading">{dict.footer.legalTitle}</p>
+        <ul>
+          {legalPages.map((p) => <li><a href={pathFor(p, lang)} aria-current={p === page ? 'page' : undefined}>{dict.footer[p]}</a></li>)}
+        </ul>
+      </nav>
+      <address class="site-footer__legal">
+        <p>{dict.footer.tradingName}</p>
+        {streetAddress && <p>{streetAddress}{postalCode ? `, ${postalCode}` : ''} {site.registeredLocality}</p>}
+        <p>{dict.footer.registration}</p>
+        <p>{dict.footer.vat} {site.vat}</p>
+        {
+          (['general', 'trading', 'finance'] as const).map((role) => (
+            <p>
+              {dict.contact.direct[role]}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+            </p>
+          ))
+        }
+      </address>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__disclaimer">{dict.footer.disclaimer}</p>
+      <div class="site-footer__meta">
+        <p>© {year} {site.legalName} {dict.footer.rights}</p>
+        <LanguageSwitch lang={lang} page={page} tone="light" />
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-950);
+    color: var(--white);
+    padding-block: clamp(3.5rem, 2.5rem + 3vw, 5.5rem) 2rem;
+    font-size: 0.92rem;
+  }
+  .site-footer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 2fr) minmax(0, 3fr) minmax(0, 4fr);
+    gap: 2.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .site-footer__brand {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+  .site-footer__brand p {
+    color: var(--navy-300);
+    max-width: 22rem;
+  }
+  .site-footer__nav ul {
+    list-style: none;
+    display: grid;
+    gap: 0.25rem;
+  }
+  .site-footer__nav a {
+    display: inline-block;
+    padding-block: 0.3rem;
+    color: #dfe5ee;
+    text-decoration: none;
+  }
+  .site-footer__heading {
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+  }
+  .site-footer__nav a[aria-current='page'] {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--gold-500);
+  }
+  .site-footer__nav a:hover {
+    color: var(--white);
+    text-decoration: underline;
+    text-decoration-color: var(--gold-500);
+  }
+  .site-footer__legal {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    font-style: normal;
+    color: #dfe5ee;
+  }
+  .site-footer__legal a {
+    color: var(--white);
+  }
+  .site-footer__bottom {
+    display: grid;
+    gap: 1rem;
+    padding-top: 1.75rem;
+    color: var(--navy-300);
+    font-size: 0.84rem;
+  }
+  .site-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .site-footer__disclaimer {
+    max-width: 48rem;
+  }
+  @media (max-width: 52rem) {
+    .site-footer__top {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__legal {
+      grid-column: 1 / -1;
+    }
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 30rem) {
+    .site-footer__top {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

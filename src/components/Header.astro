@@ -1,0 +1,207 @@
+---
+import Logo from './Logo.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
+import { t, pathFor, type Lang, type PageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+const { lang, page } = Astro.props;
+const dict = t(lang);
+// On the homepage anchors are local; elsewhere they point back to the homepage sections.
+const base = page === 'home' ? '' : pathFor('home', lang);
+const links = (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
+  id,
+  href: `${base}#${id}`,
+  label: dict.nav[id],
+}));
+---
+
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href={pathFor('home', lang)} aria-label={dict.nav.home}>
+      <Logo eager />
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      data-menu-toggle
+    >
+      <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span></span>
+      <span class="menu-toggle__label" data-label-open={dict.nav.menuOpen} data-label-close={dict.nav.menuClose}
+        >{dict.nav.menuOpen}</span
+      >
+    </button>
+
+    <div class="site-menu" id="site-menu" data-menu>
+      <nav aria-label={dict.nav.label}>
+        <ul class="site-nav">
+          {
+            links.map((l) => (
+              <li>
+                <a href={l.href} data-nav-link={l.id}>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="site-menu__actions">
+        <LanguageSwitch lang={lang} page={page} />
+        <a class="btn btn--primary site-header__cta" href={`${base}#contact`}>{dict.nav.cta}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--grey-200);
+    backdrop-filter: saturate(1.2) blur(8px);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: var(--header-h);
+  }
+  .site-header__brand {
+    display: inline-flex;
+    text-decoration: none;
+    flex: none;
+    padding-block: 0.5rem;
+  }
+
+  .site-nav {
+    list-style: none;
+    display: flex;
+    gap: clamp(1rem, 0.2rem + 1.4vw, 2rem);
+  }
+  .site-nav a {
+    position: relative;
+    display: inline-block;
+    padding-block: 0.5rem;
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: var(--navy-900);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .site-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.2rem;
+    height: 1px;
+    background: var(--gold-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .site-nav a:hover::after,
+  .site-nav a[aria-current='true']::after {
+    transform: scaleX(1);
+  }
+
+  .site-menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 0.2rem + 1.6vw, 2.25rem);
+  }
+  .site-menu__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .site-header__cta {
+    white-space: nowrap;
+    min-height: 2.75rem;
+    padding: 0.65rem 1.15rem;
+    font-size: 0.875rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    margin-right: -0.75rem;
+    background: none;
+    border: 0;
+    color: var(--navy-900);
+    font: 600 0.9rem/1 var(--font-sans);
+    cursor: pointer;
+  }
+  .menu-toggle__icon {
+    display: grid;
+    gap: 6px;
+    width: 1.25rem;
+  }
+  .menu-toggle__icon span {
+    display: block;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.2s ease;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-toggle__icon span:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded='true'] .menu-toggle__icon span:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+
+  @media (max-width: 79.99rem) {
+    .site-header__inner {
+      flex-wrap: wrap;
+    }
+    :global(.js) .menu-toggle {
+      display: inline-flex;
+    }
+    .site-menu {
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    :global(.js) .site-menu {
+      display: none;
+    }
+    :global(.js) .site-header[data-open] .site-menu {
+      display: flex;
+      max-height: calc(100vh - var(--header-h));
+      max-height: calc(100dvh - var(--header-h));
+      overflow-y: auto;
+    }
+    .site-nav {
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--grey-200);
+    }
+    .site-nav a {
+      display: block;
+      padding-block: 0.9rem;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      border-bottom: 1px solid var(--grey-200);
+    }
+    .site-nav a::after {
+      display: none;
+    }
+    .site-menu__actions {
+      justify-content: space-between;
+    }
+  }
+</style>

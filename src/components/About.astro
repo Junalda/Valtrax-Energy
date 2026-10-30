@@ -1,0 +1,149 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props {
+  lang: Lang;
+}
+const dict = t(Astro.props.lang);
+---
+
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <div class="about__main">
+      <p class="eyebrow">{dict.about.eyebrow}</p>
+      <h2 id="about-title">{dict.about.title}</h2>
+      <div class="about__body">
+        {dict.about.body.map((p, i) => <p class:list={{ lead: i === 0 }}>{p}</p>)}
+      </div>
+      <h3 class="about__subhead">{dict.about.audienceTitle}</h3>
+      <ul class="about__audiences">
+        {dict.about.audiences.map((a) => <li>{a}</li>)}
+      </ul>
+    </div>
+
+    <aside class="about__brief" aria-labelledby="about-brief-title">
+      <h3 id="about-brief-title" class="about__brief-title">{dict.about.factTitle}</h3>
+      <p class="about__fact">{dict.about.fact}</p>
+      <dl class="about__facts">
+        {
+          dict.about.facts.map((f) => (
+            <div>
+              <dt>{f.term}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+    align-items: start;
+  }
+  .about__main {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .about__main h2 {
+    font-size: var(--step-3);
+    max-width: 34rem;
+  }
+  .about__body {
+    display: grid;
+    gap: 1.1rem;
+    max-width: var(--measure);
+    color: #2a3a52;
+  }
+  .about__body .lead {
+    color: var(--navy-900);
+  }
+  .about__subhead {
+    margin-top: 1rem;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+  }
+  .about__audiences {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    border-top: 1px solid var(--rule);
+  }
+  .about__audiences li {
+    padding: 0.85rem 0 0.85rem 1.4rem;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .about__audiences li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.45rem;
+    width: 0.55rem;
+    height: 1px;
+    background: var(--gold-500);
+  }
+
+  .about__brief {
+    position: sticky;
+    top: calc(var(--header-h) + 2rem);
+    padding: clamp(1.75rem, 1rem + 2vw, 2.75rem);
+    background: var(--grey-50);
+    border-top: 3px solid var(--gold-500);
+  }
+  .about__brief-title {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+  }
+  .about__fact {
+    margin-top: 1rem;
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--navy-900);
+  }
+  .about__facts {
+    margin: 1.75rem 0 0;
+    display: grid;
+  }
+  .about__facts div {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1rem;
+    padding-block: 0.7rem;
+    border-top: 1px solid var(--grey-200);
+    font-size: 0.92rem;
+  }
+  .about__facts dt {
+    color: var(--grey-500);
+  }
+  .about__facts dd {
+    margin: 0;
+    font-weight: 500;
+  }
+  @media (max-width: 60rem) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+    .about__brief {
+      position: static;
+    }
+  }
+  @media (max-width: 30rem) {
+    .about__facts div {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+</style>

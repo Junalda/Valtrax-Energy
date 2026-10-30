@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vercel/
+.astro/
+.env
+.env.*
+!.env.example
+.DS_Store
+# Source documents supplied by the client must never be committed or published.
+source-materials/
