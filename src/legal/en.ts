@@ -2,10 +2,10 @@ import type { LegalDoc } from './types';
 import type { LegalPageKey } from '../i18n';
 
 /**
- * English legal texts (primary). nl.ts must follow the same structure.
- * Facts about the website's processing are based on the implementation as reviewed on
- * 2026-10-22 (enquiry form, Vercel hosting, Resend delivery code, no cookies/storage).
- * Keep these texts in sync when the implementation changes.
+ * English legal texts (primary). nl.ts must follow the same structure and meaning.
+ * Based on the implementation reviewed on 2026-10-22 and the client's answers (Oct 2026).
+ * Public text contains only confirmed facts; open checks live in `review` (internal).
+ * Keep these texts in sync when the implementation or providers change.
  */
 const UPDATED = '2026-10-22';
 
@@ -16,7 +16,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
       'Terms for the use of the Valtrax Energy website and for enquiries submitted through it, by Northbridge Trading B.V.',
     title: 'General Terms and Conditions',
     intro:
-      'These terms explain how you may use this website and what submitting an enquiry does and does not mean. They do not set out the terms of any energy or commodity transaction.',
+      'These terms cover the use of this website and the submission of enquiries. Commercial transactions are governed by separate written agreements.',
     updated: UPDATED,
     sections: [
       {
@@ -36,11 +36,11 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'This website presents general business information about Valtrax Energy and allows professional parties to submit enquiries. These terms apply to the use of the website and to enquiries submitted through it.',
+            text: 'These terms apply to the use of this website and to enquiries submitted through it. They are not a trading, brokerage or supply contract.',
           },
           {
             type: 'p',
-            text: 'These terms are not commercial terms for a transaction. Commercial terms apply to a transaction only if they are expressly included in, or incorporated by reference into, a separate written agreement for that transaction. Visiting this website does not mean that you accept any commercial conditions.',
+            text: 'Commercial transactions require a separate written agreement. Commercial terms apply to a transaction only if they are included in, or expressly incorporated into, that agreement. Visiting this website does not mean that you accept any commercial conditions.',
           },
         ],
       },
@@ -50,25 +50,25 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Valtrax Energy facilitates and coordinates international physical energy and commodity transactions between professional market participants.',
+            text: 'Valtrax Energy connects professional buyers and sellers of physical energy products. Our primary focus is commercial intermediation. Depending on the transaction and the agreed contractual arrangements, we may also participate directly in the purchase and resale of products, including back-to-back transactions.',
           },
           {
             type: 'p',
-            text: 'Depending on the agreement for a specific transaction, Valtrax Energy may act as an intermediary, on an agency or commission basis, or on a back-to-back basis. Our role, authority, scope of services and responsibilities are recorded for each engagement. Valtrax Energy acts as seller, supplier, title holder or authorised mandate holder only where a written agreement for that transaction expressly says so.',
+            text: 'Our role, authority, responsibilities and scope of services are agreed in writing for each transaction. Valtrax Energy acts as seller, supplier, title holder or authorised mandate holder only where the written agreement for that transaction expressly says so.',
           },
         ],
       },
       {
-        id: 'enquiries',
+        id: 'website-information',
         title: '4. Website information and enquiries',
         blocks: [
           {
             type: 'p',
-            text: 'Descriptions of products, markets and services on this website are general information. Unless expressly stated in an authorised written offer, they are not a binding offer and do not confirm that a product is available.',
+            text: 'This website is informational. Its content does not by itself constitute a binding offer, a guarantee of availability or a delivery obligation. Product references are general information and do not mean that a product is in stock or available.',
           },
           {
             type: 'p',
-            text: 'Submitting an enquiry through the contact form does not create a purchase, supply, agency, brokerage or any other agreement, and does not oblige either party to proceed with a transaction.',
+            text: 'Submitting an enquiry through the contact form does not create a purchase, supply, brokerage, agency or any other agreement, and does not oblige either party to proceed with a transaction.',
           },
         ],
       },
@@ -78,17 +78,54 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Product specifications, quantities, pricing, delivery, payment, transfer of title, commissions and all other transaction conditions are agreed separately for each transaction and recorded in writing.',
+            text: 'Product specifications, quantities, prices, delivery, payment, transfer of ownership, commissions and all other transaction conditions are agreed separately for each transaction and recorded in writing. These website terms do not replace transaction documents.',
+          },
+        ],
+      },
+      {
+        id: 'payment',
+        title: '6. Payment and commission',
+        blocks: [
+          {
+            type: 'list',
+            items: [
+              'Intermediation: any commission, any allocation of commission between parties, the payment timing and the currency are agreed in writing for each engagement.',
+              'Direct purchase and resale: the price and payment terms are set out in the relevant purchase or sale agreement.',
+            ],
           },
           {
             type: 'p',
-            text: 'These website terms do not replace transaction documents and do not apply to a transaction unless the agreement for that transaction expressly says so.',
+            text: 'These website terms do not create any payment or commission obligation.',
+          },
+        ],
+      },
+      {
+        id: 'termination',
+        title: '7. Termination and cancellation',
+        blocks: [
+          {
+            type: 'p',
+            text: 'Termination, cancellation and any entitlement to commission are governed by the relevant written agreement. These website terms do not impose cancellation charges.',
+          },
+        ],
+      },
+      {
+        id: 'commercial-information',
+        title: '8. Commercial information',
+        blocks: [
+          {
+            type: 'p',
+            text: 'We handle commercial information that is shared with us carefully. We share it with others only where this is necessary and appropriate for the matter concerned, taking into account applicable law and any non-disclosure or non-circumvention agreement (NDA or NCNDA) agreed with the parties involved.',
+          },
+          {
+            type: 'p',
+            text: 'Using this website or submitting an enquiry does not by itself create an NDA or NCNDA. Where confidentiality obligations are needed, they are agreed separately in writing.',
           },
         ],
       },
       {
         id: 'counterparties',
-        title: '6. Counterparty information and verification',
+        title: '9. Counterparty information and verification',
         blocks: [
           {
             type: 'p',
@@ -105,36 +142,32 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
       {
-        id: 'website-information',
-        title: '7. Accuracy and availability of the website',
+        id: 'accuracy',
+        title: '10. Accuracy, availability and liability',
         blocks: [
           {
             type: 'p',
-            text: 'We take reasonable care to keep the information on this website accurate and up to date. It may nevertheless contain errors or become outdated, and we may change it at any time. Information about availability, specifications or other transaction-specific matters always requires separate written confirmation.',
+            text: 'We take reasonable care to keep the information on this website accurate and up to date. It may nevertheless contain errors or become outdated, and we may change it at any time. We aim to keep the website available, but cannot guarantee uninterrupted or error-free access.',
           },
           {
             type: 'p',
-            text: 'We aim to keep the website available, but cannot guarantee uninterrupted or error-free access.',
-          },
-          {
-            type: 'p',
-            text: '[[Liability for the use of this website: decide whether a liability clause is wanted for website use and, if so, its wording.]]',
+            text: 'Decisions about a transaction should be based on the written agreement and confirmations for that transaction, not on general website information alone. Nothing in these terms limits or excludes liability where this is not permitted under mandatory applicable law.',
           },
         ],
       },
       {
         id: 'third-party-links',
-        title: '8. Links to other websites',
+        title: '11. Links to other websites',
         blocks: [
           {
             type: 'p',
-            text: 'This website may link to websites operated by third parties. Those websites are operated by their respective providers, and their own terms and privacy policies apply. We have no control over their content and are not responsible for it, but if you notice a link that is incorrect or inappropriate, please let us know.',
+            text: 'This website may link to websites operated by third parties. Those websites are operated by their respective providers, and their own terms and privacy policies apply. We have no control over their content, but if you notice a link that is incorrect or inappropriate, please let us know.',
           },
         ],
       },
       {
         id: 'intellectual-property',
-        title: '9. Intellectual property',
+        title: '12. Intellectual property',
         blocks: [
           {
             type: 'p',
@@ -148,7 +181,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
       },
       {
         id: 'privacy',
-        title: '10. Privacy and cookies',
+        title: '13. Privacy and cookies',
         blocks: [
           {
             type: 'p',
@@ -157,39 +190,28 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
       {
-        id: 'commercial-provisions',
-        title: '11. Commercial provisions',
+        id: 'law',
+        title: '14. Governing law and jurisdiction',
         blocks: [
           {
             type: 'p',
-            text: 'The following matters are agreed in the written agreement for each transaction:',
-          },
-          {
-            type: 'list',
-            items: [
-              '[[Payment and commission arrangements: confirm whether standard terms apply or whether this is always agreed per transaction.]]',
-              '[[Liability and any financial cap on liability.]]',
-              '[[Termination and cancellation.]]',
-              '[[Confidentiality obligations.]]',
-            ],
+            text: 'These terms and the use of this website are governed by Dutch law. Disputes are submitted to the competent court in Rotterdam, the Netherlands, unless mandatory law provides otherwise. Agreements for individual transactions may contain different provisions on applicable law and dispute resolution.',
           },
         ],
       },
       {
-        id: 'law-language',
-        title: '12. Applicable law, disputes and language',
+        id: 'language',
+        title: '15. Language',
         blocks: [
-          { type: 'p', text: '[[Governing law for these website terms and for enquiries.]]' },
-          { type: 'p', text: '[[Competent court for disputes.]]' },
           {
             type: 'p',
-            text: 'These terms are available in English and Dutch. [[Decide which language version prevails if the two versions differ.]]',
+            text: 'These terms are available in English and Dutch. English is our preferred language for international communication. Both versions have the same content.',
           },
         ],
       },
       {
         id: 'contact',
-        title: '13. Questions, complaints and changes',
+        title: '16. Questions, complaints and changes',
         blocks: [
           {
             type: 'p',
@@ -202,6 +224,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
+    review: [],
   },
 
   privacy: {
@@ -253,7 +276,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
-            text: 'Technical data. When you visit the website, your browser automatically sends technical information to our hosting provider, such as your IP address, the page requested, the time of the request and browser information. This is needed to deliver the website to you. [[Confirm which request data the hosting provider (Vercel) records in its logs for this website and for how long.]]',
+            text: 'Technical data. When you visit the website, your browser automatically sends technical information to our hosting provider, such as your IP address, the page requested, the time of the request and browser information. This is needed to deliver the website to you. Our hosting provider records such request data in its logs and keeps it for a limited period.',
           },
           {
             type: 'p',
@@ -282,13 +305,13 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
                 'Assessing and answering your enquiry',
                 'Enquiry form data and correspondence',
                 'Our legitimate interest in answering and following up business enquiries from professional parties (Art. 6(1)(f) GDPR). If you contact us on your own behalf to take steps towards a contract with us, the basis is taking those steps at your request (Art. 6(1)(b) GDPR).',
-                'For as long as needed to handle the enquiry. [[Retention period if no business relationship follows.]]',
+                'If no business relationship follows: deleted six months after the last substantive contact, unless a longer period is justified, for example because of a dispute, or required by law.',
               ],
               [
                 'Maintaining a business relationship with the organisation you represent',
                 'Contact details of contact persons and correspondence',
                 'Our legitimate interest in maintaining business contacts and coordinating discussions with professional parties (Art. 6(1)(f) GDPR), or the performance of a contract with you (Art. 6(1)(b) GDPR) where you are the contracting party yourself.',
-                'For the duration of the business relationship. [[Retention period after the relationship ends.]]',
+                'For as long as necessary for the purpose of the business relationship.',
               ],
               [
                 'Protecting the enquiry form against spam and abuse',
@@ -300,13 +323,13 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
                 'Delivering and securing the website',
                 'Technical request data, such as IP address and browser information',
                 'Our legitimate interest in delivering the website reliably and securely (Art. 6(1)(f) GDPR).',
-                '[[Retention of hosting logs (see section 2).]]',
+                'Kept in our hosting provider’s logs for a limited period.',
               ],
               [
-                'Complying with legal obligations',
+                'Complying with legal obligations, such as keeping fiscal records',
                 'Data that we are legally required to keep, for example when an enquiry leads to a transaction',
                 'Compliance with a legal obligation (Art. 6(1)(c) GDPR).',
-                'For as long as the applicable legal obligation requires.',
+                'For the applicable statutory retention period.',
               ],
             ],
           },
@@ -322,23 +345,23 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'We use service providers that process data on our behalf:',
+            text: 'We use the following service providers, which process data on our behalf:',
           },
           {
             type: 'list',
             items: [
               'Vercel Inc.: hosting of the website and of the server function that processes the enquiry form.',
-              'Resend: delivery of form submissions by email to our mailbox. [[Confirm that Resend is used once the form is configured.]]',
-              '[[Name the email provider that hosts the mailbox receiving the enquiries.]]',
+              'Resend: sending form submissions by email to our mailbox.',
+              'Microsoft (Microsoft 365): our email and mailbox service, where enquiries and correspondence are received and stored.',
             ],
           },
           {
             type: 'p',
-            text: '[[Confirm that data processing agreements are in place with these providers, then state this here.]]',
+            text: 'Enquiries submitted through the contact form are not automatically shared with potential buyers or suppliers. We do not share identifiable personal data with counterparties without your prior permission, unless another clear legal basis allows it.',
           },
           {
             type: 'p',
-            text: '[[Confirm whether and under which conditions enquiry details are shared with prospective transaction counterparties, and for which purpose.]]',
+            text: 'Within our organisation, enquiries are handled by the persons responsible for them. Other persons and service providers have access only where this is necessary for their work, with appropriate access restrictions.',
           },
           {
             type: 'p',
@@ -352,11 +375,11 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'Our hosting provider Vercel Inc. is based in the United States, and the server function that currently processes enquiry-form submissions runs in a data centre in the United States. Website pages are delivered through a worldwide network. Your personal data may therefore be processed outside the European Economic Area.',
+            text: 'Our hosting provider Vercel Inc. and our email-sending provider Resend are based in the United States. The server function that processes enquiry-form submissions runs in a data centre in the United States, and website pages are delivered through Vercel’s worldwide network. Microsoft may also process data outside the European Economic Area, depending on its services. Your personal data may therefore be processed outside the European Economic Area.',
           },
           {
             type: 'p',
-            text: '[[Describe the verified transfer safeguard for each provider (for example certification under the EU-U.S. Data Privacy Framework or standard contractual clauses), including Resend and the mailbox provider.]]',
+            text: 'Where personal data is transferred to a country outside the European Economic Area, we rely on the transfer mechanisms offered by the provider concerned, such as certification under the EU-U.S. Data Privacy Framework or the European Commission’s standard contractual clauses.',
           },
         ],
       },
@@ -366,7 +389,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'We keep personal data no longer than necessary for the purposes described in section 3. The retention period for each activity is listed in the table above. Data that we are legally required to keep is retained for the period required by law.',
+            text: 'We keep personal data no longer than necessary for the purposes described in section 3. The retention period for each activity is listed in the table above. Data that we are legally required to keep, such as fiscal records, is retained for the statutory period.',
           },
         ],
       },
@@ -376,7 +399,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         blocks: [
           {
             type: 'p',
-            text: 'We take appropriate technical and organisational measures to protect personal data. For example, the website is only available over an encrypted connection (HTTPS), submissions are validated on the server, the form is protected against automated abuse, our logs do not contain the content of enquiries, and access credentials for the email service are stored on the server only. [[Describe the organisational measures, for example who has access to the enquiry mailbox.]]',
+            text: 'We take appropriate technical and organisational measures to protect personal data. For example, the website is only available over an encrypted connection (HTTPS), submissions are validated on the server, the form is protected against automated abuse, our logs do not contain the content of enquiries, access credentials for the email service are stored on the server only, and access to enquiry mailboxes is restricted to the persons who need it.',
           },
           {
             type: 'p',
@@ -427,7 +450,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
           },
           {
             type: 'p',
-            text: 'We do not use the data collected through this website for profiling. [[If counterparty checks use automated screening tools, for example sanctions-list screening, describe them here.]]',
+            text: 'Counterparty checks are currently carried out manually. We do not use automated decision-making or profiling based on the data collected through this website.',
           },
         ],
       },
@@ -452,6 +475,7 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
+    review: [],
   },
 
   cookies: {
@@ -488,10 +512,6 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
             type: 'p',
             text: 'When you load a page, your browser does send standard technical information, such as your IP address, to our hosting provider. This is not a cookie; how we handle it is explained in our {link:privacy}.',
           },
-          {
-            type: 'p',
-            text: '[[Before publication, verify on the live domain valtraxenergy.com that no cookies or browser storage are set, including by the hosting provider.]]',
-          },
         ],
       },
       {
@@ -525,5 +545,6 @@ export const legalEn: Record<LegalPageKey, LegalDoc> = {
         ],
       },
     ],
+    review: [],
   },
 };

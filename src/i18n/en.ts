@@ -2,17 +2,60 @@
  * English copy (primary language). The Dutch file (nl.ts) must implement the same shape;
  * TypeScript enforces this through the `Dictionary` type.
  *
- * Copy rules: describe Valtrax as an intermediary. No ownership of refineries, terminals,
- * storage, vessels or inventory; no guaranteed supply, exclusive mandates, volumes,
- * track record, certifications, clients or partnerships.
+ * Copy rules (client answers, 2026-10): primary focus is commercial intermediation; Valtrax
+ * may also take part in direct purchase and resale, including back-to-back, where agreed per
+ * transaction. Never claim owned inventory, terminals or refineries, guaranteed availability
+ * or delivery, producer/mandate/licensed status, or automated counterparty screening.
  */
+
+/** Confirmed product list; order and keys follow productKeys in src/config/site.ts. */
+const products = [
+  {
+    key: 'en590',
+    name: 'EN590 10 PPM / ULSD',
+    text: 'Diesel to the European EN 590 standard with a maximum sulphur content of 10 ppm (ultra-low sulphur diesel), for road transport, industrial and distribution use.',
+  },
+  {
+    key: 'jet-a1',
+    name: 'Jet A-1',
+    text: 'Kerosene-type aviation turbine fuel for aviation fuel buyers and distributors.',
+  },
+  {
+    key: 'lpfo',
+    name: 'LPFO (Low Pour Fuel Oil)',
+    text: 'Residual fuel oil with a low pour point, for industrial and energy-sector buyers.',
+  },
+  {
+    key: 'd6',
+    name: 'D6 Fuel Oil',
+    text: 'Heavy residual fuel oil, handled against the specification agreed for each transaction.',
+  },
+  {
+    key: 'lpg',
+    name: 'LPG',
+    text: 'Liquefied petroleum gas, such as propane, butane and mixtures, depending on specification, volume and delivery point.',
+  },
+  {
+    key: 'lng',
+    name: 'LNG / natural gas',
+    text: 'Liquefied natural gas and natural gas, depending on delivery point, volume profile and contract structure.',
+  },
+  {
+    key: 'other',
+    name: 'Other refined petroleum products and middle distillates',
+    text: 'Further refined petroleum products and middle distillates, such as gasoil grades, considered case by case for a defined requirement.',
+  },
+];
+const productNames = products.map((p) => p.name);
+const listProducts = `${productNames.slice(0, -1).join(', ')} and ${productNames.at(-1)!.toLowerCase()}`;
+
 export const en = {
   lang: 'en',
   locale: 'en_GB',
   meta: {
     title: 'Valtrax Energy | Physical Energy Sourcing & Commercial Intermediation',
     description:
-      'Netherlands-based independent energy intermediary connecting qualified buyers with relevant physical supply of EN590, middle distillates, Jet A-1 and LNG, with a focus on the ARA market.',
+      'Valtrax Energy connects professional buyers and sellers of physical energy products such as EN590 10 PPM, Jet A-1, fuel oil, LPG and LNG. Netherlands-based, with a focus on the ARA market.',
     ogAlt: 'Valtrax Energy: physical energy sourcing and commercial intermediation',
   },
   skipLink: 'Skip to main content',
@@ -38,7 +81,7 @@ export const en = {
     currentShort: 'EN',
   },
   hero: {
-    eyebrow: 'Independent energy intermediary',
+    eyebrow: 'Commercial intermediation in physical energy',
     title: 'Physical Energy Sourcing & Commercial Intermediation',
     subtitle: 'Connecting Qualified Buyers with Relevant Physical Supply.',
     lead:
@@ -46,7 +89,7 @@ export const en = {
     focus:
       'We focus on refined petroleum products and gas, helping bring suitable counterparties together and facilitating structured commercial discussions.',
     role:
-      'We operate as an independent intermediary. We do not produce, store or hold physical product ourselves.',
+      'Our primary focus is commercial intermediation. Where agreed for a specific transaction, we may also buy and resell products ourselves, including on a back-to-back basis.',
     primary: 'Discuss your requirements',
     secondary: 'Explore our expertise',
     strap: ['Netherlands-based', 'ARA market focus', 'International reach'],
@@ -55,21 +98,21 @@ export const en = {
   },
   about: {
     eyebrow: 'About',
-    title: 'An intermediary between qualified demand and physical supply',
+    title: 'Connecting professional buyers and sellers of physical energy',
     body: [
-      'Valtrax Energy works on the commercial side of physical energy trade. We take a defined requirement from a buyer or procurement team, identify supply that is relevant to it and help both sides arrive at a workable commercial basis.',
+      'Valtrax Energy connects professional buyers and sellers of physical energy products. Our primary focus is commercial intermediation: we take a defined requirement from a buyer or procurement team, identify supply that is relevant to it and help both sides arrive at a workable commercial basis. Depending on the transaction and the agreed contractual arrangements, we may also participate directly in the purchase and resale of products, including back-to-back transactions.',
       'Our counterparties include procurement teams, physical commodity traders, fuel distributors and importers, industrial and maritime fuel consumers, and suppliers, allocation holders and refinery-side counterparties.',
       'The value we add lies in preparation and discipline: clarifying specifications and terms early, qualifying counterparties before they are introduced, and keeping the process coordinated so that time is spent on opportunities that can realistically proceed.',
     ],
     factTitle: 'In brief',
     fact:
-      'Valtrax Energy is a Netherlands-based independent energy intermediary that connects qualified buyers and procurement organisations with relevant physical supply. Operating under Northbridge Trading B.V., the company focuses on physical energy sourcing, commercial alignment and transaction coordination, with particular attention to the ARA market and international trading hubs.',
+      'Valtrax Energy is a Netherlands-based company that connects professional buyers and sellers of physical energy products. Operating under Northbridge Trading B.V., its primary focus is commercial intermediation. Depending on the transaction and the agreed contractual arrangements, it may also participate directly in the purchase and resale of products, including back-to-back transactions. Its market focus is the ARA region and international trading hubs.',
     facts: [
       { term: 'Trading name', value: 'Valtrax Energy' },
       { term: 'Legal entity', value: 'Northbridge Trading B.V.' },
       { term: 'Registered in', value: 'Zwijndrecht, the Netherlands' },
       { term: 'Chamber of Commerce (KvK)', value: '42053415' },
-      { term: 'Role', value: 'Independent intermediary, not a producer, refiner or storage operator' },
+      { term: 'Role', value: 'Primarily commercial intermediation; direct purchase and resale, including back-to-back, where agreed per transaction' },
     ],
     audienceTitle: 'Who we work with',
     audiences: [
@@ -137,34 +180,8 @@ export const en = {
     eyebrow: 'Products',
     title: 'Product focus',
     intro:
-      'We work on refined petroleum products and gas for which a qualified buyer or supplier has a defined requirement.',
-    items: [
-      {
-        key: 'en590',
-        name: 'EN590 / ULSD',
-        text: 'Diesel to the European EN 590 standard and ultra-low sulphur diesel for road transport, industrial and distribution use.',
-      },
-      {
-        key: 'middle-distillates',
-        name: 'Middle distillates',
-        text: 'Gasoil and related distillate grades, sourced against the specification required by the buyer.',
-      },
-      {
-        key: 'jet-a1',
-        name: 'Jet A-1',
-        text: 'Aviation turbine fuel for qualified aviation fuel buyers and distributors.',
-      },
-      {
-        key: 'lng',
-        name: 'LNG / natural gas',
-        text: 'Liquefied natural gas and natural gas, depending on delivery point, volume profile and contract structure.',
-      },
-      {
-        key: 'other',
-        name: 'Other refined products and energy commodities',
-        text: 'Further refined petroleum products and energy commodities, considered case by case for a qualified requirement.',
-      },
-    ],
+      'We work on physical energy products for which a professional buyer or seller has a defined requirement.',
+    items: products,
     dependsTitle: 'What sourcing depends on',
     dependsIntro: 'Whether and how a product can be sourced is assessed for each requirement, based on:',
     depends: [
@@ -176,7 +193,7 @@ export const en = {
       'Counterparty qualification',
     ],
     note:
-      'We do not publish inventory, prices or availability. Indicative terms are discussed only once a requirement and the counterparties involved have been qualified.',
+      'Listing a product does not mean that it is in stock or available. We do not publish prices or availability: specifications, quantities, availability, delivery and commercial terms are confirmed separately for each transaction.',
   },
   markets: {
     eyebrow: 'Markets & logistics',
@@ -265,19 +282,19 @@ export const en = {
     items: [
       {
         q: 'What does Valtrax Energy do?',
-        a: 'Valtrax Energy is an independent energy intermediary based in the Netherlands. It connects qualified buyers and procurement organisations with relevant physical supply, and supports counterparty qualification, commercial alignment and transaction coordination.',
+        a: 'Valtrax Energy is a Netherlands-based company that connects professional buyers and sellers of physical energy products. Its primary focus is commercial intermediation, including counterparty qualification, commercial alignment and transaction coordination. Depending on the transaction and the agreed contractual arrangements, it may also participate directly in the purchase and resale of products, including back-to-back transactions.',
       },
       {
         q: 'Which products does Valtrax Energy focus on?',
-        a: 'The focus is on EN590 / ULSD, middle distillates, Jet A-1 and LNG / natural gas. Other refined petroleum products and energy commodities are considered when there is a qualified requirement.',
+        a: `The focus is on ${listProducts}. Listing a product does not mean that it is available; specifications, quantities and availability are confirmed per transaction.`,
       },
       {
         q: 'Which markets does Valtrax Energy cover?',
         a: 'The main focus is the ARA region (Amsterdam–Rotterdam–Antwerp) and Northwest Europe. Valtrax Energy also follows international hubs such as Houston, Antwerp, Jurong and Fujairah and considers international opportunities.',
       },
       {
-        q: 'Does Valtrax Energy own refineries or storage facilities?',
-        a: 'No. Valtrax Energy is an intermediary. It does not own refineries, terminals, storage facilities, vessels or product inventory, and does not act as a producer.',
+        q: 'Does Valtrax Energy own refineries, terminals or storage facilities?',
+        a: 'No. Valtrax Energy does not own refineries, terminals or storage facilities and is not a producer. Where it participates directly in a purchase and resale, the product, delivery and transfer of ownership are arranged in the contracts for that transaction.',
       },
       {
         q: 'What information is needed for an enquiry?',
@@ -285,7 +302,7 @@ export const en = {
       },
       {
         q: 'How are potential counterparties assessed?',
-        a: 'Each opportunity is assessed individually. Valtrax Energy reviews the company’s identity and registration, its role in the transaction and the consistency of the proposed procedure before introducing parties to each other.',
+        a: 'Each opportunity is assessed individually. Valtrax Energy reviews the company’s identity and registration, its role in the transaction and the consistency of the proposed procedure before introducing parties to each other. These checks are carried out manually.',
       },
     ],
   },
@@ -304,6 +321,8 @@ export const en = {
     ],
     notRequested:
       'Please do not send banking details, passports, proof of funds or other KYC documents through this form. If documentation is needed at a later stage, we will agree a suitable channel with you.',
+    directTitle: 'Contact by email',
+    direct: { general: 'General enquiries', trading: 'Trading', finance: 'Finance' },
   },
   form: {
     legend: 'Enquiry form',
@@ -347,7 +366,7 @@ export const en = {
       invalid: 'Please check this entry.',
     },
     status: {
-      success: 'Thank you. Your enquiry has been received and will be reviewed. We respond to qualified enquiries by email.',
+      success: 'Thank you. Your enquiry has been sent. We respond to qualified enquiries by email.',
       unavailable:
         'The enquiry form is temporarily unavailable, and your message has not been sent. Please try again later.',
       error: 'Your enquiry could not be sent because of a technical problem. Please try again in a few minutes.',
@@ -370,7 +389,7 @@ export const en = {
     navTitle: 'Sections',
     rights: 'All rights reserved.',
     disclaimer:
-      'Information on this website is general in nature and does not constitute an offer, a commitment to supply or financial advice.',
+      'Information on this website is general in nature. It does not constitute a binding offer, a guarantee of availability or a delivery obligation, and is not financial advice.',
   },
   legal: {
     lastUpdated: 'Last updated',

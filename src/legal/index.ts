@@ -9,5 +9,5 @@ export function legalDoc(page: LegalPageKey, lang: Lang): LegalDoc {
   return docs[lang][page];
 }
 
-export { countDrafts } from './types';
+export { countDrafts, publicationBlockers } from './types';
 export type { LegalDoc, Block, Section } from './types';

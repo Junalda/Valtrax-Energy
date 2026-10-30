@@ -38,117 +38,81 @@ Decisions (owner, confirmed):
       tablet width (48rem) upwards and in the full logo (structured data); hidden on phones.
 - [x] No vector source; the transparent PNG master remains the source file.
 
-## 3. Product list discrepancy
+## 3. Client answers processed (questionnaire, Oct 2026)
 
-The brief states that the **company profile** and the **CIS** list different products. As
-instructed, the website and the enquiry dropdown use only the company profile list:
+Implemented on 2026-10-22, based on `docs/Vragen voor Thom - afronding website Valtrax Energy.pdf`
+and the completed answers:
 
-1. EN590 / ULSD
-2. Middle distillates
-3. Jet A-1
-4. LNG / natural gas
-5. Other refined petroleum products and energy commodities (subject to a qualified requirement)
+- **Positioning:** primary focus on commercial intermediation; may also take part in direct
+  purchase and resale, including back-to-back, where agreed per transaction. The statement
+  "we do not produce, store or hold physical product" is removed everywhere. No claims of owned
+  inventory, terminals or refineries, guaranteed availability or delivery, or
+  producer/mandate/licensed status.
+- **Products** (`productKeys` in `src/config/site.ts`, names in `src/i18n/*`): EN590 10 PPM /
+  ULSD, Jet A-1, LPFO (Low Pour Fuel Oil), D6 Fuel Oil, LPG, LNG / natural gas, other refined
+  petroleum products and middle distillates. The same list is used on the homepage, in the form,
+  the FAQ and the structured data.
+- **Dutch:** formal "u/uw" throughout, including the notice under the form.
+- **E-mail roles** (`site.emails`): info@ (general and the form recipient), trading@, finance@
+  shown on the site. Thom@ is kept in config for direct correspondence but not published.
+- **Form:** always sends to info@valtraxenergy.com only. The visitor's address is used as Reply-To.
+  The sender must be on the own domain.
+- **Counterparty checks:** described as manual; no automated screening claimed.
 
-The CIS list was not available to compare, so the specific differences are **not recorded
-here**. Action:
+## 4. Domain and e-mail (external, needs access)
 
-- [ ] Compare the two lists and decide whether any CIS product should be published.
-      If so, add it to `productKeys` (`src/config/site.ts`) and both dictionaries.
+See **docs/DNS-AND-EMAIL.md** for the exact plan. Summary:
+- [ ] TransIP: snapshot the current DNS of valtraxenergy.com and valtraxenergy.nl (could not be
+      read from the build environment).
+- [ ] Vercel: add valtraxenergy.com (primary), and set www.valtraxenergy.com, valtraxenergy.nl and
+      www.valtraxenergy.nl to redirect (308) to it; add the A/CNAME values Vercel shows.
+- [x] Resend: `valtraxenergy.com` verified (region North Virginia, us-east-1); records on
+      `resend._domainkey`, `send` and `rsend` only; Microsoft 365 records untouched.
+- [x] Vercel env: `RESEND_API_KEY` (Production), `CONTACT_FROM_EMAIL`
+      (`website@valtraxenergy.com`); production redeployed.
+- [ ] Send one labelled test enquiry and confirm arrival in the info@ mailbox (incl. Junk).
+- [ ] Vercel production branch → `main` after merging the pull request.
 
-## 4. Domain
+## 5. Company details
 
-- [ ] Confirm `https://valtraxenergy.com` as the production domain. It is used for canonical
-      URLs, hreflang, the sitemap and Open Graph. Set `SITE_URL` if it changes.
-- [ ] Decide on the `www` / apex redirect in Vercel → Domains.
+Published from `src/config/site.ts`: Northbridge Trading B.V., trading as Valtrax Energy,
+Stationsweg 41, 3331 LR Zwijndrecht, KvK 42053415, VAT NL869493334B01. These match the details
+supplied in the brief. No official registration extract is in the project to check them
+against: **compare once with the KvK extract** before launch.
 
-## 5. Public contact details
+## 6. Legal pages: open review items (internal)
 
-Published since 2026-10-22 (supplied for the legal pages): Stationsweg 41, 3331 LR Zwijndrecht ·
-Thom@valtraxenergy.com · VAT NL869493334B01. They appear in the footer, the legal pages and
-the structured data, all from `src/config/site.ts`. No phone number or social profiles are shown.
+The texts no longer contain visible placeholders. Open items are kept in the `review` arrays
+in `src/legal/en.ts` (shared by nl.ts). While any remain, a production build with
+`SITE_INDEXING=true` fails. Current items:
 
-## 6. Enquiry form recipient and delivery
+Legal review: **approved without changes by the client's lawyer (2026-10-28)**, including the
+governing-law/Rotterdam clause, the liability wording, the legitimate-interest wording and the
+language clause (no precedence clause). Removed from the review lists.
 
-- [ ] Approve the recipient mailbox for enquiries (`CONTACT_TO_EMAIL`). The CIS email is
-      **not** assumed to be the recipient.
-- [ ] Create a Resend account, verify the sending domain (SPF/DKIM DNS records) and set
-      `RESEND_API_KEY` and `CONTACT_FROM_EMAIL` in Vercel (Production, plus Preview if you
-      want to test there).
-- [ ] Send a test enquiry on the production deployment and confirm it arrives.
-      Until these are configured, the form honestly reports that it is unavailable.
-- [ ] Optional: add a Vercel Firewall rate-limit rule for `POST /api/enquiry`.
-
-If you prefer a different email provider, only `deliver()` in `src/pages/api/enquiry.ts`
-needs to change; update the privacy notice to name the new processor.
-
-## 7. Legal pages: before publication
-
-Terms (`/terms/`), Privacy Policy (`/privacy/`) and Cookie Policy (`/cookies/`), with Dutch
-versions under `/nl/`, are **drafts**. Every open item is marked `[[...]]` in
-`src/legal/en.ts` and `src/legal/nl.ts`, shows on the page as "To be confirmed / Nog te
-bevestigen", and blocks the production build (`SITE_INDEXING=true`) until resolved.
-Replace each marker with the confirmed text (EN and NL), or remove the sentence.
-
-Facts confirmed during the review on 2026-10-22:
-- Hosting: Vercel. The enquiry function runs in region `iad1` (Washington, D.C., USA).
-- No cookies, no local/session storage, no analytics, pixels, tag managers, embeds, maps,
-  captcha or third-party fonts. Checked in the code and at runtime on the built site and the
-  live vercel.app deployment (no `Set-Cookie`, no third-party requests).
-- No environment variables are set in Vercel: the form currently does not send anything and
-  tells visitors it is unavailable. Resend is the provider implemented in code, not yet active.
-- Own logs: outcome, enquiry type, product and language only. IP addresses are held in
-  memory for rate limiting and dropped after 10 minutes.
-
-Information and decisions still needed from Thom:
-
-Terms and Conditions
-- [ ] Liability clause for website use (wanted? wording?).
-- [ ] Payment and commission arrangements: standard terms, or always per transaction?
-- [ ] Liability and any financial cap; termination and cancellation; confidentiality.
-- [ ] Governing law and competent court.
-- [ ] Which language version prevails.
-- [ ] Are approved commercial terms available? If so, they replace these draft items.
-
-Privacy Policy
-- [ ] Hosting logs: what Vercel records for this project and for how long (Vercel dashboard / plan).
-- [ ] Email delivery: confirm Resend (or another provider) and set it up; name the mailbox
-      provider for valtraxenergy.com (for example Microsoft 365 or Google Workspace).
-- [ ] Data processing agreements with Vercel, Resend and the mailbox provider.
-- [ ] Transfer safeguards per provider (Data Privacy Framework certification or SCCs).
-- [ ] Consider switching the Vercel function region to the EU (for example `fra1`) to reduce
-      transfers; the policy text must then be updated.
-- [ ] Whether and under which conditions enquiry details are shared with prospective
-      counterparties.
-- [ ] Retention periods: enquiries without follow-up, and business contacts after the
-      relationship ends.
-- [ ] Organisational measures (who has access to the enquiry mailbox).
-- [ ] Automated screening tools used in counterparty checks, if any.
+Privacy Policy (confirmed by the client, 2026-10-28)
+- [x] Retention: Thom checks the info@ mailbox monthly and deletes enquiries without follow-up
+      that are older than six months (manual routine; no automated deletion).
+- [x] Vercel: DPA accepted.
+- [x] Resend: DPA accepted; region North Virginia (us-east-1). The account is held by webmaister;
+      the client decided not to name the agency in the privacy text.
+- [x] Microsoft 365: tenant data location EU.
 
 Cookie Policy
-- [ ] After connecting valtraxenergy.com, check in a private browser window that no cookies
-      or storage are set (Vercel deployment protection only applies to logged-in team
-      members on protected vercel.app URLs, not to visitors of the custom domain).
+- [x] Verified on the live domain valtraxenergy.com (2026-10-28): no Set-Cookie header, only
+      same-origin resources, and no cookie or browser-storage code in `src/`. Recheck whenever a
+      script, embed or provider is added.
 
-Content consistency
-- [ ] Products: the brief for the legal pages lists EN590 diesel, Jet A-1, D6 and LPG; the
-      homepage (company profile) lists EN590/ULSD, middle distillates, Jet A-1, LNG/natural gas
-      and other products. The legal pages avoid a product list until this is decided.
-- [ ] Role: the terms describe possible roles as intermediary, agency/commission or
-      back-to-back. The homepage says "We operate as an independent intermediary. We do not
-      produce, store or hold physical product ourselves." Check that this still fits
-      back-to-back transactions (where title may pass through Valtrax).
-- [ ] The form notice uses the informal "je" in Dutch (text as supplied); the rest of the
-      site uses "u".
+## 7. Facts verified in this review (2026-10-22)
 
-## 8. Content approvals
+- **Hosting:** Vercel. The form function runs in `iad1` (Washington, D.C., USA). Pages are
+  delivered via Vercel's global network. The client accepts the US server; no migration.
+- **Integrations:** no analytics, pixels, tag managers, embeds, maps, captcha or third-party fonts.
+- **Form delivery:** Resend, active in production since 2026-10-28 (`src/pages/api/enquiry.ts`).
+- **Own logs:** outcome, enquiry type, product and language only. IP addresses are held in
+  memory for 10 minutes for rate limiting.
 
-- [ ] All English and Dutch copy (`src/i18n/en.ts`, `src/i18n/nl.ts`), especially the
-      expertise activities, the process stages and the FAQ answers.
-- [ ] Delivery-basis explanations (FOB, CIF, terminal-based) are general descriptions,
-      not legal Incoterms definitions.
-- [ ] Footer disclaimer: “Information on this website is general in nature and does not
-      constitute an offer, a commitment to supply or financial advice.”
+## 8. Launch switch
 
-## 9. Launch switch
-
-- [ ] Set `SITE_INDEXING=true` for the **Production** environment and redeploy (see README).
+- [ ] Only after sections 4 to 6 are done: set `SITE_INDEXING=true` for the Vercel Production
+      environment, redeploy, and then submit the sitemap.
