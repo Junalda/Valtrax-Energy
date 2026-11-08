@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
-import { t, pathFor, type Lang, type PageKey } from '../i18n';
+import { t, pathFor, contentPages, type Lang, type PageKey } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -9,13 +9,17 @@ interface Props {
 }
 const { lang, page } = Astro.props;
 const dict = t(lang);
-// On the homepage anchors are local; elsewhere they point back to the homepage sections.
-const base = page === 'home' ? '' : pathFor('home', lang);
-const links = (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
-  id,
-  href: `${base}#${id}`,
-  label: dict.nav[id],
-}));
+// The one-page overview (/start) navigates by local anchors; every other page links to the content pages.
+const onePage = page === 'start';
+const links = onePage
+  ? (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
+      id,
+      href: `#${id}`,
+      label: dict.nav[id],
+      current: false,
+    }))
+  : contentPages.map((id) => ({ id: undefined, href: pathFor(id, lang), label: dict.nav[id], current: id === page }));
+const ctaHref = onePage ? '#contact' : pathFor('contact', lang);
 ---
 
 <header class="site-header" data-header>
@@ -43,7 +47,7 @@ const links = (['about', 'expertise', 'products', 'markets', 'process', 'contact
           {
             links.map((l) => (
               <li>
-                <a href={l.href} data-nav-link={l.id}>
+                <a href={l.href} data-nav-link={l.id} aria-current={l.current ? 'page' : undefined}>
                   {l.label}
                 </a>
               </li>
@@ -53,7 +57,7 @@ const links = (['about', 'expertise', 'products', 'markets', 'process', 'contact
       </nav>
       <div class="site-menu__actions">
         <LanguageSwitch lang={lang} page={page} />
-        <a class="btn btn--primary site-header__cta" href={`${base}#contact`}>{dict.nav.cta}</a>
+        <a class="btn btn--primary site-header__cta" href={ctaHref}>{dict.nav.cta}</a>
       </div>
     </div>
   </div>
@@ -110,7 +114,8 @@ const links = (['about', 'expertise', 'products', 'markets', 'process', 'contact
     transition: transform 0.25s ease;
   }
   .site-nav a:hover::after,
-  .site-nav a[aria-current='true']::after {
+  .site-nav a[aria-current='true']::after,
+  .site-nav a[aria-current='page']::after {
     transform: scaleX(1);
   }
 

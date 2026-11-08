@@ -1,0 +1,61 @@
+---
+// Content pages of the multi-page site. Each reuses the sections of the one-page overview.
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import PageHeader from './PageHeader.astro';
+import About from './About.astro';
+import Expertise from './Expertise.astro';
+import Products from './Products.astro';
+import Markets from './Markets.astro';
+import Process from './Process.astro';
+import Faq from './Faq.astro';
+import Contact from './Contact.astro';
+import CtaBand from './CtaBand.astro';
+import Footer from './Footer.astro';
+import { t, type Lang, type ContentPageKey } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: ContentPageKey;
+}
+const { lang, page } = Astro.props;
+const meta = t(lang).pages[page];
+---
+
+<Base lang={lang} page={page} title={meta.metaTitle} description={meta.metaDescription}>
+  <Header lang={lang} page={page} />
+  <main id="main" tabindex="-1">
+    <PageHeader title={meta.title} />
+    {
+      page === 'about' && (
+        <>
+          <About lang={lang} />
+          <Expertise lang={lang} />
+        </>
+      )
+    }
+    {page === 'products' && <Products lang={lang} />}
+    {
+      page === 'process' && (
+        <>
+          <Process lang={lang} />
+          <Markets lang={lang} />
+        </>
+      )
+    }
+    {
+      page === 'contact' && (
+        <>
+          <Contact lang={lang} />
+          <Faq lang={lang} />
+        </>
+      )
+    }
+    {page !== 'contact' && <CtaBand lang={lang} />}
+  </main>
+  <Footer lang={lang} page={page} />
+</Base>
+
+<script>
+  import '../scripts/site.ts';
+</script>

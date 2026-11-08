@@ -3,8 +3,11 @@ import Arrow from './Arrow.astro';
 import { t, type Lang } from '../i18n';
 interface Props {
   lang: Lang;
+  /** Page that holds the enquiry form; empty when the form is on the same page. */
+  contactPath?: string;
 }
-const dict = t(Astro.props.lang);
+const { lang, contactPath = '' } = Astro.props;
+const dict = t(lang);
 const blocks = [
   { key: 'buyer', id: 'buyers', ...dict.audiences.buyers },
   { key: 'supplier', id: 'suppliers', ...dict.audiences.suppliers },
@@ -28,7 +31,7 @@ const blocks = [
                 <li>{p}</li>
               ))}
             </ul>
-            <a class="btn btn--outline" href={`?type=${b.key}#contact`} data-enquiry-type={b.key}>
+            <a class="btn btn--outline" href={`${contactPath}?type=${b.key}#contact`} data-enquiry-type={b.key}>
               {b.cta}
               <Arrow />
             </a>

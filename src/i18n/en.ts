@@ -413,6 +413,39 @@ export const en = {
       website: 'Website',
     },
   },
+  /** Multi-page site: page headings and metadata, composed from the approved copy above. */
+  pages: {
+    readMore: 'Read more',
+    home: 'Home',
+    start: {
+      nav: 'Everything on one page',
+      metaTitle: 'Physical Energy Sourcing & Commercial Intermediation | Valtrax Energy',
+    },
+    about: {
+      title: 'About Valtrax Energy',
+      metaTitle: 'About | Valtrax Energy',
+      metaDescription:
+        'Valtrax Energy connects professional buyers and sellers of physical energy products. Our primary focus is commercial intermediation, with a market focus on the ARA region and international trading hubs.',
+    },
+    products: {
+      title: 'Products',
+      metaTitle: 'Products | Valtrax Energy',
+      metaDescription:
+        'We work on physical energy products for which a professional buyer or seller has a defined requirement: EN590 10 PPM / ULSD, Jet A-1, LPFO, D6 Fuel Oil, LPG and LNG.',
+    },
+    process: {
+      title: 'Markets and process',
+      metaTitle: 'Markets and process | Valtrax Energy',
+      metaDescription:
+        'Our main focus is the Amsterdam–Rotterdam–Antwerp (ARA) region and Northwest Europe. Every opportunity is assessed on its own merits.',
+    },
+    contact: {
+      title: 'Contact',
+      metaTitle: 'Contact | Valtrax Energy',
+      metaDescription:
+        'Tell us about your requirement or supply position. A precise brief helps us assess quickly whether and how we can assist.',
+    },
+  },
   notFound: {
     title: 'Page not found',
     text: 'The page you are looking for does not exist or has moved.',

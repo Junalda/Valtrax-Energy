@@ -22,7 +22,7 @@ const origin = (Astro.site?.origin ?? Astro.url.origin).replace(/\/$/, '');
 const canonical = `${origin}${pathFor(page, lang)}`;
 const ogImage = `${origin}/og/og-${lang}.png`;
 const indexable = site.indexable && !noindex;
-const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page })) : null;
+const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page, title, description })) : null;
 ---
 
 <!doctype html>

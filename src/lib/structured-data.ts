@@ -1,14 +1,13 @@
 import { site } from '../config/site';
 import { t, pathFor, type Lang, type PageKey } from '../i18n';
-import { legalDoc } from '../legal';
 
 /**
  * Schema.org graph. Only verified, approved facts are included. Stable @id values let
  * search engines connect the Organization, WebSite and WebPage entities across languages.
  * FAQPage text is taken from the same dictionary entries that render the visible FAQ.
  */
-export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey }) {
-  const { origin, lang, page } = opts;
+export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey; title: string; description: string }) {
+  const { origin, lang, page, title, description } = opts;
   const dict = t(lang);
   const orgId = `${origin}/#organization`;
   const siteId = `${origin}/#website`;
@@ -67,8 +66,8 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
     '@type': 'WebPage',
     '@id': pageId,
     url: pageUrl,
-    name: page === 'home' ? dict.meta.title : legalDoc(page, lang).metaTitle,
-    description: page === 'home' ? dict.meta.description : legalDoc(page, lang).metaDescription,
+    name: title,
+    description,
     inLanguage: lang,
     isPartOf: { '@id': siteId },
     about: { '@id': orgId },
@@ -88,8 +87,11 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey })
     webPage,
   ];
 
-  if (page === 'home') {
+  if (page === 'home' || page === 'start') {
     webPage.primaryImageOfPage = { '@type': 'ImageObject', url: `${origin}/og/og-${lang}.png` };
+  }
+  // The FAQ appears on /start and /contact; it is marked up once, on the contact page.
+  if (page === 'contact') {
     graph.push({
       '@type': 'FAQPage',
       '@id': `${pageUrl}#faq`,

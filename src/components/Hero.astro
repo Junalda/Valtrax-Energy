@@ -4,8 +4,11 @@ import { t, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
+  /** Targets of the two calls to action; local anchors on the one-page overview. */
+  contactHref?: string;
+  expertiseHref?: string;
 }
-const { lang } = Astro.props;
+const { lang, contactHref = '#contact', expertiseHref = '#expertise' } = Astro.props;
 const dict = t(lang);
 
 // Chart composition (pure SVG, no imagery): a navigational-chart graticule and range
@@ -42,8 +45,8 @@ const arc = (deg: number, r: number) => {
       <p class="hero__focus">{dict.hero.focus}</p>
       <p class="hero__role">{dict.hero.role}</p>
       <div class="hero__actions">
-        <a class="btn btn--gold" href="#contact">{dict.hero.primary}<Arrow /></a>
-        <a class="btn btn--ghost" href="#expertise">{dict.hero.secondary}</a>
+        <a class="btn btn--gold" href={contactHref}>{dict.hero.primary}<Arrow /></a>
+        <a class="btn btn--ghost" href={expertiseHref}>{dict.hero.secondary}</a>
       </div>
     </div>
 

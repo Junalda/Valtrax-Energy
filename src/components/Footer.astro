@@ -2,7 +2,7 @@
 import Logo from './Logo.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import { site } from '../config/site';
-import { t, pathFor, legalPages, type Lang, type PageKey } from '../i18n';
+import { t, pathFor, legalPages, contentPages, type Lang, type PageKey } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -10,11 +10,17 @@ interface Props {
 }
 const { lang, page } = Astro.props;
 const dict = t(lang);
-const base = page === 'home' ? '' : pathFor('home', lang);
-const sections = (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
-  href: `${base}#${id}`,
-  label: dict.nav[id],
-}));
+const sections =
+  page === 'start'
+    ? (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
+        href: `#${id}`,
+        label: dict.nav[id],
+      }))
+    : [
+        { href: pathFor('home', lang), label: dict.pages.home },
+        ...contentPages.map((id) => ({ href: pathFor(id, lang), label: dict.nav[id] })),
+        { href: pathFor('start', lang), label: dict.pages.start.nav },
+      ];
 const year = new Date().getFullYear();
 const { streetAddress, postalCode } = site.publicContact;
 ---

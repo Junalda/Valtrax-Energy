@@ -405,6 +405,38 @@ export const nl: Dictionary = {
       website: 'Website',
     },
   },
+  pages: {
+    readMore: 'Lees meer',
+    home: 'Home',
+    start: {
+      nav: 'Alles op één pagina',
+      metaTitle: 'Fysieke energie-inkoop en commerciële bemiddeling | Valtrax Energy',
+    },
+    about: {
+      title: 'Over Valtrax Energy',
+      metaTitle: 'Over ons | Valtrax Energy',
+      metaDescription:
+        'Valtrax Energy brengt professionele kopers en verkopers van fysieke energieproducten bij elkaar. Onze primaire focus ligt op commerciële bemiddeling, met de ARA-regio en internationale handelsknooppunten als marktfocus.',
+    },
+    products: {
+      title: 'Producten',
+      metaTitle: 'Producten | Valtrax Energy',
+      metaDescription:
+        'Wij werken aan fysieke energieproducten waarvoor een professionele koper of verkoper een concrete behoefte heeft: EN590 10 PPM / ULSD, Jet A-1, LPFO, D6 Fuel Oil, LPG en LNG.',
+    },
+    process: {
+      title: 'Markten en werkwijze',
+      metaTitle: 'Markten en werkwijze | Valtrax Energy',
+      metaDescription:
+        'Onze belangrijkste focus ligt op de regio Amsterdam–Rotterdam–Antwerpen (ARA) en Noordwest-Europa. Elke kans wordt afzonderlijk beoordeeld.',
+    },
+    contact: {
+      title: 'Contact',
+      metaTitle: 'Contact | Valtrax Energy',
+      metaDescription:
+        'Vertel ons over uw behoefte of aanbodpositie. Met een precieze briefing kunnen wij snel beoordelen of en hoe wij kunnen helpen.',
+    },
+  },
   notFound: {
     title: 'Pagina niet gevonden',
     text: 'De pagina die u zoekt bestaat niet of is verplaatst.',
