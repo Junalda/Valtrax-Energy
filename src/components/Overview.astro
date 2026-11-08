@@ -1,0 +1,80 @@
+---
+import Arrow from './Arrow.astro';
+import { t, pathFor, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const firstSentence = (text: string) => text.split(/(?<=\.)\s/)[0];
+
+// Short entry points to the content pages, using the approved section copy.
+const cards = [
+  { eyebrow: dict.about.eyebrow, title: dict.about.title, text: firstSentence(dict.about.body[0]), href: pathFor('about', lang) },
+  { eyebrow: dict.products.eyebrow, title: dict.products.title, text: dict.products.intro, href: pathFor('products', lang) },
+  { eyebrow: dict.markets.eyebrow, title: dict.markets.title, text: firstSentence(dict.markets.intro), href: `${pathFor('process', lang)}#markets` },
+  { eyebrow: dict.process.eyebrow, title: dict.process.title, text: firstSentence(dict.process.intro), href: `${pathFor('process', lang)}#process` },
+];
+---
+
+<section class="section overview" aria-labelledby="overview-title">
+  <div class="container">
+    <header class="section-head">
+      <h2 id="overview-title">{dict.about.factTitle}</h2>
+    </header>
+    <ul class="overview__grid">
+      {
+        cards.map((c) => (
+          <li class="overview__card">
+            <p class="eyebrow">{c.eyebrow}</p>
+            <h3>{c.title}</h3>
+            <p>{c.text}</p>
+            <a class="text-link overview__link" href={c.href}>
+              {dict.pages.readMore}
+              <span class="visually-hidden">: {c.title}</span>
+              <Arrow />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .overview__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: 1.5rem;
+  }
+  .overview__card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--gold-500);
+    background: var(--white);
+  }
+  .overview__card h3 {
+    margin: 0.25rem 0 0.75rem;
+    font-size: var(--step-1);
+  }
+  .overview__card p:not(.eyebrow) {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+  }
+  .overview__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    margin-top: auto;
+    font-weight: 600;
+  }
+  .overview__link :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>

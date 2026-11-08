@@ -100,6 +100,8 @@ function preselectType(value: string | null) {
 preselectType(new URLSearchParams(location.search).get('type'));
 document.querySelectorAll<HTMLAnchorElement>('[data-enquiry-type]').forEach((link) => {
   link.addEventListener('click', (e) => {
+    // On pages without the form the link simply navigates to the contact page.
+    if (!form) return;
     e.preventDefault();
     preselectType(link.dataset.enquiryType ?? null);
     const contact = document.getElementById('contact');

@@ -1,6 +1,6 @@
 # Valtrax Energy website
 
-One-page bilingual website (English primary, Dutch at `/nl/`) for Valtrax Energy, a trading
+Bilingual multi-page website (English primary, Dutch at `/nl/`) for Valtrax Energy, a trading
 name of Northbridge Trading B.V. Built with Astro 7 and TypeScript, deployed on Vercel.
 
 - All pages are prerendered static HTML. The only server code is the enquiry endpoint
@@ -10,6 +10,11 @@ name of Northbridge Trading B.V. Built with Astro 7 and TypeScript, deployed on 
   `/_vercel/`) are described in the privacy and cookie policies; keep those texts in line.
 - Client JavaScript is a single small module (mobile menu, section-aware language switch,
   enquiry-type preselection, form submission). All content works without it.
+
+Pages (each also under `/nl/`): `/` home, `/about/`, `/products/`, `/process/` (markets and
+process), `/contact/` (form and FAQ), the legal pages, and `/start/`: the complete one-page
+overview with local anchor navigation. All pages reuse the same section components and copy
+(`src/i18n/*`); page headings and metadata live under `pages` in the dictionaries.
 
 Owner decisions still open before launch: see **[docs/OWNER-REVIEW.md](docs/OWNER-REVIEW.md)**.
 
@@ -77,7 +82,8 @@ src/
                            Audiences, Faq, Contact (form), Footer, LanguageSwitch, Logo
   lib/structured-data.ts   Organization / WebSite / WebPage / FAQPage graph
   lib/enquiry.ts           Shared validation and limits
-  pages/                   /, /nl/, /privacy/, /nl/privacy/, 404, sitemap.xml, robots.txt
+  pages/                   home, start, about, products, process, contact, legal pages (EN + /nl/),
+                           404, sitemap.xml, robots.txt
   pages/api/enquiry.ts     Form endpoint (server-rendered)
   scripts/site.ts          Progressive enhancements
   styles/global.css        Design tokens and base styles

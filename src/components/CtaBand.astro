@@ -1,0 +1,43 @@
+---
+import Arrow from './Arrow.astro';
+import { t, pathFor, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+---
+
+<section class="section cta-band" aria-labelledby="cta-title">
+  <div class="container cta-band__inner">
+    <div>
+      <p class="eyebrow">{dict.contact.eyebrow}</p>
+      <h2 id="cta-title">{dict.contact.title}</h2>
+      <p class="cta-band__text">{dict.contact.intro}</p>
+    </div>
+    <a class="btn btn--primary" href={pathFor('contact', lang)}>{dict.nav.cta}<Arrow /></a>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    border-top: 1px solid var(--rule);
+  }
+  .cta-band__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta-band h2 {
+    max-width: 22ch;
+    margin: 0.5rem 0 1rem;
+  }
+  .cta-band__text {
+    max-width: var(--measure);
+    margin-bottom: 0;
+    color: var(--text-muted);
+  }
+</style>
