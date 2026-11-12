@@ -90,14 +90,15 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey; t
   if (page === 'home' || page === 'start') {
     webPage.primaryImageOfPage = { '@type': 'ImageObject', url: `${origin}/og/og-${lang}.png` };
   }
-  // The FAQ appears on /start and /contact; it is marked up once, on the contact page.
-  if (page === 'contact') {
+  // FAQPage markup follows the visible FAQ: the general FAQ on /contact, the short FAQ on /start.
+  if (page === 'contact' || page === 'start') {
+    const items = page === 'start' ? dict.start.faq.items : dict.faq.items;
     graph.push({
       '@type': 'FAQPage',
       '@id': `${pageUrl}#faq`,
       inLanguage: lang,
       isPartOf: { '@id': pageId },
-      mainEntity: dict.faq.items.map((item) => ({
+      mainEntity: items.map((item) => ({
         '@type': 'Question',
         name: item.q,
         acceptedAnswer: { '@type': 'Answer', text: item.a },

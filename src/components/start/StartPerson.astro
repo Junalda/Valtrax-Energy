@@ -1,0 +1,105 @@
+---
+// Who the visitor deals with. No photo is available, so the person is presented in text only.
+import { site } from '../../config/site';
+import { t, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const p = dict.start.person;
+const c = dict.legal.company;
+const facts = [
+  { term: c.tradingName, value: site.brand },
+  { term: c.legalName, value: site.legalName },
+  {
+    term: c.address,
+    value: `${site.publicContact.streetAddress}, ${site.publicContact.postalCode} ${site.registeredLocality}, ${site.country[lang]}`,
+  },
+  { term: c.kvk, value: site.kvk },
+  { term: c.vat, value: site.vat },
+];
+---
+
+<section class="section section--grey start-person" aria-labelledby="person-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">{p.eyebrow}</p>
+      <h2 id="person-title">{p.title}</h2>
+    </header>
+    <div class="start-person__grid">
+      <article class="start-person__card" aria-labelledby="person-name">
+        <h3 id="person-name">{p.name}</h3>
+        <p class="start-person__role">{p.role}</p>
+        <p>{p.text}</p>
+      </article>
+      <article class="start-person__card" aria-labelledby="company-title">
+        <h3 id="company-title">{p.companyTitle}</h3>
+        <dl class="start-person__facts">
+          {
+            facts.map((f) => (
+              <div>
+                <dt>{f.term}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .start-person__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .start-person__card {
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    background: var(--white);
+    border-top: 3px solid var(--navy-900);
+  }
+  .start-person__card h3 {
+    margin: 0;
+    font-size: var(--step-2);
+  }
+  .start-person__role {
+    margin: 0.35rem 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+  }
+  .start-person__facts {
+    display: grid;
+    margin: 1rem 0 0;
+  }
+  .start-person__facts div {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.93rem;
+  }
+  .start-person__facts dt {
+    color: var(--text-muted);
+  }
+  .start-person__facts dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  @media (max-width: 48rem) {
+    .start-person__grid {
+      grid-template-columns: 1fr;
+    }
+    .start-person__facts div {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+</style>

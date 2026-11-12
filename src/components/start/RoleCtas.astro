@@ -1,0 +1,46 @@
+---
+// The two primary actions. Without JavaScript they jump to the form; with it they also select the route.
+import Arrow from '../Arrow.astro';
+import { t, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Where the actions sit on the page; sent to analytics with the choice. */
+  position: 'hero' | 'value' | 'closing';
+  tone?: 'navy' | 'light';
+}
+const { lang, position, tone = 'light' } = Astro.props;
+const h = t(lang).start.hero;
+---
+
+<div class="role-ctas">
+  <a
+    class:list={['btn', tone === 'navy' ? 'btn--gold' : 'btn--primary']}
+    href="?role=buyer#enquiry"
+    data-start-cta="buyer"
+    data-cta-position={position}>{h.buy}<Arrow /></a
+  >
+  <a
+    class:list={['btn', tone === 'navy' ? 'btn--ghost' : 'btn--outline']}
+    href="?role=supplier#enquiry"
+    data-start-cta="supplier"
+    data-cta-position={position}>{h.supply}<Arrow /></a
+  >
+</div>
+
+<style>
+  .role-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  @media (max-width: 36rem) {
+    .role-ctas {
+      flex-direction: column;
+    }
+    .role-ctas .btn {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

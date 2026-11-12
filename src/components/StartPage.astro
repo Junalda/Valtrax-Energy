@@ -1,42 +1,39 @@
 ---
-// The complete one-page overview, served at /start (and /nl/start). Uses local anchors throughout.
+// Start page (/start, /nl/start): the landing page for LinkedIn and direct outreach. One page
+// that explains the offer and leads buyers and suppliers to the right route of one enquiry form.
 import Base from '../layouts/Base.astro';
 import Header from './Header.astro';
-import Hero from './Hero.astro';
-import About from './About.astro';
-import Expertise from './Expertise.astro';
-import Products from './Products.astro';
-import Markets from './Markets.astro';
-import Process from './Process.astro';
-import Audiences from './Audiences.astro';
-import Faq from './Faq.astro';
-import Contact from './Contact.astro';
 import Footer from './Footer.astro';
+import StartHero from './start/StartHero.astro';
+import StartValue from './start/StartValue.astro';
+import StartPerson from './start/StartPerson.astro';
+import StartSteps from './start/StartSteps.astro';
+import StartForm from './start/StartForm.astro';
+import StartFaq from './start/StartFaq.astro';
+import StartClosing from './start/StartClosing.astro';
 import { t, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
-const dict = t(lang);
+const s = t(lang).start;
 ---
 
-<Base lang={lang} page="start" title={dict.pages.start.metaTitle} description={dict.meta.description}>
-  <Header lang={lang} page="start" />
+<Base lang={lang} page="start" title={s.metaTitle} description={s.metaDescription}>
+  <Header lang={lang} page="start" minimal />
   <main id="main" tabindex="-1">
-    <Hero lang={lang} />
-    <About lang={lang} />
-    <Expertise lang={lang} />
-    <Products lang={lang} />
-    <Markets lang={lang} />
-    <Process lang={lang} />
-    <Audiences lang={lang} />
-    <Faq lang={lang} />
-    <Contact lang={lang} />
+    <StartHero lang={lang} />
+    <StartValue lang={lang} />
+    <StartPerson lang={lang} />
+    <StartSteps lang={lang} />
+    <StartForm lang={lang} />
+    <StartFaq lang={lang} />
+    <StartClosing lang={lang} />
   </main>
   <Footer lang={lang} page="start" />
 </Base>
 
 <script>
-  import '../scripts/site.ts';
+  import '../scripts/start.ts';
 </script>

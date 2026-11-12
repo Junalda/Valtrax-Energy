@@ -418,8 +418,7 @@ export const en = {
     readMore: 'Read more',
     home: 'Home',
     start: {
-      nav: 'Everything on one page',
-      metaTitle: 'Physical Energy Sourcing & Commercial Intermediation | Valtrax Energy',
+      nav: 'Buy or supply EN590',
     },
     about: {
       title: 'About Valtrax Energy',
@@ -444,6 +443,177 @@ export const en = {
       metaTitle: 'Contact | Valtrax Energy',
       metaDescription:
         'Tell us about your requirement or supply position. A precise brief helps us assess quickly whether and how we can assist.',
+    },
+  },
+  /** Start page (/start): conversion page for LinkedIn and direct outreach. */
+  start: {
+    metaTitle: 'Buy or supply EN590 in the ARA region | Valtrax Energy',
+    metaDescription:
+      'Valtrax Energy connects business buyers and suppliers of EN590 diesel in the Amsterdam–Rotterdam–Antwerp region. Share a concrete requirement or supply opportunity.',
+    hero: {
+      eyebrow: 'Physical energy sourcing and commercial intermediation',
+      title: 'Connecting EN590 buyers and suppliers in the ARA region',
+      lead: 'Valtrax Energy is an independent intermediary for physical energy products. We match a defined requirement with a relevant counterparty and help align the commercial terms on both sides.',
+      prompt: 'Choose your route:',
+      buy: 'I’m looking to buy',
+      supply: 'I’m a supplier',
+      trust: 'Valtrax Energy is a trading name of Northbridge Trading B.V., registered in Zwijndrecht, the Netherlands (KvK 42053415).',
+      facts: [
+        { term: 'Product focus', value: 'EN590 10 PPM diesel (ULSD)' },
+        { term: 'Market', value: 'Amsterdam, Rotterdam and Antwerp (ARA)' },
+        { term: 'Our role', value: 'Intermediary, without own refinery, storage or stock' },
+      ],
+    },
+    value: {
+      eyebrow: 'What we do',
+      title: 'A focused match between concrete demand and relevant supply',
+      buyers: {
+        title: 'For buyers',
+        lead: 'You have a concrete requirement and want relevant supply options.',
+        points: [
+          'We translate your requirement into focused sourcing.',
+          'We look for potential suppliers that fit your specification, volume, location and delivery terms.',
+          'We support the first commercial alignment and the introduction.',
+        ],
+      },
+      suppliers: {
+        title: 'For suppliers',
+        lead: 'You have product or an allocation and want to reach buyers with a defined need.',
+        points: [
+          'We connect you with potential buyers that have a concrete requirement.',
+          'You get early insight into product requirements, volume and destination.',
+          'We help establish whether there is a workable commercial match.',
+        ],
+      },
+      note: 'Every opportunity is assessed on its own merits. A match or transaction is never guaranteed.',
+    },
+    person: {
+      eyebrow: 'Who you work with',
+      title: 'One point of contact, a registered Dutch company',
+      name: 'Thom van Welie',
+      role: 'Point of contact, Valtrax Energy',
+      text: 'Thom van Welie is your point of contact at Valtrax Energy. He reviews incoming requirements and supply opportunities, discusses the commercial details with you and coordinates the introduction to a relevant counterparty.',
+      companyTitle: 'The company behind Valtrax Energy',
+    },
+    steps: {
+      eyebrow: 'How it works',
+      title: 'Three steps from enquiry to introduction',
+      items: [
+        {
+          title: 'Share your requirement or supply opportunity',
+          text: 'Use the form on this page. Product, volume, location and timing are enough to start.',
+        },
+        {
+          title: 'Review the commercial fit',
+          text: 'We review the specification, volume, location, timing and delivery terms, and ask for anything that is missing.',
+        },
+        {
+          title: 'Connect with a relevant counterparty and discuss next steps',
+          text: 'If there is a fit, we introduce the relevant counterparty and support the first commercial discussions.',
+        },
+      ],
+      note: 'Availability, documentation, terms and the final agreement are assessed and agreed separately for each transaction.',
+    },
+    form: {
+      eyebrow: 'Enquiry',
+      title: 'Share your requirement or supply opportunity',
+      intro: 'Choose your route. We only ask for what we need for a first assessment.',
+      legend: 'Start page enquiry form',
+      roleLegend: 'Your route',
+      roles: {
+        buyer: { label: 'I’m looking to buy', hint: 'You have a buying requirement.' },
+        supplier: { label: 'I’m a supplier', hint: 'You have product or an allocation to offer.' },
+      },
+      choosePrompt: 'Choose a route above to see the relevant questions.',
+      companyLegend: 'You and your company',
+      buyerLegend: 'Your buying requirement',
+      supplierLegend: 'Your supply opportunity',
+      requiredNote: 'Fields marked * are required.',
+      optional: 'optional',
+      selectPlaceholder: 'Select',
+      fields: {
+        name: 'Full name',
+        company: 'Company',
+        email: 'Business email',
+        companyWebsite: 'Company website',
+        country: 'Country',
+        product: 'Product',
+        buyerVolume: 'Required volume',
+        supplierVolume: 'Available or indicative volume',
+        unit: 'Unit',
+        buyerFrequency: 'One-off or recurring',
+        buyerLocation: 'Delivery location',
+        supplierLocation: 'Loading or delivery location',
+        buyerTiming: 'Preferred timing',
+        supplierPeriod: 'Availability period',
+        supplierRole: 'Your role',
+        buyerNotes: 'Specification and delivery basis',
+        supplierNotes: 'Product specification and terms',
+      },
+      hints: {
+        companyWebsite: 'For example company.com.',
+        volume: 'A number or range per delivery or per month.',
+        buyerLocation: 'Port, terminal or region, for example Rotterdam.',
+        supplierLocation: 'Port, terminal or region where the product is loaded or delivered.',
+        buyerTiming: 'For example a delivery window or start date.',
+        supplierPeriod: 'For example a loading window or contract period.',
+        buyerNotes: 'If known: specification, delivery basis (such as FOB, CIF or in-tank) and anything else that matters.',
+        supplierNotes: 'Specification, delivery basis and the main commercial terms, as far as you can share them now.',
+      },
+      frequencies: { 'one-off': 'One-off', recurring: 'Recurring' },
+      supplierRoles: {
+        direct: 'Direct supplier',
+        representative: 'Authorised representative',
+        other: 'Other role',
+      },
+      notRequested:
+        'Please do not send proof of funds, bank details or confidential trade documents through this form. If documents are needed later, we agree a suitable channel with you.',
+      submit: {
+        buyer: 'Submit buying requirement',
+        supplier: 'Submit supply opportunity',
+        none: 'Submit enquiry',
+      },
+      sending: 'Sending…',
+      success: {
+        buyer:
+          'Thank you. Your buying requirement has been sent to Valtrax Energy. We will review it and contact you by email if there is a possible fit or if we need more information.',
+        supplier:
+          'Thank you. Your supply opportunity has been sent to Valtrax Energy. We will review it and contact you by email if there is a possible fit or if we need more information.',
+      },
+      successNext: 'Your details are not shared with a counterparty without your permission.',
+      another: 'Submit another enquiry',
+    },
+    faq: {
+      eyebrow: 'FAQ',
+      title: 'Short answers',
+      items: [
+        {
+          q: 'Is Valtrax the direct supplier?',
+          a: 'No. Valtrax Energy does not own a refinery, storage or physical stock. We act as an intermediary between buyers and suppliers. If a specific transaction is structured differently, for example back-to-back, this is agreed in writing for that transaction.',
+        },
+        {
+          q: 'Which products and locations do you focus on?',
+          a: 'Our first focus is EN590 10 PPM diesel (ULSD) in the Amsterdam–Rotterdam–Antwerp (ARA) region. We also consider Jet A-1 and other refined petroleum products and gas, case by case, for a defined requirement.',
+        },
+        {
+          q: 'What information is needed to get started?',
+          a: 'Your company details, the product, the volume, the location and, if possible, the timing. Specification and delivery basis help if you know them. Proof of funds, bank details or confidential documents are not needed at this stage.',
+        },
+        {
+          q: 'What happens after submitting an enquiry?',
+          a: 'We review your enquiry and contact you by email if there is a possible fit or if we need more information. Your details are not shared with a counterparty without your permission.',
+        },
+        {
+          q: 'How are commercial fees agreed?',
+          a: 'Fees and terms are agreed in advance for each collaboration or transaction. Commission, payment terms and currency are set out in writing.',
+        },
+      ],
+    },
+    closing: {
+      title: 'Ready to discuss a concrete requirement or supply position?',
+      text: 'Choose your route and share the key details. We review every enquiry individually.',
+      contactTitle: 'Prefer email?',
+      legalTitle: 'Legal information',
     },
   },
   notFound: {

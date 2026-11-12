@@ -66,4 +66,14 @@ export type DeliveryBasis = (typeof deliveryBases)[number];
 export const volumeUnits = ['mt', 'm3', 'bbl', 'mmbtu', 'other'] as const;
 export type VolumeUnit = (typeof volumeUnits)[number];
 
+/** Start page (/start) enquiry routes and their option lists. */
+export const startRoles = ['buyer', 'supplier'] as const;
+export type StartRole = (typeof startRoles)[number];
+
+export const buyerFrequencies = ['one-off', 'recurring'] as const;
+export type BuyerFrequency = (typeof buyerFrequencies)[number];
+
+export const supplierRoles = ['direct', 'representative', 'other'] as const;
+export type SupplierRole = (typeof supplierRoles)[number];
+
 export const sectionIds = ['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const;
