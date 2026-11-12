@@ -43,9 +43,9 @@ const { streetAddress, postalCode } = site.publicContact;
         <p>{dict.footer.registration}</p>
         <p>{dict.footer.vat} {site.vat}</p>
         {
-          (['general', 'trading', 'finance'] as const).map((role) => (
+          (['general'] as const).map((role) => (
             <p>
-              {dict.contact.direct[role]}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+              {dict.legal.company.email}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
             </p>
           ))
         }

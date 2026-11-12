@@ -316,7 +316,6 @@ export const nl: Dictionary = {
     notRequested:
       'Stuur via dit formulier geen bankgegevens, paspoorten, bewijs van financiële middelen of andere KYC-documenten. Als documentatie later nodig is, spreken wij met u een geschikt kanaal af.',
     directTitle: 'Contact per e-mail',
-    direct: { general: 'Algemene vragen', trading: 'Handel', finance: 'Financiën' },
   },
   form: {
     legend: 'Aanvraagformulier',

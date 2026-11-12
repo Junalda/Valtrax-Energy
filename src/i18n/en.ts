@@ -322,7 +322,6 @@ export const en = {
     notRequested:
       'Please do not send banking details, passports, proof of funds or other KYC documents through this form. If documentation is needed at a later stage, we will agree a suitable channel with you.',
     directTitle: 'Contact by email',
-    direct: { general: 'General enquiries', trading: 'Trading', finance: 'Finance' },
   },
   form: {
     legend: 'Enquiry form',

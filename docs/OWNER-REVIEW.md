@@ -53,8 +53,9 @@ and the completed answers:
   petroleum products and middle distillates. The same list is used on the homepage, in the form,
   the FAQ and the structured data.
 - **Dutch:** formal "u/uw" throughout, including the notice under the form.
-- **E-mail roles** (`site.emails`): info@ (general and the form recipient), trading@, finance@
-  shown on the site. Thom@ is kept in config for direct correspondence but not published.
+- **E-mail** (`site.emails`): only info@ is published on the site (owner decision, 2026-11);
+  it is also the form recipient. trading@ and finance@ are no longer shown. Thom@ is kept in
+  config for direct correspondence but not published.
 - **Form:** always sends to info@valtraxenergy.com only. The visitor's address is used as Reply-To.
   The sender must be on the own domain.
 - **Counterparty checks:** described as manual; no automated screening claimed.

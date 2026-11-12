@@ -49,11 +49,11 @@ export function buildJsonLd(opts: { origin: string; lang: Lang; page: PageKey; t
       'ARA market',
     ],
     email: site.emails.general,
-    contactPoint: (['general', 'trading', 'finance'] as const).map((role) => ({
+    contactPoint: {
       '@type': 'ContactPoint',
-      contactType: t('en').contact.direct[role],
-      email: site.emails[role],
-    })),
+      contactType: 'General enquiries',
+      email: site.emails.general,
+    },
   };
   organization.logo = {
     '@type': 'ImageObject',

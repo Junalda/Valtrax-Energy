@@ -22,9 +22,9 @@ const c = dict.start.closing;
       <h3>{c.contactTitle}</h3>
       <ul>
         {
-          (['general', 'trading'] as const).map((role) => (
+          (['general'] as const).map((role) => (
             <li>
-              {dict.contact.direct[role]}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+              {dict.legal.company.email}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
             </li>
           ))
         }

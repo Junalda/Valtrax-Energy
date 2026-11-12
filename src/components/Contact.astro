@@ -32,9 +32,9 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
       <h3 class="contact__subhead">{dict.contact.directTitle}</h3>
       <dl class="contact__emails">
         {
-          (['general', 'trading', 'finance'] as const).map((role) => (
+          (['general'] as const).map((role) => (
             <div>
-              <dt>{dict.contact.direct[role]}</dt>
+              <dt>{dict.legal.company.email}</dt>
               <dd>
                 <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
               </dd>

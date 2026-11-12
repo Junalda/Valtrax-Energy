@@ -15,14 +15,12 @@ export const site = {
   /** Origin is set via SITE_URL in astro.config.mjs; this is read from Astro.site at render time. */
   indexable: __SITE_INDEXABLE__,
   /**
-   * Confirmed e-mail roles (client answers, 2026-10). `general` is the public contact
-   * address and the only recipient of the website enquiry form. `direct` is Thom's address
-   * for existing business correspondence and is intentionally not shown on the site.
+   * E-mail addresses. `general` (info@) is the only address published on the site (owner
+   * decision, 2026-11) and the only recipient of the website enquiry form. `direct` is Thom's
+   * address for existing business correspondence and is intentionally not shown on the site.
    */
   emails: {
     general: 'info@valtraxenergy.com',
-    trading: 'trading@valtraxenergy.com',
-    finance: 'finance@valtraxenergy.com',
     direct: 'Thom@valtraxenergy.com',
   },
   /** The enquiry form always delivers to this single address (no copies, no routing). */
