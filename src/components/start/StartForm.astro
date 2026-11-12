@@ -1,0 +1,457 @@
+---
+// Start page enquiry form: one form, two routes (buyer / supplier). Posts to the same
+// endpoint as the contact form (form=start). Route fields are prefixed so both groups work
+// without JavaScript; the page script shows only the chosen route and marks its required fields.
+import Arrow from '../Arrow.astro';
+import { buyerFrequencies, productKeys, startRoles, supplierRoles, volumeUnits } from '../../config/site';
+import { limits, startRequired } from '../../lib/enquiry';
+import { t, pathFor, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const f = dict.start.form;
+const g = dict.form;
+const products = productKeys.map((key) => dict.products.items.find((p) => p.key === key)!);
+const messages = {
+  validation: g.validation,
+  status: g.status,
+  sending: f.sending,
+  submit: f.submit,
+  success: f.success,
+  summary: g.errorsSummary,
+  required: startRequired,
+};
+const err = (name: string) => `sf-${name}-error`;
+---
+
+<section class="section section--grey start-form" id="enquiry" aria-labelledby="enquiry-title">
+  <div class="container start-form__inner">
+    <header class="section-head">
+      <p class="eyebrow">{f.eyebrow}</p>
+      <h2 id="enquiry-title">{f.title}</h2>
+      <p>{f.intro}</p>
+    </header>
+
+    <form class="sf" action="/api/enquiry" method="post" data-start-form data-messages={JSON.stringify(messages)} aria-label={f.legend}>
+      <input type="hidden" name="form" value="start" />
+      <input type="hidden" name="lang" value={lang} />
+      <input type="hidden" name="sourcePage" value={pathFor('start', lang)} data-source-page />
+      <input type="hidden" name="startedAt" value="" data-started-at />
+      <div class="hp" aria-hidden="true">
+        <label for="sf-website">{g.fields.honeypot}</label>
+        <input type="text" id="sf-website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="sf__summary" role="alert" tabindex="-1" data-form-summary hidden></div>
+
+      <fieldset class="sf__roles" aria-describedby={err('role')}>
+        <legend>{f.roleLegend} <span aria-hidden="true">*</span></legend>
+        <div class="sf__role-options">
+          {
+            startRoles.map((r) => (
+              <label class="sf__role">
+                <input type="radio" name="role" value={r} required data-role-input />
+                <span class="sf__role-text">
+                  <span class="sf__role-label">{f.roles[r].label}</span>
+                  <span class="sf__role-hint">{f.roles[r].hint}</span>
+                </span>
+              </label>
+            ))
+          }
+        </div>
+        <p class="sf__error" id={err('role')} data-error-for="role"></p>
+      </fieldset>
+
+      <p class="sf__note">{f.requiredNote}</p>
+
+      <fieldset class="sf__group">
+        <legend>{f.companyLegend}</legend>
+        <div class="sf__grid">
+          <div class="sf__field">
+            <label for="sf-name">{f.fields.name} <span aria-hidden="true">*</span></label>
+            <input id="sf-name" name="name" type="text" autocomplete="name" required maxlength={limits.name} aria-describedby={err('name')} />
+            <p class="sf__error" id={err('name')} data-error-for="name"></p>
+          </div>
+          <div class="sf__field">
+            <label for="sf-company">{f.fields.company} <span aria-hidden="true">*</span></label>
+            <input id="sf-company" name="company" type="text" autocomplete="organization" required maxlength={limits.company} aria-describedby={err('company')} />
+            <p class="sf__error" id={err('company')} data-error-for="company"></p>
+          </div>
+          <div class="sf__field">
+            <label for="sf-email">{f.fields.email} <span aria-hidden="true">*</span></label>
+            <input id="sf-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required maxlength={limits.email} aria-describedby={err('email')} />
+            <p class="sf__error" id={err('email')} data-error-for="email"></p>
+          </div>
+          <div class="sf__field">
+            <label for="sf-companyWebsite">{f.fields.companyWebsite} <span class="sf__opt">({f.optional})</span></label>
+            <input id="sf-companyWebsite" name="companyWebsite" type="text" inputmode="url" autocomplete="url" spellcheck="false" maxlength={limits.companyWebsite} pattern="(https?://)?[^\s<>]+\.[^\s<>]{2,}" aria-describedby={`sf-companyWebsite-hint ${err('companyWebsite')}`} />
+            <p class="sf__hint" id="sf-companyWebsite-hint">{f.hints.companyWebsite}</p>
+            <p class="sf__error" id={err('companyWebsite')} data-error-for="companyWebsite"></p>
+          </div>
+          <div class="sf__field">
+            <label for="sf-country">{f.fields.country} <span aria-hidden="true">*</span></label>
+            <input id="sf-country" name="country" type="text" autocomplete="country-name" required maxlength={limits.country} aria-describedby={err('country')} />
+            <p class="sf__error" id={err('country')} data-error-for="country"></p>
+          </div>
+          <div class="sf__field">
+            <label for="sf-product">{f.fields.product} <span aria-hidden="true">*</span></label>
+            <select id="sf-product" name="product" required aria-describedby={err('product')}>
+              <option value="">{f.selectPlaceholder}</option>
+              {products.map((p) => <option value={p.key}>{p.name}</option>)}
+            </select>
+            <p class="sf__error" id={err('product')} data-error-for="product"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <p class="sf__prompt" data-choose-prompt hidden>{f.choosePrompt}</p>
+
+      {
+        startRoles.map((r) => {
+          const req = (name: string) => (startRequired[r] as readonly string[]).includes(name);
+          const star = (name: string) => (req(name) ? <span aria-hidden="true">*</span> : <span class="sf__opt">({f.optional})</span>);
+          const loc = r === 'buyer' ? 'buyerLocation' : 'supplierLocation';
+          const per = r === 'buyer' ? 'buyerTiming' : 'supplierPeriod';
+          const notes = r === 'buyer' ? 'buyerNotes' : 'supplierNotes';
+          return (
+            <fieldset class="sf__group" data-route={r}>
+              <legend>{r === 'buyer' ? f.buyerLegend : f.supplierLegend}</legend>
+              <div class="sf__grid">
+                <div class="sf__field sf__field--volume">
+                  <div>
+                    <label for={`sf-${r}Volume`}>
+                      {r === 'buyer' ? f.fields.buyerVolume : f.fields.supplierVolume} {star(`${r}Volume`)}
+                    </label>
+                    <input id={`sf-${r}Volume`} name={`${r}Volume`} type="text" inputmode="decimal" maxlength={limits.volume} data-route-required={req(`${r}Volume`) || undefined} aria-describedby={`sf-${r}Volume-hint ${err(`${r}Volume`)}`} />
+                  </div>
+                  <div>
+                    <label for={`sf-${r}Unit`}>
+                      {f.fields.unit} {star(`${r}Unit`)}
+                    </label>
+                    <select id={`sf-${r}Unit`} name={`${r}Unit`} data-route-required={req(`${r}Unit`) || undefined} aria-describedby={err(`${r}Unit`)}>
+                      <option value="">{f.selectPlaceholder}</option>
+                      {volumeUnits.map((u) => <option value={u}>{g.units[u]}</option>)}
+                    </select>
+                  </div>
+                  <p class="sf__hint" id={`sf-${r}Volume-hint`}>{f.hints.volume}</p>
+                  <p class="sf__error" id={err(`${r}Volume`)} data-error-for={`${r}Volume`}></p>
+                  <p class="sf__error" id={err(`${r}Unit`)} data-error-for={`${r}Unit`}></p>
+                </div>
+                {r === 'buyer' && (
+                  <div class="sf__field">
+                    <label for="sf-buyerFrequency">
+                      {f.fields.buyerFrequency} {star('buyerFrequency')}
+                    </label>
+                    <select id="sf-buyerFrequency" name="buyerFrequency" aria-describedby={err('buyerFrequency')}>
+                      <option value="">{f.selectPlaceholder}</option>
+                      {buyerFrequencies.map((k) => <option value={k}>{f.frequencies[k]}</option>)}
+                    </select>
+                    <p class="sf__error" id={err('buyerFrequency')} data-error-for="buyerFrequency"></p>
+                  </div>
+                )}
+                {r === 'supplier' && (
+                  <div class="sf__field">
+                    <label for="sf-supplierRole">
+                      {f.fields.supplierRole} {star('supplierRole')}
+                    </label>
+                    <select id="sf-supplierRole" name="supplierRole" data-route-required aria-describedby={err('supplierRole')}>
+                      <option value="">{f.selectPlaceholder}</option>
+                      {supplierRoles.map((k) => <option value={k}>{f.supplierRoles[k]}</option>)}
+                    </select>
+                    <p class="sf__error" id={err('supplierRole')} data-error-for="supplierRole"></p>
+                  </div>
+                )}
+                <div class="sf__field">
+                  <label for={`sf-${loc}`}>
+                    {f.fields[loc]} {star(loc)}
+                  </label>
+                  <input id={`sf-${loc}`} name={loc} type="text" maxlength={limits.location} data-route-required={req(loc) || undefined} aria-describedby={`sf-${loc}-hint ${err(loc)}`} />
+                  <p class="sf__hint" id={`sf-${loc}-hint`}>{f.hints[loc]}</p>
+                  <p class="sf__error" id={err(loc)} data-error-for={loc}></p>
+                </div>
+                <div class="sf__field">
+                  <label for={`sf-${per}`}>
+                    {f.fields[per]} {star(per)}
+                  </label>
+                  <input id={`sf-${per}`} name={per} type="text" maxlength={limits.period} aria-describedby={`sf-${per}-hint ${err(per)}`} />
+                  <p class="sf__hint" id={`sf-${per}-hint`}>{f.hints[per]}</p>
+                  <p class="sf__error" id={err(per)} data-error-for={per}></p>
+                </div>
+                <div class="sf__field sf__field--full">
+                  <label for={`sf-${notes}`}>
+                    {f.fields[notes]} {star(notes)}
+                  </label>
+                  <p class="sf__hint" id={`sf-${notes}-hint`}>{f.hints[notes]}</p>
+                  <textarea id={`sf-${notes}`} name={notes} rows="4" maxlength={limits.notes} aria-describedby={`sf-${notes}-hint ${err(notes)}`}></textarea>
+                  <p class="sf__error" id={err(notes)} data-error-for={notes}></p>
+                </div>
+              </div>
+            </fieldset>
+          );
+        })
+      }
+
+      <p class="sf__not-requested">{f.notRequested}</p>
+      <p class="sf__consent">
+        {g.notice.before} <a href={pathFor('privacy', lang)}>{g.notice.link}</a> {g.notice.after}
+      </p>
+
+      <div class="sf__actions">
+        <button class="btn btn--primary" type="submit" data-submit>
+          <span data-submit-label>{f.submit.none}</span>
+          <Arrow />
+        </button>
+        <p class="sf__status" role="status" aria-live="polite" data-form-status></p>
+      </div>
+    </form>
+
+    <div class="sf__success" data-form-success tabindex="-1" hidden>
+      <p class="sf__success-text" data-success-text></p>
+      <p>{f.successNext}</p>
+      <button class="btn btn--outline" type="button" data-form-again>{f.another}</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .start-form__inner {
+    max-width: 52rem;
+  }
+  .sf {
+    display: grid;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 0.75rem + 3vw, 2.75rem);
+    background: var(--white);
+    border-top: 3px solid var(--navy-900);
+  }
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  legend {
+    padding: 0;
+    margin-bottom: 1rem;
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    color: var(--navy-900);
+  }
+  .sf__group {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .sf__role-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .sf__role {
+    position: relative;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 1rem 1.1rem;
+    border: 1px solid #7d8796;
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .sf__role:has(input:checked) {
+    border-color: var(--navy-900);
+    box-shadow: inset 0 0 0 1px var(--navy-900);
+    background: var(--grey-50);
+  }
+  .sf__role:has(input:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .sf__role input {
+    width: 1.15rem;
+    height: 1.15rem;
+    min-height: 0;
+    margin: 0.2rem 0 0;
+    padding: 0;
+    accent-color: var(--navy-900);
+    flex: none;
+  }
+  .sf__role-text {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .sf__role-label {
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+  .sf__role-hint {
+    font-size: 0.85rem;
+    color: var(--grey-500);
+  }
+  .sf__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+  }
+  .sf__field {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .sf__field--full {
+    grid-column: 1 / -1;
+  }
+  .sf__field--volume {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 0.4rem 0.75rem;
+  }
+  .sf__field--volume > div {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .sf__field--volume > p {
+    grid-column: 1 / -1;
+  }
+  label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--navy-900);
+  }
+  .sf__opt {
+    font-weight: 400;
+    color: var(--grey-500);
+  }
+  .sf__hint {
+    font-size: 0.82rem;
+    color: var(--grey-500);
+  }
+  .sf__note,
+  .sf__consent {
+    font-size: 0.85rem;
+    color: var(--grey-500);
+  }
+  .sf__consent a {
+    color: var(--navy-900);
+  }
+  .sf__not-requested {
+    padding: 0.9rem 1.1rem;
+    border-left: 2px solid var(--gold-500);
+    background: var(--grey-50);
+    font-size: 0.88rem;
+  }
+  .sf__prompt {
+    padding: 1rem 1.1rem;
+    border: 1px dashed var(--grey-200);
+    color: var(--grey-500);
+    font-size: 0.93rem;
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid #7d8796;
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--navy-900);
+    font: inherit;
+    font-size: 1rem;
+  }
+  select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23022449' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 0.75rem;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 7rem;
+    line-height: 1.5;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-color: var(--navy-900);
+  }
+  [aria-invalid='true'] {
+    border-color: var(--error);
+    box-shadow: inset 3px 0 0 var(--error);
+  }
+  .sf__error {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--error);
+  }
+  .sf__error:empty,
+  .sf__status:empty {
+    display: none;
+  }
+  .sf__summary {
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--error);
+    background: #fbefef;
+    color: var(--error);
+    font-weight: 500;
+  }
+  .hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .sf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  .sf__actions .btn[aria-disabled='true'] {
+    opacity: 0.7;
+    cursor: progress;
+  }
+  .sf__status {
+    flex: 1 1 16rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--error);
+    background: #fbefef;
+    color: var(--error);
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+  .sf__success {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    padding: clamp(1.25rem, 0.75rem + 3vw, 2.75rem);
+    background: var(--white);
+    border-top: 3px solid var(--success);
+  }
+  .sf__success[hidden],
+  .sf[hidden],
+  .sf__group[hidden] {
+    display: none;
+  }
+  .sf__success-text {
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    color: var(--navy-900);
+  }
+  @media (max-width: 36rem) {
+    .sf__grid,
+    .sf__role-options {
+      grid-template-columns: 1fr;
+    }
+    .sf__actions .btn {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>

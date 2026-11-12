@@ -1,4 +1,10 @@
 import {
+  buyerFrequencies,
+  startRoles,
+  supplierRoles,
+  type BuyerFrequency,
+  type StartRole,
+  type SupplierRole,
   deliveryBases,
   enquiryTypes,
   productKeys,
@@ -20,6 +26,11 @@ export const limits = {
   volume: 40,
   destination: 160,
   phone: 40,
+  companyWebsite: 200,
+  location: 160,
+  period: 120,
+  notes: 2000,
+  sourcePage: 200,
 } as const;
 
 /** Maximum accepted request body in bytes. */
@@ -139,6 +150,116 @@ export function validateEnquiry(input: Record<string, unknown>): ValidationResul
       destination,
       basis: basisRaw ? (basisRaw as DeliveryBasis) : undefined,
       phone,
+    },
+  };
+}
+
+// --- Start page (/start) ----------------------------------------------------------------
+// A separate, shorter form with a buyer and a supplier route. Field names are prefixed per
+// route so both groups can be rendered without JavaScript; only the chosen route is read.
+
+export interface StartEnquiry {
+  lang: 'en' | 'nl';
+  role: StartRole;
+  sourcePage: string;
+  name: string;
+  company: string;
+  email: string;
+  companyWebsite?: string;
+  country: string;
+  product: ProductKey;
+  volume: string;
+  unit: VolumeUnit;
+  location: string;
+  /** Buyer: one-off or recurring. */
+  frequency?: BuyerFrequency;
+  /** Buyer: preferred timing. Supplier: availability period. */
+  period?: string;
+  /** Supplier: role in the transaction. */
+  supplierRole?: SupplierRole;
+  notes?: string;
+}
+
+export type StartValidationResult =
+  | { ok: true; data: StartEnquiry }
+  | { ok: false; errors: Record<string, ErrorCode> };
+
+/** Required fields per route, used by the page script (aria-required) and the server. */
+export const startRequired = {
+  buyer: ['buyerVolume', 'buyerUnit', 'buyerLocation'],
+  supplier: ['supplierVolume', 'supplierUnit', 'supplierLocation', 'supplierRole'],
+} as const;
+
+// A web address or bare domain such as company.com; no spaces or angle brackets.
+const WEBSITE_RE = /^(https?:\/\/)?[^\s<>"]+\.[^\s<>"]{2,}$/i;
+
+export function validateStartEnquiry(input: Record<string, unknown>): StartValidationResult {
+  const errors: Record<string, ErrorCode> = {};
+  const text = (key: string, max: number, required: boolean, multi = false) => {
+    const raw = str(input, key);
+    const value = multi ? multiLine(raw) : singleLine(raw);
+    if (!value) {
+      if (required) errors[key] = 'required';
+      return undefined;
+    }
+    if (value.length > max) errors[key] = 'tooLong';
+    return value;
+  };
+  const choice = <T extends string>(key: string, list: readonly T[], required: boolean): T | undefined => {
+    const value = str(input, key);
+    if (!value) {
+      if (required) errors[key] = 'required';
+      return undefined;
+    }
+    if (!oneOf(list, value)) {
+      errors[key] = 'invalid';
+      return undefined;
+    }
+    return value;
+  };
+
+  const role = choice('role', startRoles, true);
+  const name = text('name', limits.name, true);
+  const company = text('company', limits.company, true);
+  const email = text('email', limits.email, true);
+  if (email && !errors.email && !EMAIL_RE.test(email)) errors.email = 'email';
+  const companyWebsite = text('companyWebsite', limits.companyWebsite, false);
+  if (companyWebsite && !errors.companyWebsite && !WEBSITE_RE.test(companyWebsite)) errors.companyWebsite = 'invalid';
+  const country = text('country', limits.country, true);
+  const product = choice('product', productKeys, true);
+
+  let fields: Pick<StartEnquiry, 'volume' | 'unit' | 'location' | 'frequency' | 'period' | 'supplierRole' | 'notes'> | undefined;
+  if (role) {
+    const p = role; // 'buyer' | 'supplier': field-name prefix
+    const volume = text(`${p}Volume`, limits.volume, true);
+    const unit = choice(`${p}Unit`, volumeUnits, true);
+    const location = text(`${p}Location`, limits.location, true);
+    const period = text(role === 'buyer' ? 'buyerTiming' : 'supplierPeriod', limits.period, false);
+    const notes = text(`${p}Notes`, limits.notes, false, true);
+    const frequency = role === 'buyer' ? choice('buyerFrequency', buyerFrequencies, false) : undefined;
+    const supplierRole = role === 'supplier' ? choice('supplierRole', supplierRoles, true) : undefined;
+    if (volume && unit && location) fields = { volume, unit, location, period, notes, frequency, supplierRole };
+  }
+
+  const source = singleLine(str(input, 'sourcePage'));
+  const sourcePage = source.startsWith('/') && source.length <= limits.sourcePage ? source : '/start/';
+
+  if (Object.keys(errors).length > 0 || !role || !name || !company || !email || !country || !product || !fields) {
+    return { ok: false, errors };
+  }
+  return {
+    ok: true,
+    data: {
+      lang: str(input, 'lang') === 'nl' ? 'nl' : 'en',
+      role,
+      sourcePage,
+      name,
+      company,
+      email,
+      companyWebsite,
+      country,
+      product,
+      ...fields,
     },
   };
 }

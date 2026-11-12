@@ -1,0 +1,69 @@
+---
+import { t, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const s = t(lang).start.steps;
+---
+
+<section class="section start-steps" aria-labelledby="steps-title">
+  <div class="container">
+    <header class="section-head">
+      <p class="eyebrow">{s.eyebrow}</p>
+      <h2 id="steps-title">{s.title}</h2>
+    </header>
+    <ol class="start-steps__list">
+      {
+        s.items.map((item, i) => (
+          <li>
+            <span class="start-steps__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="start-steps__note">{s.note}</p>
+  </div>
+</section>
+
+<style>
+  .start-steps__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .start-steps__list li {
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+  .start-steps__num {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    color: var(--gold-600);
+  }
+  .start-steps__list h3 {
+    margin: 0.5rem 0;
+    font-size: var(--step-1);
+  }
+  .start-steps__list p {
+    color: var(--text-muted);
+  }
+  .start-steps__note {
+    margin-top: 2rem;
+    padding: 1rem 1.15rem;
+    border-left: 2px solid var(--gold-500);
+    background: var(--grey-50);
+    font-size: 0.93rem;
+  }
+  @media (max-width: 48rem) {
+    .start-steps__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

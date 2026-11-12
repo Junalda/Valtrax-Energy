@@ -1,0 +1,77 @@
+---
+import RoleCtas from './RoleCtas.astro';
+import { site } from '../../config/site';
+import { t, pathFor, legalPages, type Lang } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const c = dict.start.closing;
+---
+
+<section class="section section--grey start-closing" aria-labelledby="closing-title">
+  <div class="container start-closing__inner">
+    <div>
+      <h2 id="closing-title">{c.title}</h2>
+      <p class="start-closing__text">{c.text}</p>
+      <RoleCtas lang={lang} position="closing" />
+    </div>
+    <div class="start-closing__aside">
+      <h3>{c.contactTitle}</h3>
+      <ul>
+        {
+          (['general'] as const).map((role) => (
+            <li>
+              {dict.legal.company.email}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <h3>{c.legalTitle}</h3>
+      <ul>
+        {legalPages.map((p) => <li><a href={pathFor(p, lang)}>{dict.footer[p]}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .start-closing__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+  }
+  .start-closing h2 {
+    margin-top: 0;
+    max-width: 22ch;
+  }
+  .start-closing__text {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+  }
+  .start-closing__aside h3 {
+    margin: 0 0 0.5rem;
+    font-size: var(--step-0);
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  .start-closing__aside ul {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.35rem;
+    overflow-wrap: anywhere;
+  }
+  .start-closing__aside a {
+    color: var(--navy-900);
+    text-decoration-color: var(--gold-500);
+  }
+  @media (max-width: 48rem) {
+    .start-closing__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

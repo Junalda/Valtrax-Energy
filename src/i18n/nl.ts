@@ -316,7 +316,6 @@ export const nl: Dictionary = {
     notRequested:
       'Stuur via dit formulier geen bankgegevens, paspoorten, bewijs van financiële middelen of andere KYC-documenten. Als documentatie later nodig is, spreken wij met u een geschikt kanaal af.',
     directTitle: 'Contact per e-mail',
-    direct: { general: 'Algemene vragen', trading: 'Handel', finance: 'Financiën' },
   },
   form: {
     legend: 'Aanvraagformulier',
@@ -409,8 +408,7 @@ export const nl: Dictionary = {
     readMore: 'Lees meer',
     home: 'Home',
     start: {
-      nav: 'Alles op één pagina',
-      metaTitle: 'Fysieke energie-inkoop en commerciële bemiddeling | Valtrax Energy',
+      nav: 'EN590 kopen of leveren',
     },
     about: {
       title: 'Over Valtrax Energy',
@@ -435,6 +433,176 @@ export const nl: Dictionary = {
       metaTitle: 'Contact | Valtrax Energy',
       metaDescription:
         'Vertel ons over uw behoefte of aanbodpositie. Met een precieze briefing kunnen wij snel beoordelen of en hoe wij kunnen helpen.',
+    },
+  },
+  start: {
+    metaTitle: 'EN590 kopen of leveren in de ARA-regio | Valtrax Energy',
+    metaDescription:
+      'Valtrax Energy brengt zakelijke kopers en leveranciers van EN590-diesel in de regio Amsterdam–Rotterdam–Antwerpen samen. Deel een concrete behoefte of aanbodkans.',
+    hero: {
+      eyebrow: 'Fysieke energie-inkoop en commerciële bemiddeling',
+      title: 'Wij verbinden kopers en leveranciers van EN590 in de ARA-regio',
+      lead: 'Valtrax Energy is een onafhankelijke bemiddelaar in fysieke energieproducten. Wij koppelen een concrete behoefte aan een passende tegenpartij en helpen de commerciële voorwaarden aan beide kanten op elkaar af te stemmen.',
+      prompt: 'Kies uw route:',
+      buy: 'Ik wil kopen',
+      supply: 'Ik ben leverancier',
+      trust: 'Valtrax Energy is een handelsnaam van Northbridge Trading B.V., gevestigd in Zwijndrecht (KvK 42053415).',
+      facts: [
+        { term: 'Productfocus', value: 'EN590 10 PPM-diesel (ULSD)' },
+        { term: 'Markt', value: 'Amsterdam, Rotterdam en Antwerpen (ARA)' },
+        { term: 'Onze rol', value: 'Bemiddelaar, zonder eigen raffinaderij, opslag of voorraad' },
+      ],
+    },
+    value: {
+      eyebrow: 'Wat wij doen',
+      title: 'Een gerichte koppeling tussen concrete vraag en passend aanbod',
+      buyers: {
+        title: 'Voor kopers',
+        lead: 'U heeft een concrete behoefte en zoekt passend aanbod.',
+        points: [
+          'Wij vertalen uw behoefte naar gerichte sourcing.',
+          'Wij zoeken potentiële leveranciers die aansluiten op uw specificatie, volume, locatie en leveringsvoorwaarden.',
+          'Wij ondersteunen de eerste commerciële afstemming en de introductie.',
+        ],
+      },
+      suppliers: {
+        title: 'Voor leveranciers',
+        lead: 'U heeft product of een allocatie en wilt kopers met een concrete behoefte bereiken.',
+        points: [
+          'Wij brengen u in contact met potentiële kopers met een concrete behoefte.',
+          'U krijgt vroeg inzicht in productvereisten, volume en bestemming.',
+          'Wij helpen vaststellen of er een werkbare commerciële match is.',
+        ],
+      },
+      note: 'Elke kans wordt afzonderlijk beoordeeld. Een match of transactie is nooit gegarandeerd.',
+    },
+    person: {
+      eyebrow: 'Met wie u samenwerkt',
+      title: 'Eén aanspreekpunt, een geregistreerd Nederlands bedrijf',
+      name: 'Thom van Welie',
+      role: 'Aanspreekpunt, Valtrax Energy',
+      text: 'Thom van Welie is uw aanspreekpunt bij Valtrax Energy. Hij beoordeelt binnenkomende behoeften en aanbodkansen, bespreekt de commerciële details met u en coördineert de introductie bij een passende tegenpartij.',
+      companyTitle: 'Het bedrijf achter Valtrax Energy',
+    },
+    steps: {
+      eyebrow: 'Zo werkt het',
+      title: 'In drie stappen van aanvraag naar introductie',
+      items: [
+        {
+          title: 'Deel uw behoefte of aanbodkans',
+          text: 'Gebruik het formulier op deze pagina. Product, volume, locatie en timing zijn genoeg om te beginnen.',
+        },
+        {
+          title: 'Wij beoordelen de commerciële match',
+          text: 'Wij bekijken specificatie, volume, locatie, timing en leveringsvoorwaarden, en vragen wat nog ontbreekt.',
+        },
+        {
+          title: 'Kennismaking met een passende tegenpartij en vervolgstappen',
+          text: 'Is er een match, dan introduceren wij de passende tegenpartij en ondersteunen wij de eerste commerciële gesprekken.',
+        },
+      ],
+      note: 'Beschikbaarheid, documentatie, voorwaarden en de uiteindelijke overeenkomst worden per transactie beoordeeld en afgesproken.',
+    },
+    form: {
+      eyebrow: 'Aanvraag',
+      title: 'Deel uw behoefte of aanbodkans',
+      intro: 'Kies uw route. Wij vragen alleen wat nodig is voor een eerste beoordeling.',
+      legend: 'Aanvraagformulier startpagina',
+      roleLegend: 'Uw route',
+      roles: {
+        buyer: { label: 'Ik wil kopen', hint: 'U heeft een inkoopbehoefte.' },
+        supplier: { label: 'Ik ben leverancier', hint: 'U heeft product of een allocatie aan te bieden.' },
+      },
+      choosePrompt: 'Kies hierboven een route om de bijbehorende vragen te zien.',
+      companyLegend: 'U en uw bedrijf',
+      buyerLegend: 'Uw inkoopbehoefte',
+      supplierLegend: 'Uw aanbodkans',
+      requiredNote: 'Velden met een * zijn verplicht.',
+      optional: 'optioneel',
+      selectPlaceholder: 'Kies',
+      fields: {
+        name: 'Volledige naam',
+        company: 'Bedrijf',
+        email: 'Zakelijk e-mailadres',
+        companyWebsite: 'Website van het bedrijf',
+        country: 'Land',
+        product: 'Product',
+        buyerVolume: 'Gewenst volume',
+        supplierVolume: 'Beschikbaar of indicatief volume',
+        unit: 'Eenheid',
+        buyerFrequency: 'Eenmalig of terugkerend',
+        buyerLocation: 'Gewenste leveringslocatie',
+        supplierLocation: 'Laad- of leveringslocatie',
+        buyerTiming: 'Gewenste timing',
+        supplierPeriod: 'Beschikbaarheidsperiode',
+        supplierRole: 'Uw rol',
+        buyerNotes: 'Specificatie en leveringsbasis',
+        supplierNotes: 'Productspecificatie en voorwaarden',
+      },
+      hints: {
+        companyWebsite: 'Bijvoorbeeld bedrijf.nl.',
+        volume: 'Een getal of bandbreedte per levering of per maand.',
+        buyerLocation: 'Haven, terminal of regio, bijvoorbeeld Rotterdam.',
+        supplierLocation: 'Haven, terminal of regio waar het product wordt geladen of geleverd.',
+        buyerTiming: 'Bijvoorbeeld een leveringsperiode of startdatum.',
+        supplierPeriod: 'Bijvoorbeeld een laadperiode of contractperiode.',
+        buyerNotes: 'Indien bekend: specificatie, leveringsbasis (zoals FOB, CIF of in-tank) en wat verder van belang is.',
+        supplierNotes: 'Specificatie, leveringsbasis en de belangrijkste commerciële voorwaarden, voor zover u die nu kunt delen.',
+      },
+      frequencies: { 'one-off': 'Eenmalig', recurring: 'Terugkerend' },
+      supplierRoles: {
+        direct: 'Directe leverancier',
+        representative: 'Bevoegde vertegenwoordiger',
+        other: 'Andere rol',
+      },
+      notRequested:
+        'Stuur via dit formulier geen proof of funds, bankgegevens of vertrouwelijke handelsdocumenten mee. Zijn er later documenten nodig, dan spreken wij met u een geschikt kanaal af.',
+      submit: {
+        buyer: 'Inkoopbehoefte versturen',
+        supplier: 'Aanbodkans versturen',
+        none: 'Aanvraag versturen',
+      },
+      sending: 'Bezig met versturen…',
+      success: {
+        buyer:
+          'Dank u wel. Uw inkoopbehoefte is naar Valtrax Energy verstuurd. Wij beoordelen deze en nemen per e-mail contact met u op als er een mogelijke match is of als wij meer informatie nodig hebben.',
+        supplier:
+          'Dank u wel. Uw aanbodkans is naar Valtrax Energy verstuurd. Wij beoordelen deze en nemen per e-mail contact met u op als er een mogelijke match is of als wij meer informatie nodig hebben.',
+      },
+      successNext: 'Uw gegevens worden niet zonder uw toestemming met een tegenpartij gedeeld.',
+      another: 'Nog een aanvraag versturen',
+    },
+    faq: {
+      eyebrow: 'Veelgestelde vragen',
+      title: 'Korte antwoorden',
+      items: [
+        {
+          q: 'Is Valtrax de directe leverancier?',
+          a: 'Nee. Valtrax Energy heeft geen eigen raffinaderij, opslag of fysieke voorraad. Wij treden op als bemiddelaar tussen kopers en leveranciers. Wordt een transactie anders ingericht, bijvoorbeeld back-to-back, dan wordt dat voor die transactie schriftelijk afgesproken.',
+        },
+        {
+          q: 'Op welke producten en locaties richt u zich?',
+          a: 'Onze eerste focus is EN590 10 PPM-diesel (ULSD) in de regio Amsterdam–Rotterdam–Antwerpen (ARA). Daarnaast bekijken wij Jet A-1 en andere geraffineerde aardolieproducten en gas, per geval en voor een concrete behoefte.',
+        },
+        {
+          q: 'Welke informatie is nodig om te beginnen?',
+          a: 'Uw bedrijfsgegevens, het product, het volume, de locatie en zo mogelijk de timing. Specificatie en leveringsbasis helpen als u die al weet. Proof of funds, bankgegevens of vertrouwelijke documenten zijn in deze fase niet nodig.',
+        },
+        {
+          q: 'Wat gebeurt er nadat ik een aanvraag heb verstuurd?',
+          a: 'Wij beoordelen uw aanvraag en nemen per e-mail contact met u op als er een mogelijke match is of als wij meer informatie nodig hebben. Uw gegevens worden niet zonder uw toestemming met een tegenpartij gedeeld.',
+        },
+        {
+          q: 'Hoe worden vergoedingen afgesproken?',
+          a: 'Vergoeding en voorwaarden worden vooraf per samenwerking of transactie afgestemd. Commissie, betalingstermijn en valuta worden schriftelijk vastgelegd.',
+        },
+      ],
+    },
+    closing: {
+      title: 'Klaar om een concrete behoefte of aanbodpositie te bespreken?',
+      text: 'Kies uw route en deel de belangrijkste gegevens. Wij beoordelen elke aanvraag afzonderlijk.',
+      contactTitle: 'Liever per e-mail?',
+      legalTitle: 'Juridische informatie',
     },
   },
   notFound: {

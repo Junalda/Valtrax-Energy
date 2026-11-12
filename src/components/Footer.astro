@@ -10,17 +10,11 @@ interface Props {
 }
 const { lang, page } = Astro.props;
 const dict = t(lang);
-const sections =
-  page === 'start'
-    ? (['about', 'expertise', 'products', 'markets', 'process', 'contact'] as const).map((id) => ({
-        href: `#${id}`,
-        label: dict.nav[id],
-      }))
-    : [
-        { href: pathFor('home', lang), label: dict.pages.home },
-        ...contentPages.map((id) => ({ href: pathFor(id, lang), label: dict.nav[id] })),
-        { href: pathFor('start', lang), label: dict.pages.start.nav },
-      ];
+const sections = [
+  { href: pathFor('home', lang), label: dict.pages.home },
+  ...contentPages.map((id) => ({ href: pathFor(id, lang), label: dict.nav[id] })),
+  { href: pathFor('start', lang), label: dict.pages.start.nav },
+];
 const year = new Date().getFullYear();
 const { streetAddress, postalCode } = site.publicContact;
 ---
@@ -49,9 +43,9 @@ const { streetAddress, postalCode } = site.publicContact;
         <p>{dict.footer.registration}</p>
         <p>{dict.footer.vat} {site.vat}</p>
         {
-          (['general', 'trading', 'finance'] as const).map((role) => (
+          (['general'] as const).map((role) => (
             <p>
-              {dict.contact.direct[role]}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
+              {dict.legal.company.email}: <a href={`mailto:${site.emails[role]}`}>{site.emails[role]}</a>
             </p>
           ))
         }

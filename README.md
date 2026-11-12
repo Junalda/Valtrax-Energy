@@ -12,9 +12,14 @@ name of Northbridge Trading B.V. Built with Astro 7 and TypeScript, deployed on 
   enquiry-type preselection, form submission). All content works without it.
 
 Pages (each also under `/nl/`): `/` home, `/about/`, `/products/`, `/process/` (markets and
-process), `/contact/` (form and FAQ), the legal pages, and `/start/`: the complete one-page
-overview with local anchor navigation. All pages reuse the same section components and copy
-(`src/i18n/*`); page headings and metadata live under `pages` in the dictionaries.
+process), `/contact/` (form and FAQ), the legal pages, and `/start/`: the landing page for
+LinkedIn and direct outreach (`src/components/StartPage.astro`, `src/components/start/*`, copy
+under `start` in the dictionaries). It has its own two-route enquiry form (buyer / supplier)
+that posts to the same endpoint with `form=start` (validation: `validateStartEnquiry` in
+`src/lib/enquiry.ts`). Page headings and metadata of the other pages live under `pages`.
+
+Analytics events on `/start` (Vercel Web Analytics custom events; route and position only, no
+form content): `start_cta_click`, `start_route_selected`, `start_enquiry_sent`.
 
 Owner decisions still open before launch: see **[docs/OWNER-REVIEW.md](docs/OWNER-REVIEW.md)**.
 
