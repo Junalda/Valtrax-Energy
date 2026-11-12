@@ -1,0 +1,112 @@
+---
+// Thom van Welie as point of contact: real photo (supplied by the owner), role, short text and
+// a plain link to his LinkedIn profile (no embed, no tracking). Used on /start, /about and /contact.
+import { site } from '../config/site';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Heading level for the name, so the card fits the page outline. */
+  level?: 'h2' | 'h3';
+  compact?: boolean;
+}
+const { lang, level = 'h3', compact = false } = Astro.props;
+const p = t(lang).start.person;
+const person = site.contactPerson;
+const Name = level;
+---
+
+<article class:list={['person', { 'person--compact': compact }]} aria-labelledby={`person-${compact ? 'c' : 'f'}-name`}>
+  <img
+    class="person__photo"
+    src={person.photo.src640}
+    srcset={`${person.photo.src320} 320w, ${person.photo.src640} 640w`}
+    sizes={compact ? '6rem' : '(max-width: 48rem) 9rem, 12rem'}
+    width={person.photo.size}
+    height={person.photo.size}
+    alt={p.photoAlt}
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="person__body">
+    <Name id={`person-${compact ? 'c' : 'f'}-name`} class="person__name">{person.name}</Name>
+    <p class="person__role">{p.role}</p>
+    {!compact && <p class="person__text">{p.text}</p>}
+    <a class="person__link" href={person.linkedin} rel="noopener">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"
+        ><path
+          fill="currentColor"
+          d="M3.6 5.6H1V15h2.6V5.6zM2.3 1.1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM15 9.8c0-2.5-.5-4.4-3.4-4.4-1.4 0-2.3.8-2.7 1.5V5.6H6.4V15H9v-4.6c0-1.2.2-2.4 1.7-2.4s1.5 1.4 1.5 2.5V15H15V9.8z"
+        ></path></svg
+      >
+      {p.linkedin}
+    </a>
+  </div>
+</article>
+
+<style>
+  .person {
+    display: grid;
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 0.75rem + 2vw, 2.25rem);
+    align-items: start;
+  }
+  .person--compact {
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 1.1rem;
+    align-items: center;
+  }
+  .person__photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 1px var(--rule);
+    background: var(--grey-100);
+  }
+  .person__name {
+    margin: 0;
+    font-size: var(--step-2);
+  }
+  .person--compact .person__name {
+    font-size: var(--step-1);
+  }
+  .person__role {
+    margin: 0.35rem 0 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-600);
+  }
+  .person--compact .person__role {
+    margin-bottom: 0.5rem;
+  }
+  .person__text {
+    margin-bottom: 1rem;
+  }
+  .person__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-weight: 600;
+    color: var(--navy-900);
+    text-decoration-color: var(--gold-500);
+  }
+  .person__link svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+  @media (max-width: 36rem) {
+    .person:not(.person--compact) {
+      grid-template-columns: 1fr;
+    }
+    .person:not(.person--compact) .person__photo {
+      width: 9rem;
+    }
+  }
+</style>

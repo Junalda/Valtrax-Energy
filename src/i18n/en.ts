@@ -493,6 +493,10 @@ export const en = {
       role: 'Point of contact, Valtrax Energy',
       text: 'Thom van Welie is your point of contact at Valtrax Energy. He reviews incoming requirements and supply opportunities, discusses the commercial details with you and coordinates the introduction to a relevant counterparty.',
       companyTitle: 'The company behind Valtrax Energy',
+      photoAlt: 'Portrait of Thom van Welie',
+      linkedin: 'View Thom’s profile on LinkedIn',
+      sectionEyebrow: 'Point of contact',
+      sectionTitle: 'Your point of contact at Valtrax Energy',
     },
     steps: {
       eyebrow: 'How it works',

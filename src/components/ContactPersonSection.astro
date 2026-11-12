@@ -1,0 +1,27 @@
+---
+// "Your point of contact" section for the About page.
+import PersonCard from './PersonCard.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const p = t(lang).start.person;
+---
+
+<section class="section contact-person" aria-labelledby="contact-person-title">
+  <div class="container contact-person__inner">
+    <header class="section-head">
+      <p class="eyebrow">{p.sectionEyebrow}</p>
+      <h2 id="contact-person-title">{p.sectionTitle}</h2>
+    </header>
+    <PersonCard lang={lang} />
+  </div>
+</section>
+
+<style>
+  .contact-person__inner {
+    max-width: 56rem;
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
-// Who the visitor deals with. No photo is available, so the person is presented in text only.
+// Who the visitor deals with: Thom van Welie (photo, role, LinkedIn) and the company details.
+import PersonCard from '../PersonCard.astro';
 import { site } from '../../config/site';
 import { t, type Lang } from '../../i18n';
 
@@ -29,11 +30,9 @@ const facts = [
       <h2 id="person-title">{p.title}</h2>
     </header>
     <div class="start-person__grid">
-      <article class="start-person__card" aria-labelledby="person-name">
-        <h3 id="person-name">{p.name}</h3>
-        <p class="start-person__role">{p.role}</p>
-        <p>{p.text}</p>
-      </article>
+      <div class="start-person__card">
+        <PersonCard lang={lang} />
+      </div>
       <article class="start-person__card" aria-labelledby="company-title">
         <h3 id="company-title">{p.companyTitle}</h3>
         <dl class="start-person__facts">
@@ -54,7 +53,7 @@ const facts = [
 <style>
   .start-person__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: 1.5rem;
   }
   .start-person__card {
@@ -65,14 +64,6 @@ const facts = [
   .start-person__card h3 {
     margin: 0;
     font-size: var(--step-2);
-  }
-  .start-person__role {
-    margin: 0.35rem 0 1rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold-600);
   }
   .start-person__facts {
     display: grid;

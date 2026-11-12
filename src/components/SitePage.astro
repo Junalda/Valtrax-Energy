@@ -11,6 +11,7 @@ import Process from './Process.astro';
 import Faq from './Faq.astro';
 import Contact from './Contact.astro';
 import CtaBand from './CtaBand.astro';
+import ContactPersonSection from './ContactPersonSection.astro';
 import Footer from './Footer.astro';
 import { t, type Lang, type ContentPageKey } from '../i18n';
 
@@ -31,6 +32,7 @@ const meta = t(lang).pages[page];
         <>
           <About lang={lang} />
           <Expertise lang={lang} />
+          <ContactPersonSection lang={lang} />
         </>
       )
     }
