@@ -483,6 +483,10 @@ export const nl: Dictionary = {
       role: 'Aanspreekpunt, Valtrax Energy',
       text: 'Thom van Welie is uw aanspreekpunt bij Valtrax Energy. Hij beoordeelt binnenkomende behoeften en aanbodkansen, bespreekt de commerciële details met u en coördineert de introductie bij een passende tegenpartij.',
       companyTitle: 'Het bedrijf achter Valtrax Energy',
+      photoAlt: 'Portret van Thom van Welie',
+      linkedin: 'Bekijk het LinkedIn-profiel van Thom',
+      sectionEyebrow: 'Aanspreekpunt',
+      sectionTitle: 'Uw aanspreekpunt bij Valtrax Energy',
     },
     steps: {
       eyebrow: 'Zo werkt het',

@@ -56,6 +56,9 @@ and the completed answers:
 - **E-mail** (`site.emails`): only info@ is published on the site (owner decision, 2026-11);
   it is also the form recipient. trading@ and finance@ are no longer shown. Thom@ is kept in
   config for direct correspondence but not published.
+- **Point of contact:** Thom van Welie with photo (`public/team/`, supplied by the owner,
+  2026-11), role and a plain link to his LinkedIn profile on /start, /about and /contact. No
+  biography beyond his role is published until verifiable details are supplied.
 - **Form:** always sends to info@valtraxenergy.com only. The visitor's address is used as Reply-To.
   The sender must be on the own domain.
 - **Counterparty checks:** described as manual; no automated screening claimed.

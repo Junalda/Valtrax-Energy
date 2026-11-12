@@ -23,6 +23,12 @@ export const site = {
     general: 'info@valtraxenergy.com',
     direct: 'Thom@valtraxenergy.com',
   },
+  /** Point of contact shown with photo on /start, /about and /contact (supplied by the owner). */
+  contactPerson: {
+    name: 'Thom van Welie',
+    linkedin: 'https://www.linkedin.com/in/thom-van-welie-565310403',
+    photo: { src320: '/team/thom-van-welie-320.webp', src640: '/team/thom-van-welie-640.webp', size: 640 },
+  },
   /** The enquiry form always delivers to this single address (no copies, no routing). */
   formRecipient: 'info@valtraxenergy.com',
   /** Public contact details (footer, legal pages, structured data). */

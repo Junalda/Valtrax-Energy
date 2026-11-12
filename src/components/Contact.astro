@@ -1,4 +1,5 @@
 ---
+import PersonCard from './PersonCard.astro';
 import Arrow from './Arrow.astro';
 import { t, pathFor, type Lang } from '../i18n';
 import { site, productKeys, enquiryTypes, deliveryBases, volumeUnits } from '../config/site';
@@ -42,6 +43,9 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
           ))
         }
       </dl>
+      <div class="contact__person">
+        <PersonCard lang={lang} compact />
+      </div>
     </div>
 
     <form
@@ -227,6 +231,11 @@ const messages = { validation: f.validation, status: f.status, sending: f.sendin
   }
   .contact__emails dt {
     color: var(--grey-500);
+  }
+  .contact__person {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--grey-200);
   }
   .contact__emails dd {
     margin: 0;
