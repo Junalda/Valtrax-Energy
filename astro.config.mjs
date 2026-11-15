@@ -11,6 +11,9 @@ const SITE_INDEXABLE =
   process.env.SITE_INDEXING === 'true' &&
   (!process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production');
 
+// Preview builds (staging branch and pull requests) show a visible banner and mark form e-mails.
+const SITE_PREVIEW = process.env.VERCEL_ENV === 'preview';
+
 export default defineConfig({
   site: SITE_URL,
   trailingSlash: 'ignore',
@@ -20,7 +23,10 @@ export default defineConfig({
   build: { format: 'directory', inlineStylesheets: 'auto' },
   compressHTML: true,
   vite: {
-    define: { __SITE_INDEXABLE__: JSON.stringify(SITE_INDEXABLE) },
+    define: {
+      __SITE_INDEXABLE__: JSON.stringify(SITE_INDEXABLE),
+      __SITE_PREVIEW__: JSON.stringify(SITE_PREVIEW),
+    },
   },
   env: {
     schema: {
