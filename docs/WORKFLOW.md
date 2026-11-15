@@ -12,7 +12,8 @@
    from `staging` **into `main`** opened and merged. Vercel then deploys valtraxenergy.com.
 3. Never commit or merge directly to `main` without that approval.
 
-Staging builds are Vercel previews, so they are always `noindex` with an empty sitemap, show a
+Staging is public (no Vercel login): Vercel Authentication is switched off for this project, so
+anyone with the address can view staging and pull-request previews. Staging builds are Vercel previews, so they are always `noindex` with an empty sitemap, show a
 "Staging" banner at the top of every page, and form e-mails get `[STAGING]` in the subject.
 
 Form delivery on staging needs `RESEND_API_KEY` for the Preview environment (Vercel →
