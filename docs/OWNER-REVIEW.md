@@ -74,7 +74,7 @@ See **docs/DNS-AND-EMAIL.md** for the exact plan. Summary:
       `resend._domainkey`, `send` and `rsend` only; Microsoft 365 records untouched.
 - [x] Vercel env: `RESEND_API_KEY` (Production), `CONTACT_FROM_EMAIL`
       (`website@valtraxenergy.com`); production redeployed.
-- [ ] Send one labelled test enquiry and confirm arrival in the info@ mailbox (incl. Junk).
+- [x] Test enquiry via the contact form received in the info@ mailbox (confirmed by the owner, 2026-11-15).
 - [ ] Vercel production branch → `main` after merging the pull request.
 
 ## 5. Company details
