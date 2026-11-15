@@ -162,12 +162,17 @@ function composeStartEmail(e: StartEnquiry): { subject: string; text: string } {
   return { subject, text };
 }
 
+/** Form e-mails from staging or pull-request previews are marked, so they are never mistaken for real leads. */
+const SUBJECT_PREFIX = __SITE_PREVIEW__ ? '[STAGING] ' : '';
+
 async function deliver(
   e: Enquiry | StartEnquiry,
   kind: FormKind,
   config: { apiKey: string; to: string[]; from: string },
 ) {
-  const { subject, text } = kind === 'start' ? composeStartEmail(e as StartEnquiry) : composeEmail(e as Enquiry);
+  const composed = kind === 'start' ? composeStartEmail(e as StartEnquiry) : composeEmail(e as Enquiry);
+  const subject = SUBJECT_PREFIX + composed.subject;
+  const { text } = composed;
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { authorization: `Bearer ${config.apiKey}`, 'content-type': 'application/json' },

@@ -73,8 +73,26 @@ const jsonLd = structuredData ? serializeJsonLd(buildJsonLd({ origin, lang, page
   </head>
   <body>
     <a class="skip-link" href="#main">{dict.skipLink}</a>
+    {
+      __SITE_PREVIEW__ && (
+        <p class="preview-banner" role="note">
+          <strong>Staging</strong> · test version, not the live website / testversie, niet de live website
+        </p>
+      )
+    }
     <slot />
     <Analytics />
     <SpeedInsights />
   </body>
 </html>
+
+<style is:global>
+  .preview-banner {
+    margin: 0;
+    padding: 0.4rem 1rem;
+    background: var(--gold-200);
+    color: var(--navy-900);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+</style>

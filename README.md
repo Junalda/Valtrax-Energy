@@ -21,6 +21,8 @@ that posts to the same endpoint with `form=start` (validation: `validateStartEnq
 Analytics events on `/start` (Vercel Web Analytics custom events; route and position only, no
 form content): `start_cta_click`, `start_route_selected`, `start_enquiry_sent`.
 
+Changes go to staging first: see **[docs/WORKFLOW.md](docs/WORKFLOW.md)**.
+
 Owner decisions still open before launch: see **[docs/OWNER-REVIEW.md](docs/OWNER-REVIEW.md)**.
 
 ## Requirements
